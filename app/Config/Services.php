@@ -1,7 +1,6 @@
-<?php namespace Config;
+<?php
 
-use CodeIgniter\Config\Services as CoreServices;
-use CodeIgniter\Config\BaseConfig;
+namespace Config;
 
 require_once SYSTEMPATH . 'Config/Services.php';
 
@@ -18,7 +17,7 @@ require_once SYSTEMPATH . 'Config/Services.php';
  * method format you should use for your service methods. For more examples,
  * see the core Services file at system/Config/Services.php.
  */
-class Services extends CoreServices
+class Services extends \CodeIgniter\Config\Services
 {
 
 	//    public static function example($getShared = true)
@@ -30,4 +29,15 @@ class Services extends CoreServices
 	//
 	//        return new \CodeIgniter\Example();
 	//    }
+
+    public static function user($getShared = true)
+    {
+        if ($getShared)
+        {
+            return static::getSharedInstance('user');
+        }
+
+        return new \denis303\codeigniter4\UserService(static::session(), \App\Models\UserModel::class);
+    }
+
 }

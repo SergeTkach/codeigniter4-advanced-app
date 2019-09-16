@@ -1,12 +1,17 @@
 {
-    "name": "codeigniter4/appstarter",
+    "name": "denis303/codeigniter4-advanced-app",
     "type": "project",
-    "description": "CodeIgniter4 starter app",
-    "homepage": "https://codeigniter.com",
+    "description": "CodeIgniter4 advanced starter app",
+    "homepage": "https://denis303.com",
     "license": "MIT",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "php": ">=7.2",
-        "codeigniter4/framework": "^4@rc"
+        "codeigniter4/framework": "^4@rc",
+        "denis303/codeigniter4-widget": "dev-master",
+        "denis303/codeigniter4-form": "dev-master",
+        "denis303/codeigniter4-user-service": "dev-master"
     },
     "require-dev": {
         "mikey179/vfsstream": "1.6.*",
@@ -16,10 +21,5 @@
         "post-update-cmd": [
             "@composer dump-autoload"
         ]
-    },
-    "support": {
-        "forum": "http://forum.codeigniter.com/",
-        "source": "https://github.com/codeigniter4/CodeIgniter4",
-        "slack": "https://codeigniterchat.slack.com"
     }
 }
