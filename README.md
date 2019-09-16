@@ -11,8 +11,10 @@ to your `app` folder. The affected files can be copied or merged from
 
 ## Setup
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
+1. Copy `env` to `.env` and tailor for your app, specifically the baseURL
 and any database settings.
+
+2. Run `bower install` or extract `public_libs.zip` archive. 
 
 ## Server Requirements
 
