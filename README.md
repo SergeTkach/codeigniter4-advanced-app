@@ -1,6 +1,6 @@
 # CodeIgniter 4 Advanced Project Template
 
-This application is the [Yii 2 Advanced Project Template](https://github.com/yiisoft/yii2-app-advanced) clone on CodeIgniter 4.
+This project is the [Yii 2 Advanced Project Template](https://github.com/yiisoft/yii2-app-advanced) clone on CodeIgniter 4.
 
 ## Overview
 
@@ -22,7 +22,7 @@ and any database settings.
 
 2. Run `bower install` or extract `public_libs.zip` archive. 
 
-3. Run `php spark migrate`
+3. Run `php spark migrate`.
 
 ## Server Requirements
 
