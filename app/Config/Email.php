@@ -1,7 +1,8 @@
 <?php
+
 namespace Config;
 
-class Email
+class Email extends \CodeIgniter\Config\BaseConfig
 {
 
 	/**

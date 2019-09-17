@@ -37,7 +37,7 @@ class Services extends \CodeIgniter\Config\Services
             return static::getSharedInstance('user');
         }
 
-        return new \denis303\codeigniter4\UserService(static::session(), \App\Models\UserModel::class);
+        return new \App\Components\UserService(static::session(), \App\Models\UserModel::class);
     }
 
 }

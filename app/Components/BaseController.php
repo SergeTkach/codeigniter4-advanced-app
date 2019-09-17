@@ -1,5 +1,10 @@
 <?php
-namespace App\Controllers;
+
+namespace App\Components;
+
+use CodeIgniter\HTTP\RequestInterface;
+use CodeIgniter\HTTP\ResponseInterface;
+use Psr\Log\LoggerInterface;
 
 /**
  * Class BaseController
@@ -14,24 +19,17 @@ namespace App\Controllers;
  * @package CodeIgniter
  */
 
-use CodeIgniter\Controller;
-
-class BaseController extends Controller
+abstract class BaseController extends \denis303\codeigniter4\Controller
 {
 
-	/**
-	 * An array of helpers to be loaded automatically upon
-	 * class instantiation. These helpers will be available
-	 * to all other controllers that extend BaseController.
-	 *
-	 * @var array
-	 */
-	protected $helpers = [];
+    protected $session;
+
+    protected $user;
 
 	/**
 	 * Constructor.
 	 */
-	public function initController(\CodeIgniter\HTTP\RequestInterface $request, \CodeIgniter\HTTP\ResponseInterface $response, \Psr\Log\LoggerInterface $logger)
+	public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
 	{
 		// Do Not Edit This Line
 		parent::initController($request, $response, $logger);
@@ -39,8 +37,10 @@ class BaseController extends Controller
 		//--------------------------------------------------------------------
 		// Preload any models, libraries, etc, here.
 		//--------------------------------------------------------------------
-		// E.g.:
-		// $this->session = \Config\Services::session();
+
+		$this->session = \Config\Services::session();
+
+        $this->user = \Config\Services::user();
 	}
 
 }
