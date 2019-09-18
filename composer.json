@@ -14,7 +14,9 @@
         "denis303/codeigniter4-migration": "dev-master",
         "denis303/codeigniter4-controller": "dev-master",
         "denis303/codeigniter4-model": "dev-master",
-        "denis303/codeigniter4-entity": "dev-master"
+        "denis303/codeigniter4-entity": "dev-master",
+        "denis303/codeigniter4-mailer-service": "dev-master",
+        "denis303/codeigniter4-user": "dev-master"
     },
     "require-dev": {
         "mikey179/vfsstream": "1.6.*",

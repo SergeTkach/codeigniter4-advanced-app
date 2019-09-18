@@ -53,14 +53,19 @@ class SignupForm extends \App\Components\BaseModel
      */
     public function sendEmail(User $user, &$error = null)
     {
-        $model = new UserModel;
-
         $message = view('messages/signup', [
             'user' => $user,
-            'verifyLink' => site_url('signup/verify-email/' . $user->user_verification_token)
+            'verifyLink' => site_url('user/verifyEmail/' . $user->user_verification_token)
         ]);
 
-        return $model->sendEmail($user, 'Account registration at ' . base_url(), $message, $error);
+        $mailer = service('mailer');
+
+        return $mailer->sendToUser(
+            $user, 
+            'Account registration at ' . base_url(), 
+            $message, 
+            $error
+        );
     }
 
 }

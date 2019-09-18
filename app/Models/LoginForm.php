@@ -11,7 +11,7 @@ class LoginForm extends \App\Components\BaseModel
     protected static $_user;
 
     protected $validationRules = [
-        'username' => 'trim|required|valid_email|max_length[255]|min_length[2]|App\Models\LoginForm::getUser',
+        'email' => 'trim|required|valid_email|max_length[255]|min_length[2]|App\Models\LoginForm::getUser',
         'password' => 'trim|required|max_length[72]|min_length[5]|App\Models\LoginForm::validatePassword',
         'rememberMe' => 'required|in_list[0,1]'
     ];
@@ -24,7 +24,7 @@ class LoginForm extends \App\Components\BaseModel
     ];
 
     protected $fieldLabels = [
-        'username' => 'Username',
+        'email' => 'Email',
         'password' => 'Password',
         'rememberMe' => 'Remember Me'
     ];

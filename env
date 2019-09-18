@@ -17,11 +17,11 @@
 # CI_ENVIRONMENT = production
 
 #--------------------------------------------------------------------
-# EMAIL
+# MAILER
 #--------------------------------------------------------------------
 
-email.fromEmail = 'no-reply@example.com'
-email.fromName = 'No-reply';
+mailer.fromEmail = 'no-reply@example.com'
+mailer.fromName = 'No-reply';
 
 #--------------------------------------------------------------------
 # APP

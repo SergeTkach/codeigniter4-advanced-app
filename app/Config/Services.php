@@ -40,4 +40,16 @@ class Services extends \CodeIgniter\Config\Services
         return new \App\Components\UserService(static::session(), \App\Models\UserModel::class);
     }
 
+    public static function mailer($getShared = true)
+    {
+        if ($getShared)
+        {
+            return static::getSharedInstance('mailer');
+        }
+
+        $mailerConfig = config(Mailer::class);
+
+        return new \App\Components\MailerService($mailerConfig->fromEmail, $mailerConfig->fromName);
+    }
+
 }

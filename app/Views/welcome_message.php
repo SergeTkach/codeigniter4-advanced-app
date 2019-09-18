@@ -103,7 +103,7 @@
 				</svg>
 			</div>
 
-			<h1>Welcome to CodeIgniter</h1>
+            <h1>Welcome to CodeIgniter</h1>
 
 			<p class="version">version <?= CodeIgniter\CodeIgniter::CI_VERSION ?></p>
 
@@ -129,6 +129,25 @@
 				<p>If you are exploring CodeIgniter for the very first time, you
 					should start by reading the
 					<a href="https://codeigniter4.github.io/CodeIgniter4">User Guide</a>.</p>
+
+                <?php
+
+                $user = service('user');
+
+                if (!$user->isGuest())
+                {
+                    echo '<p><a href="' . site_url('user/logout') . '">Logout</a> (' . $user->getEntity()->user_name . ')</p>';
+                }
+                else
+                {
+                    echo '<p><a href="' . site_url('user/login') . '">Login</a>';
+
+                    echo ' | ';
+
+                    echo '<a href="' . site_url('user/signup') . '">Signup</a></p>';
+                }
+
+                ?>
 
 			</div>
 

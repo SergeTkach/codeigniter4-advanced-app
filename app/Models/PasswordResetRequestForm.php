@@ -37,13 +37,10 @@ class PasswordResetRequestForm extends \App\Components\BaseModel
     }
     */
 
-    /**
-     * Sends an email with a link, for resetting the password.
-     *
-     * @return bool whether the email was send
-     */
-    public function sendEmail($data, &$error = null)
-    {
+
+    /*
+
+
         /* @var $user User */
 
         /*
@@ -71,12 +68,32 @@ class PasswordResetRequestForm extends \App\Components\BaseModel
             )
             ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
             ->setTo($this->email)
-            ->setSubject('Password reset for ' . Yii::$app->name)
+            ->setSubject()
             ->send();
         */
 
-        //'Sorry, we are unable to reset password for the provided email address.'
-    
-        return true;
+        //'Sorry, we are unable to reset password for the provided email address.'    
+
+
+    */
+
+    /**
+     * Sends an email with a link, for resetting the password.
+     *
+     * @return bool whether the email was send
+     */
+    public function sendEmail(User $user, &$error = null)
+    {    
+        $message = view('messages/passwordReset', [
+            'user' => $user,
+            'resetLink' => site_url('user/resetPassword/' . $user->user_password_reset_token)
+        ]);
+
+        return service('mailer')->sendToUser(
+            $user,
+            'Password reset for ' . base_url(),
+            $message,
+            $error
+        );
     }
 }

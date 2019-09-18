@@ -67,14 +67,7 @@ class User extends \App\Components\BaseController
         
         if ($data && $model->validate($data))
         {
-            if (array_key_exists('rememberMe', $data) && $data['rememberMe'])
-            {
-                $rememberMe = true;
-            }
-            else
-            {
-                $rememberMe = false;
-            }
+            $rememberMe = array_key_exists('rememberMe', $data) ? $data['rememberMe'] : 0;
 
             $user = $model::getUser();
 
@@ -87,8 +80,6 @@ class User extends \App\Components\BaseController
                 $errors[] = $error;
             }
         }
-         
-        $data['password'] = '';
 
         return $this->render('user/login', [
             'model' => $model,
