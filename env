@@ -28,6 +28,7 @@ mailer.fromName = 'No-reply';
 #--------------------------------------------------------------------
 
 # app.baseURL = ''
+# app.indexPage = ''
 # app.forceGlobalSecureRequests = false
 
 # app.sessionDriver = 'CodeIgniter\Session\Handlers\FileHandler'
