@@ -2,7 +2,7 @@
     "name": "denis303/codeigniter4-advanced-app",
     "type": "project",
     "description": "CodeIgniter4 advanced starter app",
-    "homepage": "https://denis303.com",
+    "homepage": "http://denis303.com",
     "license": "MIT",
     "minimum-stability": "dev",
     "prefer-stable": true,
