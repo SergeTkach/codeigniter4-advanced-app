@@ -3,29 +3,37 @@
 namespace App\Models;
 
 class UserModel extends \denis303\user\BaseUserModel
-{
+{   
 
-    const STATUS_DELETED = 1;
+    protected $returnType = User::class;
 
-    const STATUS_INACTIVE = 9;
+    protected $allowedFields = [
+        self::FIELD_PREFIX . 'name',
+        self::FIELD_PREFIX . 'password_hash',
+        self::FIELD_PREFIX . 'email',
+        self::FIELD_PREFIX . 'created_at',
+        self::FIELD_PREFIX . 'updated_at',
+        self::FIELD_PREFIX . 'verification_token',
+        self::FIELD_PREFIX . 'password_reset_token',
+        self::FIELD_PREFIX . 'verified_at'
+    ];
 
-    const STATUS_ACTIVE = 10;
-
-    protected $defaultStatus = self::STATUS_INACTIVE;
-
-    public function setStatusActive(User $user)
+    public function beforeCreateUser($user, array $data)
     {
-        $this->setStatus(static::STATUS_ACTIVE);
+        if (!$user->user_verification_token)
+        {
+            $this->generateEmailVerificationToken($user);
+        }        
     }
 
-    public function setStatusInactive(User $user)
+    public function generateEmailVerificationToken(User $user)
     {
-        $this->setStatus(static::STATUS_INACTIVE);
-    }    
+        $user->{static::FIELD_PREFIX . 'verification_token'} = md5(time() . rand(0, PHP_INT_MAX));
+    }
 
-    public function setStatusDeleted(User $user)
+    public function generatePasswordResetToken(User $user)
     {
-        $this->setStatus(static::STATUS_INACTIVE);
-    }     
+        $user->{static::FIELD_PREFIX . 'password_reset_token'} = md5(time() . rand(0, PHP_INT_MAX));
+    }
 
 }

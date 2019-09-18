@@ -17,8 +17,10 @@ class LoginForm extends \App\Components\BaseModel
     ];
 
     protected $validationMessages = [
-        'password' => [
+        'email' => [
             'App\Models\LoginForm::getUser' => 'User not found.',
+        ],
+        'password' => [
             'App\Models\LoginForm::validatePassword' => 'Password Invalid.'
         ]
     ];
@@ -40,12 +42,14 @@ class LoginForm extends \App\Components\BaseModel
         {
             $model = new UserModel;
 
-            static::$_user = $model->where(['user_email' => $email])->first();
+            static::$_user = $model->where([
+                'user_email' => $email
+            ])->first();
 
             if (static::$_user)
             {
                 return true;
-            }            
+            }
 
             return false;
         }
