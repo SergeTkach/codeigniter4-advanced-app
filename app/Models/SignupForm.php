@@ -53,7 +53,7 @@ class SignupForm extends \App\Components\BaseModel
     {
         $message = view('messages/signup', [
             'user' => $user,
-            'verifyLink' => site_url('user/verifyEmail/' . $user->user_verification_token)
+            'verifyLink' => UserModel::getUserVerificationUrl($user)
         ]);
 
         $mailer = service('mailer');
