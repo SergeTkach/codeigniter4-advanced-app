@@ -13,8 +13,6 @@ helper(['form']);
 
 ?>
     
-<h1><?= esc($this->data['title']);?></h1>
-
 <p>Please fill out the following fields to signup:</p>
 
 <?= view('_errors', ['errors' => $errors]);?>

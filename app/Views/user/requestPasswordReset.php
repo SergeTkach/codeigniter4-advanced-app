@@ -13,11 +13,9 @@ helper(['form']);
 
 ?>
     
-<h1><?= esc($this->data['title']);?></h1>
-
 <p>Please fill out your email. A link to reset password will be sent there.</p>
 
-<?= form_open('', ['id' => 'request-password-reset-form']);?>
+<?= form_open('user/requestPasswordReset', ['id' => 'request-password-reset-form']);?>
 
 <?= view('_errors', ['errors' => $errors]);?>
 

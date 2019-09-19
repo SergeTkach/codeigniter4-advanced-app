@@ -12,11 +12,9 @@ $this->data['breadcrumbs'][] = $this->data['title'];
 helper(['form']);
 ?>
 
-<h1><?= esc($this->data['title']);?></h1>
-
 <p>Please fill out the following fields to login:</p>
 
-<?= form_open('', ['id' => 'login-form']);?>
+<?= form_open('user/login', ['id' => 'login-form']);?>
 
 <?= view('_errors', ['errors' => $errors]);?>
 

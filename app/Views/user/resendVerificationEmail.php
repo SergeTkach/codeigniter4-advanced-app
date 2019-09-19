@@ -12,11 +12,10 @@ $this->data['breadcrumbs'][] = $this->data['title'];
 helper('form');
 
 ?>
-<h1><?= esc($this->data['title']);?></h1>
 
 <p>Please fill out your email. A verification email will be sent there.</p>
 
-<?= form_open('', ['id' => 'resend-verification-email-form']); ?>
+<?= form_open('user/resendVerificationEmail', ['id' => 'resend-verification-email-form']); ?>
 
 <?= view('_errors', ['errors' => $errors]);?>
 

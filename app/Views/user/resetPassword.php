@@ -13,11 +13,9 @@ helper('form');
 
 ?>
 
-<h1><?= esc($this->data['title']);?></h1>
-
 <p>Please choose your new password:</p>
 
-<?= form_open('', ['id' => 'reset-password-form']);?>
+<?= form_open('user/resetPassword/' . $id . '/' . $token, ['id' => 'reset-password-form']);?>
 
 <?= view('_errors', ['errors' => $errors]);?>
 

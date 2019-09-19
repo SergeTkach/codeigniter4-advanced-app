@@ -263,7 +263,9 @@ class User extends \App\Components\BaseController
         return $this->render('user/resetPassword', [
             'model' => $model,
             'data' => $data,
-            'errors' => array_merge((array) $model->errors(), $errors)
+            'errors' => array_merge((array) $model->errors(), $errors),
+            'id' => $id,
+            'token' => $token
         ]);
     }
 
