@@ -14,7 +14,7 @@ class PasswordResetRequestForm extends \App\Components\BaseModel
 
     protected $validationRules = [
         'email' => [
-            'rules' => 'required|' . UserModel::EMAIL_RULES . '|' . __CLASS__ . '::validateEmail' .  __CLASS__ .'::validateVerification',
+            'rules' => 'required|' . UserModel::EMAIL_RULES . '|' . __CLASS__ . '::validateEmail|' .  __CLASS__ .'::validateVerification',
             'label' => 'Email'
         ]
     ];
