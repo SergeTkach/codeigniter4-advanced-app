@@ -77,7 +77,7 @@ class User extends \App\Components\BaseController
 
             if ($this->user->login($user, $rememberMe, $error))
             {
-                return $this->goBack();
+                return $this->goHome();
             }
             else
             {
