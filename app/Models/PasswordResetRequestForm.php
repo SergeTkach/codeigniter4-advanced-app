@@ -22,7 +22,7 @@ class PasswordResetRequestForm extends \App\Components\BaseModel
     protected $validationMessages = [
         'email' => [
             __CLASS__ . '::validateEmail' => 'There is no user with this email address.',
-            __CLASS__ . '::validateVerification' => 'Unable to reset password for not verefied email address.'
+            __CLASS__ . '::validateVerification' => 'Unable to reset password for not verified email address.'
         ]
     ];
 
