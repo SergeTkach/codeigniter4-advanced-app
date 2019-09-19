@@ -14,14 +14,15 @@ class PasswordResetRequestForm extends \App\Components\BaseModel
 
     protected $validationRules = [
         'email' => [
-            'rules' => 'required|' . UserModel::EMAIL_RULES . '|' . __CLASS__ . '::validateEmail',
+            'rules' => 'required|' . UserModel::EMAIL_RULES . '|' . __CLASS__ . '::validateEmail' .  __CLASS__ .'::validateVerification',
             'label' => 'Email'
         ]
     ];
 
     protected $validationMessages = [
         'email' => [
-            __CLASS__ . '::validateEmail' => 'There is no user with this email address.'
+            __CLASS__ . '::validateEmail' => 'There is no user with this email address.',
+            __CLASS__ . '::validateVerification' => 'Email is not verified.'
         ]
     ];
 
@@ -31,6 +32,21 @@ class PasswordResetRequestForm extends \App\Components\BaseModel
 
         return static::$_user ? true : false;
     }
+
+    public static function validateVerification($email)
+    {
+        if (static::$_user)
+        {
+            if (!UserModel::getUserField(static::$_user, 'verified_at'))
+            {
+                static::$_user = null;
+
+                return false;
+            }
+        }
+
+        return true;
+    }    
 
     public function getUser()
     {
