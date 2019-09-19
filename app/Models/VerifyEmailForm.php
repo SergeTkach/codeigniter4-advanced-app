@@ -2,9 +2,6 @@
 
 namespace App\Models;
 
-use common\models\User;
-use yii\base\InvalidArgumentException;
-
 class VerifyEmailForm extends \App\Components\BaseModel
 {
     /**

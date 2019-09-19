@@ -3,7 +3,8 @@
 /* @var $this \CodeIgniter\View\View */
 /* @var $data \App\Models\ContactForm */
 
-use App\Components\Form;
+use denis303\bootstrap4\Alert;
+use denis303\bootstrap4\FormGroup;
 
 $this->data['title'] = 'Contact';
 
@@ -16,31 +17,71 @@ helper(['form']);
 
 <p>If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.</p>
 
-<?= view('_messages', ['messages' => $messages]);?>
+<?php if($message):?>
+
+<?= Alert::factory(['message' => $message, 'type' => Alert::TYPE_SUCCESS]);?>
+
+<?php endif;?>
 
 <?= view('_errors', ['errors' => $errors]);?>
 
 <?= form_open('', ['id' => 'contact-form']);?>
 
-<?php
+<?= FormGroup::factory([
+    'content' => form_input(
+        'name', 
+        array_key_exists('name', $data) ? $data['name'] : '', 
+        [
+            'class' => 'form-control',
+            'autofocus' => true
+        ]
+    ),
+    'label' => $model->getFieldLabel('name'),
+    'error' => array_key_exists('name', $errors) ? $errors['name'] : null
+]);?>
 
-$form = new Form($model, $data);
+<?= FormGroup::factory([
+    'content' => form_input(
+        'email', 
+        array_key_exists('email', $data) ? $data['email'] : '', 
+        [
+            'class' => 'form-control'
+        ]
+    ),
+    'label' => $model->getFieldLabel('email'),
+    'error' => array_key_exists('email', $errors) ? $errors['email'] : null
+]);?>
 
-?>
+<?= FormGroup::factory([
+    'content' => form_input(
+        'subject', 
+        array_key_exists('subject', $data) ? $data['subject'] : '', 
+        [
+            'class' => 'form-control'
+        ]
+    ),
+    'label' => $model->getFieldLabel('subject'),
+    'error' => array_key_exists('subject', $errors) ? $errors['subject'] : null
+]);?>
 
-<?= $form->input('name', ['autofocus' => true, 'class' => 'form-control']);?>
-
-<?= $form->input('email', ['class' => 'form-control']);?>
-
-<?= $form->input('subject', ['class' => 'form-control']);?>
-
-<?= $form->textarea('body', ['class' => 'form-control', 'rows' => 6]);?>
-
-<?= $form->input('verifyCode', ['class' => 'form-control']);?>
+<?= FormGroup::factory([
+    'content' => form_textarea(
+        'body', 
+        array_key_exists('body', $data) ? $data['body'] : '', 
+        [
+            'class' => 'form-control',
+            'rows' => 6
+        ]
+    ),
+    'label' => $model->getFieldLabel('body'),
+    'error' => array_key_exists('body', $errors) ? $errors['body'] : null
+]);?>
 
 <?php
 
 /*
+
+    $form->input('verifyCode', ['class' => 'form-control']);
 
     <?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
         'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>',

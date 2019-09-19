@@ -6,6 +6,8 @@ use Exception;
 use App\Models\LoginForm;
 use App\Models\SignupForm;
 use App\Models\PasswordResetRequestForm;
+use App\Models\ResendVerificationEmailForm;
+use App\Models\UserModel;
 
 class User extends \App\Components\BaseController
 {
@@ -144,9 +146,15 @@ class User extends \App\Components\BaseController
 
         $data = $this->request->getPost();
 
-        if ($post && $model->validate($post))
+        if ($data && $model->validate($data))
         {
-            if ($model->sendEmail($post, $error))
+//          $user = $model->getUser();
+
+
+
+            //if (!UserModel::getField($user, 'verified_at'))
+            //{
+            if ($model->sendEmail($error))
             {
                 $this->session->setFlashdata('success', 'Check your email for further instructions.');
             
@@ -155,11 +163,12 @@ class User extends \App\Components\BaseController
             else
             {
                 $errors[] = $error;
-            }
-        }
-        else
-        {
-            $errors = (array) $model->errors();
+            }                
+            //}
+            //else
+            //{
+//                $errors[] = ;
+            //}
         }
 
         return $this->render('user/resendVerificationEmail', [
@@ -184,7 +193,7 @@ class User extends \App\Components\BaseController
         
         if ($data && $model->validate($data))
         {
-            if ($model->sendEmail($data, $error))
+            if ($model->sendEmail($error))
             {
                 $this->session->setFlashdata('success', 'Check your email for further instructions.');
 
@@ -192,11 +201,11 @@ class User extends \App\Components\BaseController
             }
             else
             {
-                $errors[] = $error;
+                //'Sorry, we are unable to reset password for the provided email address.'
+
+                $errors[] = $error; 
             }
         }
-
-        $data = (object) $data;
 
         return $this->render('user/requestPasswordReset', [
             'model' => $model,

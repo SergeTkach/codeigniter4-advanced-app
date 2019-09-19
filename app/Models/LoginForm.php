@@ -11,17 +11,17 @@ class LoginForm extends \App\Components\BaseModel
     protected static $_user;
 
     protected $validationRules = [
-        'email' => 'trim|required|valid_email|max_length[255]|min_length[2]|App\Models\LoginForm::getUser',
-        'password' => 'trim|required|max_length[72]|min_length[5]|App\Models\LoginForm::validatePassword',
+        'email' => 'trim|required|valid_email|max_length[255]|min_length[2]|' . __CLASS__ .'::getUser',
+        'password' => 'trim|required|max_length[72]|min_length[5]|' . __CLASS__ .'::validatePassword',
         'rememberMe' => 'required|in_list[0,1]'
     ];
 
     protected $validationMessages = [
         'email' => [
-            'App\Models\LoginForm::getUser' => 'User not found.',
+            __CLASS__ . '::getUser' => 'There is no user with this email address.',
         ],
         'password' => [
-            'App\Models\LoginForm::validatePassword' => 'Password Invalid.'
+            __CLASS__ . '::validatePassword' => 'Password Invalid.'
         ]
     ];
 
@@ -40,18 +40,9 @@ class LoginForm extends \App\Components\BaseModel
     {
         if ($email !== null)
         {
-            $model = new UserModel;
+            static::$_user = UserModel::findByEmail($email);
 
-            static::$_user = $model->where([
-                'user_email' => $email
-            ])->first();
-
-            if (static::$_user)
-            {
-                return true;
-            }
-
-            return false;
+            return static::$_user ? true : false;
         }
 
         return static::$_user;

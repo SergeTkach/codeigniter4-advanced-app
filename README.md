@@ -7,8 +7,9 @@ This project is the [Yii 2 Advanced Project Template](https://github.com/yiisoft
   - Signup
   - Login
   - Logout
-  - Email confirmation (in progress)
-  - Reset password (in progress)
+  - Email Confirmation
+  - Password Reset
+  - Profile Edit
 
 ## Installation & updates
 

@@ -64,16 +64,6 @@ helper(['form']);
     'error' => array_key_exists('rememberMe', $errors) ? $errors['rememberMe'] : null
 ]);?>
 
-<div style="color:#999;margin:1em 0">
-    
-    If you forgot your password you can <a href="<?= site_url('user/requestPasswordReset');?>">reset it</a>.
-    
-    <br>
-    
-    Need new verification email? <a href="<?= site_url('user/resendVerificationEmail');?>">Resend</a>
-
-</div>
-
 <div class="form-group">
     
     <?= form_submit('login-button', 'Login', ['class' => 'btn btn-primary']);?>

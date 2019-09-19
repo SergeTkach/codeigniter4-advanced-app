@@ -1,17 +1,15 @@
 <?php
 
+use denis303\bootstrap4\FormGroup;
+
 /* @var $this \CodeIgniter\View\View */
 /* @var $model \App\Models\PasswordResetRequestForm */
-
-use App\Components\ActiveForm;
 
 $this->data['title'] = 'Request password reset';
 
 $this->data['breadcrumbs'][] = $this->data['title'];
 
 helper(['form']);
-
-$form = new ActiveForm($model);
 
 ?>
     
@@ -21,9 +19,20 @@ $form = new ActiveForm($model);
 
 <?= form_open('', ['id' => 'request-password-reset-form']);?>
 
-<?= view('_errors', ['errors' => array_merge($model->errors(), $errors)]);?>
+<?= view('_errors', ['errors' => $errors]);?>
 
-<?= $form->input($data, 'email', ['autofocus' => true, 'class' => 'form-control']);?>
+<?= FormGroup::factory([
+    'content' => form_input(
+        'email', 
+        array_key_exists('email', $data) ? $data['email'] : '', 
+        [
+            'class' => 'form-control',
+            'autofocus' => true
+        ]
+    ),
+    'label' => $model->getFieldLabel('email'),
+    'error' => array_key_exists('email', $errors) ? $errors['email'] : null
+]);?>
 
 <div class="form-group">
 

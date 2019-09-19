@@ -11,14 +11,14 @@ class CreateUserTable extends \denis303\user\BaseCreateUserTableMigration
 
         $return[static::FIELD_PREFIX . 'password_reset_token'] = [
             'type' => 'VARCHAR',
-            'constraint' => '32',
+            'constraint' => '255',
             'unique' => true,
             'null' => true
         ];
 
         $return[static::FIELD_PREFIX . 'verification_token'] = [
             'type' => 'VARCHAR',
-            'constraint' => '32',
+            'constraint' => '255',
             'unique' => true,
             'null' => true
         ];

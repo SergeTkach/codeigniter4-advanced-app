@@ -20,20 +20,55 @@ class UserModel extends \denis303\user\BaseUserModel
 
     public function beforeCreateUser($user, array $data)
     {
-        if (!$user->user_verification_token)
+        $token = static::getUserField($user, 'verification_token');
+
+        if (!$token)
         {
-            $this->generateEmailVerificationToken($user);
-        }        
+            static::setUserField($user, 'verification_token', static::generateToken());
+        }
     }
 
-    public function generateEmailVerificationToken(User $user)
+    public static function generateToken()
     {
-        $user->{static::FIELD_PREFIX . 'verification_token'} = md5(time() . rand(0, PHP_INT_MAX));
+        return md5(time() . rand(0, PHP_INT_MAX)) . '_' . time();
     }
 
-    public function generatePasswordResetToken(User $user)
+    public static function getUserVerificationUrl($user)
     {
-        $user->{static::FIELD_PREFIX . 'password_reset_token'} = md5(time() . rand(0, PHP_INT_MAX));
+        $id = static::getUserField($user, 'id');
+
+        $token = static::getUserField($user, 'verification_token');
+
+        return site_url('user/verifyEmail/' . $id  . '/'. $token);
+    }
+
+    public static function getUserResetPasswordUrl($user)
+    {
+        $id = static::getUserField($user, 'id');
+        
+        $token = static::getUserField($user, 'password_reset_token');
+
+        return site_url('user/resetPassword/' . $id . '/' .  $token);
+    }
+
+    /**
+     * Finds out if token is valid
+     *
+     * @param string $token token
+     * @return bool
+     */
+    public static function isTokenValid($token)
+    {
+        if (!$token)
+        {
+            return false;
+        }
+
+        $timestamp = (int) substr($token, strrpos($token, '_') + 1);
+     
+        $expire = 600;
+        
+        return $timestamp + $expire >= time();
     }
 
 }

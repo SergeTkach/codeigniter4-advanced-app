@@ -1,32 +1,42 @@
 <?php
-/* @var $this yii\web\View */
-/* @var $form yii\bootstrap\ActiveForm */
-/* @var $model \frontend\models\ResetPasswordForm */
 
-use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
+use denis303\bootstrap4\FormGroup;
 
-$this->title = 'Resend verification email';
-$this->params['breadcrumbs'][] = $this->title;
+/* @var $this \CodeIgniter\View\View */
+/* @var $model \App\Models\ResendVerificationEmailForm */
+
+$this->data['title'] = 'Resend verification email';
+
+$this->data['breadcrumbs'][] = $this->data['title'];
+
+helper('form');
+
 ?>
-<div class="site-resend-verification-email">
-    <h1><?= Html::encode($this->title) ?></h1>
+<h1><?= esc($this->data['title']);?></h1>
 
-    <p>Please fill out your email. A verification email will be sent there.</p>
+<p>Please fill out your email. A verification email will be sent there.</p>
 
-    <div class="row">
-        <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'resend-verification-email-form']); ?>
+<?= form_open('', ['id' => 'resend-verification-email-form']); ?>
 
-            <?= view('_errors', ['errors' => array_merge($model->errors(), $errors)]);?>
+<?= view('_errors', ['errors' => $errors]);?>
 
-            <?= $form->field($model, 'email')->textInput(['autofocus' => true]) ?>
+<?= FormGroup::factory([
+    'content' => form_input(
+        'email', 
+        array_key_exists('email', $data) ? $data['email'] : '', 
+        [
+            'class' => 'form-control',
+            'autofocus' => true
+        ]
+    ),
+    'label' => $model->getFieldLabel('email'),
+    'error' => array_key_exists('email', $errors) ? $errors['email'] : null
+]);?>
 
-            <div class="form-group">
-                <?= Html::submitButton('Send', ['class' => 'btn btn-primary']) ?>
-            </div>
+<div class="form-group">
 
-            <?php ActiveForm::end(); ?>
-        </div>
-    </div>
+    <?= form_submit('send', 'Send', ['class' => 'btn btn-primary']) ?>
+
 </div>
+
+<?= form_close();?>

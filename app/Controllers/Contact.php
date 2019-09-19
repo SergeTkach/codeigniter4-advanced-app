@@ -18,7 +18,7 @@ class Contact extends \App\Components\BaseController
     {
         $errors = [];
 
-        $messages = [];
+        $message = null;
 
         $data = $this->request->getPost();
 
@@ -26,42 +26,22 @@ class Contact extends \App\Components\BaseController
 
         if ($data && $model->validate($data))
         {
-            $email = Services::email();
-
-            if (!$email->fromEmail)
-            {
-                throw new Exception('From email is not defined.');
-            }
-
-            if ($model->sendEmail((object) $data, $email->fromEmail))
+            if ($model->sendEmail($data, $error))
             {   
-                $messages[] = 'Thank you for contacting us. We will respond to you as soon as possible.';
+                $message = 'Thank you for contacting us. We will respond to you as soon as possible.';
 
                 $data = [];
             }
             else
             {
-                if (CI_DEBUG)
-                {
-                    $errors[] = $email->printDebugger([]); 
-                }
-                else
-                {
-                    $errors[] = 'There was an error sending your message.';
-                }
+                $errors[] = $error;
             }
         }
-        else
-        {
-            $errors = (array) $model->errors();
-        }
-
-        $data = (object) $data;
 
         return $this->render('contact', [
             'data' => $data,
-            'errors' => $errors,
-            'messages' => $messages,
+            'errors' => array_merge((array) $model->errors(), $errors),
+            'message' => $message,
             'model' => $model
         ]);
     }

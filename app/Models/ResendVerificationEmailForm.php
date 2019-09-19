@@ -2,62 +2,86 @@
 
 namespace App\Models;
 
-use Yii;
-use common\models\User;
+use Exception;
 
 class ResendVerificationEmailForm extends \App\Components\BaseModel
 {
 
-    /**
-     * @var string
-     */
-    public $email;
+    protected static $_user;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function rules()
+    protected $validationRules = [
+        'email' => [
+            'label' => 'Email',
+            'rules' => 'trim|valid_email|required|max_length[255]|' . __CLASS__ . '::validateEmail'
+        ]
+    ];
+
+    protected $validationMessages = [
+        'email' => [
+            __CLASS__ . '::validateEmail' => 'There is no user with this email address.'
+        ]
+    ];
+
+    public static function validateEmail($email)
     {
-        return [
-            ['email', 'trim'],
-            ['email', 'required'],
-            ['email', 'email'],
-            ['email', 'exist',
-                'targetClass' => '\common\models\User',
-                'filter' => ['status' => User::STATUS_INACTIVE],
-                'message' => 'There is no user with this email address.'
-            ],
-        ];
-    }
+        if ($email)
+        {
+            $user = UserModel::findByEmail($email);
 
-    /**
-     * Sends confirmation email to user
-     *
-     * @return bool whether the email was sent
-     */
-    public function sendEmail()
-    {
-                    
-            //$this->session->setFlashdata('error', 'Sorry, we are unable to resend verification email for the provided email address.');
+            if (!$user)
+            {
+                return false;
+            }
 
-        $user = User::findOne([
-            'email' => $this->email,
-            'status' => User::STATUS_INACTIVE
-        ]);
+            if (UserModel::getUserField($user, 'verified_at'))
+            {
+                $error = 'Sorry, we are unable to resend verification email for the provided email address.';
 
-        if ($user === null) {
-            return false;
+                $this->validationMessages['email'][__CLASS__ . '::validateEmail'] = $error;
+
+                return false;
+            }
+
+            static::$_user = $user;
         }
 
-        return Yii::$app
-            ->mailer
-            ->compose(
-                ['html' => 'emailVerify-html', 'text' => 'emailVerify-text'],
-                ['user' => $user]
-            )
-            ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
-            ->setTo($this->email)
-            ->setSubject('Account registration at ' . Yii::$app->name)
-            ->send();
+        return true;
     }
+
+    public function getUser()
+    {
+        return static::$_user;
+    }
+
+    public function sendEmail(&$error)
+    {
+        $user = $this->getUser();
+
+        if (!UserModel::isTokenValid(UserModel::getUserField($user, 'verification_token')))
+        {
+            UserModel::setUserField($user, 'verification_token', UserModel::generateToken());
+
+            $model = new UserModel;
+
+            $model->protect(false);
+
+            if(!$model->save($user))
+            {
+                throw new Exception('User not saved.');
+            }
+
+            $model->protect(true);
+        }
+
+        return service('mailer')->sendToUser(
+            $user, 
+           'Account verification at ' . base_url(), 
+            view('messages/verification', [
+                'user' => $user,
+                'verifyLink' => UserModel::getUserVerificationUrl($user)
+            ]), 
+            $error
+        );
+    }
+
 }

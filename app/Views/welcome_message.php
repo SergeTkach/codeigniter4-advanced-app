@@ -107,6 +107,43 @@
 
 			<p class="version">version <?= CodeIgniter\CodeIgniter::CI_VERSION ?></p>
 
+                    <p>
+
+                <?php
+
+                $user = service('user');
+
+                if (!$user->isGuest())
+                {
+                    echo '<a href="' . site_url('user/logout') . '">Logout</a> (' . $user->getEntity()->user_name . ')';
+
+                    echo ' | ';
+
+                    echo '<a href="' . site_url('user/profile') . '">Edit Profile</a>';
+                }
+                else
+                {
+                    echo '<a href="' . site_url('user/login') . '">Login</a>';
+
+                    echo ' | ';
+
+                    echo '<a href="' . site_url('user/signup') . '">Signup</a>';
+
+                    echo ' | ';
+
+                    echo '<a href="' . site_url('user/resendVerificationEmail') . '">Resend Verification Email</a>';
+
+                    echo ' | ';
+
+                    echo '<a href="' . site_url('user/requestPasswordReset') . '">Reset Password</a>';
+                }
+
+                ?>
+
+                | <a href="<?= site_url('contact');?>">Contact Us</a>
+
+            </p>
+
 			<div class="guide">
 				<p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
 
@@ -130,24 +167,6 @@
 					should start by reading the
 					<a href="https://codeigniter4.github.io/CodeIgniter4">User Guide</a>.</p>
 
-                <?php
-
-                $user = service('user');
-
-                if (!$user->isGuest())
-                {
-                    echo '<p><a href="' . site_url('user/logout') . '">Logout</a> (' . $user->getEntity()->user_name . ')</p>';
-                }
-                else
-                {
-                    echo '<p><a href="' . site_url('user/login') . '">Login</a>';
-
-                    echo ' | ';
-
-                    echo '<a href="' . site_url('user/signup') . '">Signup</a></p>';
-                }
-
-                ?>
 
 			</div>
 
