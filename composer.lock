@@ -214,12 +214,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/denis303/codeigniter4-model.git",
-                "reference": "5baa4665134068da3e05cb1273a89cdaafb34d80"
+                "reference": "3fda0e4f382a8cc43afa040474f25746d6fe5457"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/denis303/codeigniter4-model/zipball/5baa4665134068da3e05cb1273a89cdaafb34d80",
-                "reference": "5baa4665134068da3e05cb1273a89cdaafb34d80",
+                "url": "https://api.github.com/repos/denis303/codeigniter4-model/zipball/3fda0e4f382a8cc43afa040474f25746d6fe5457",
+                "reference": "3fda0e4f382a8cc43afa040474f25746d6fe5457",
                 "shasum": ""
             },
             "type": "library",
@@ -232,7 +232,7 @@
             "license": [
                 "MIT"
             ],
-            "time": "2019-09-19T10:14:39+00:00"
+            "time": "2019-09-19T13:31:48+00:00"
         },
         {
             "name": "denis303/codeigniter4-user",
