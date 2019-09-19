@@ -13,8 +13,6 @@ $this->data['breadcrumbs'][] = $this->data['title'];
 helper(['form']);
 
 ?>
-<h1><?= esc($this->data['title']);?></h1>
-
 <p>If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.</p>
 
 <?php if($message):?>

@@ -7,7 +7,7 @@ $this->data['title'] = 'Welcome to CodeIgniter 4';
 
 ?>
 
-    <p>
+<p>
 
 <?php
 

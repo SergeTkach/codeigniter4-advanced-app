@@ -240,12 +240,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/denis303/codeigniter4-user.git",
-                "reference": "82b5ce32ee624309f1748050f5b98613ae58f02d"
+                "reference": "6f5c19e45025abc91b92d29ecd4dfabcb3595ed5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/denis303/codeigniter4-user/zipball/82b5ce32ee624309f1748050f5b98613ae58f02d",
-                "reference": "82b5ce32ee624309f1748050f5b98613ae58f02d",
+                "url": "https://api.github.com/repos/denis303/codeigniter4-user/zipball/6f5c19e45025abc91b92d29ecd4dfabcb3595ed5",
+                "reference": "6f5c19e45025abc91b92d29ecd4dfabcb3595ed5",
                 "shasum": ""
             },
             "type": "library",
@@ -258,7 +258,7 @@
             "license": [
                 "MIT"
             ],
-            "time": "2019-09-19T10:59:41+00:00"
+            "time": "2019-09-19T12:06:28+00:00"
         },
         {
             "name": "denis303/codeigniter4-user-service",
