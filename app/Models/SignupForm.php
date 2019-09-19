@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\User;
-use App\Models\UserModel;
 use Config\Services;
 
 /**
@@ -13,9 +11,9 @@ class SignupForm extends \App\Components\BaseModel
 {
 
     protected $validationRules = [
-        'username' => 'trim|required|max_length[255]|min_length[2]',
-        'email' => 'trim|required|max_length[255]|valid_email|is_unique[user.user_email,user_id,{user_id}]',
-        'password' => 'trim|required|max_length[72]|min_length[5]'
+        'username' => 'required|max_length[255]|min_length[2]',
+        'email' => 'required|' . UserModel::EMAIL_RULES . '|is_unique[user.user_email,user_id,{user_id}]',
+        'password' => 'required|' . UserModel::PASSWORD_RULES
     ];
 
     protected $validationMessages = [

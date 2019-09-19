@@ -14,7 +14,7 @@ class PasswordResetRequestForm extends \App\Components\BaseModel
 
     protected $validationRules = [
         'email' => [
-            'rules' => 'trim|required|valid_email|max_length[255]|' . __CLASS__ . '::validateEmail',
+            'rules' => 'required|' . UserModel::EMAIL_RULES . '|' . __CLASS__ . '::validateEmail',
             'label' => 'Email'
         ]
     ];
@@ -27,14 +27,9 @@ class PasswordResetRequestForm extends \App\Components\BaseModel
 
     public static function validateEmail($email)
     {
-        if ($email)
-        {
-            static::$_user = UserModel::findByEmail($email);
+        static::$_user = UserModel::findByEmail($email);
 
-            return static::$_user ? true : false;
-        }
-
-        return true;
+        return static::$_user ? true : false;
     }
 
     public function getUser()

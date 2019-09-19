@@ -45,6 +45,10 @@ helper(['form']);
     'error' => array_key_exists('password', $errors) ? $errors['password'] : null
 ]);?>
 
+<?php
+
+/*
+
 <?= form_hidden('rememberMe', 0);?>
 
 <?= FormGroup::factory([
@@ -63,6 +67,10 @@ helper(['form']);
     ],
     'error' => array_key_exists('rememberMe', $errors) ? $errors['rememberMe'] : null
 ]);?>
+
+*/
+
+?>
 
 <div class="form-group">
     

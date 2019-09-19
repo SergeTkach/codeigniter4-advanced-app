@@ -1,3 +1,8 @@
+<?php
+
+use App\Models\UserModel;
+
+?>
 <!doctype html>
 <html>
 	<head>
@@ -115,11 +120,7 @@
 
                 if (!$user->isGuest())
                 {
-                    echo '<a href="' . site_url('user/logout') . '">Logout</a> (' . $user->getEntity()->user_name . ')';
-
-                    echo ' | ';
-
-                    echo '<a href="' . site_url('user/profile') . '">Edit Profile</a>';
+                    echo '<a href="' . site_url('user/logout') . '">Logout</a> (' . esc(UserModel::getUserName($user->getEntity())) . ')';
                 }
                 else
                 {

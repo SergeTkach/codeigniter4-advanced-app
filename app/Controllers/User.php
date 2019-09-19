@@ -3,10 +3,12 @@
 namespace App\Controllers;
 
 use Exception;
+use CodeIgniter\Exceptions\PageNotFoundException;
 use App\Models\LoginForm;
 use App\Models\SignupForm;
 use App\Models\PasswordResetRequestForm;
 use App\Models\ResendVerificationEmailForm;
+use App\Models\ResetPasswordForm;
 use App\Models\UserModel;
 
 class User extends \App\Components\BaseController
@@ -71,7 +73,7 @@ class User extends \App\Components\BaseController
         {
             $rememberMe = array_key_exists('rememberMe', $data) ? $data['rememberMe'] : 0;
 
-            $user = $model::getUser();
+            $user = $model->getUser();
 
             if ($this->user->login($user, $rememberMe, $error))
             {
@@ -108,29 +110,44 @@ class User extends \App\Components\BaseController
      * @param string $token
      * @return mixed
      */
-    public function verifyEmail($token)
+    public function verifyEmail($id, $token)
     {
-        $model = new VerifyEmailForm;
+        $user = UserModel::findByPrimaryKey($id);
 
-        $data = $this->request->getPost();
-
-        $data['token'] = $token;
-
-        if ($data && $model->validate($data))
+        if (!$user)
         {
-            $user = $model->getUser();
-
-            if ($this->user->login($user))
-            {
-                $this->session->setFlashdata('success', 'Your email has been confirmed!');
-
-                return $this->goHome();
-            }
+            throw new PageNotFoundException;
         }
 
-        $this->session->setFlashdata('error', 'Sorry, we are unable to verify your account with provided token.');
-        
-        return $this->goHome();
+        if (UserModel::getUserField($user, 'verification_token') != $token)
+        {
+            throw new Exception('Unable to verify your account with provided token.');
+        }
+
+        $model = new UserModel;
+
+        $model->set(UserModel::FIELD_PREFIX . 'verified_at', 'NOW()', false);
+
+        $model->set(UserModel::FIELD_PREFIX . 'verification_token', 'NULL', false);
+
+        $model->protect(false);
+
+        $id = $model->getUserField($user, 'id');
+
+        $updated = $model->update($id);
+
+        $model->protect(true);
+
+        if (!$updated)
+        {
+            $error = $model->getFirstError();
+
+            throw new Exception($error);
+        }
+
+        $this->session->setFlashdata('success', 'Your email has been confirmed!');
+
+        return $this->redirect(site_url('user/login'));
     }
 
     /**
@@ -148,12 +165,6 @@ class User extends \App\Components\BaseController
 
         if ($data && $model->validate($data))
         {
-//          $user = $model->getUser();
-
-
-
-            //if (!UserModel::getField($user, 'verified_at'))
-            //{
             if ($model->sendEmail($error))
             {
                 $this->session->setFlashdata('success', 'Check your email for further instructions.');
@@ -163,12 +174,7 @@ class User extends \App\Components\BaseController
             else
             {
                 $errors[] = $error;
-            }                
-            //}
-            //else
-            //{
-//                $errors[] = ;
-            //}
+            }
         }
 
         return $this->render('user/resendVerificationEmail', [
@@ -220,26 +226,44 @@ class User extends \App\Components\BaseController
      * @param string $token
      * @return mixed
      */
-    public function resetPassword($token)
+    public function resetPassword($id, $token)
     {
-        try
+        $user = UserModel::findByPrimaryKey($id);
+
+        if (!$user)
         {
-            $model = new ResetPasswordForm($token);
-        }
-        catch(Exception $e)
-        {
-            throw new BadRequestHttpException($e->getMessage());
+            throw new PageNotFoundException;
         }
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword())
+        if (UserModel::getUserField($user, 'password_reset_token') != $token)
         {
-            $this->session->setFlashdata('success', 'New password saved.');
+            throw new Exception('Wrong password reset token.');
+        }
 
-            return $this->goHome();
+        $errors = [];
+
+        $model = new ResetPasswordForm;
+
+        $data = $this->request->getPost();
+
+        if ($data && $model->validate($data))
+        {
+            if ($model->resetPassword($user, $data, $error))
+            {
+                $this->session->setFlashdata('success', 'New password saved.');
+
+                return $this->redirect(site_url('user/login'));
+            }
+            else
+            {
+                $errors[] = $error;
+            }
         }
 
         return $this->render('user/resetPassword', [
-            'model' => $model
+            'model' => $model,
+            'data' => $data,
+            'errors' => array_merge((array) $model->errors(), $errors)
         ]);
     }
 

@@ -3,7 +3,11 @@
 namespace App\Models;
 
 class UserModel extends \denis303\user\BaseUserModel
-{   
+{
+
+    const EMAIL_RULES = 'max_length[255]|valid_email|min_length[2]';
+
+    const PASSWORD_RULES = 'max_length[72]|min_length[5]';   
 
     protected $returnType = User::class;
 

@@ -11,14 +11,15 @@ class LoginForm extends \App\Components\BaseModel
     protected static $_user;
 
     protected $validationRules = [
-        'email' => 'trim|required|valid_email|max_length[255]|min_length[2]|' . __CLASS__ .'::getUser',
-        'password' => 'trim|required|max_length[72]|min_length[5]|' . __CLASS__ .'::validatePassword',
+        'email' => 'required|' . UserModel::EMAIL_RULES. '|' . __CLASS__ .'::validateEmail|' . __CLASS__ .'::validateVerification',
+        'password' => 'required|' . UserModel::PASSWORD_RULES . '|' . __CLASS__ .'::validatePassword',
         'rememberMe' => 'required|in_list[0,1]'
     ];
 
     protected $validationMessages = [
         'email' => [
-            __CLASS__ . '::getUser' => 'There is no user with this email address.',
+            __CLASS__ . '::validateEmail' => 'There is no user with this email address.',
+            __CLASS__ . '::validateVerification' => 'Email is not verified.',
         ],
         'password' => [
             __CLASS__ . '::validatePassword' => 'Password Invalid.'
@@ -36,16 +37,31 @@ class LoginForm extends \App\Components\BaseModel
      *
      * @return User|bool|null
      */
-    public static function getUser($email = null)
+    public function getUser()
     {
-        if ($email !== null)
-        {
-            static::$_user = UserModel::findByEmail($email);
+        return static::$_user;
+    }
 
-            return static::$_user ? true : false;
+    public static function validateEmail($email)
+    {
+        static::$_user = UserModel::findByEmail($email);
+
+        return static::$_user ? true : false;
+    }
+
+    public static function validateVerification($email)
+    {
+        if (static::$_user)
+        {
+            if (!UserModel::getUserField(static::$_user, 'verified_at'))
+            {
+                static::$_user = null;
+
+                return false;
+            }
         }
 
-        return static::$_user;
+        return true;
     }
 
     /**
@@ -54,15 +70,11 @@ class LoginForm extends \App\Components\BaseModel
      *
      * @param string $password the attribute currently being validated
      */
-    public static function validatePassword(string $password) : bool
+    public static function validatePassword(string $password)
     {
-        $user = static::getUser();
-
-        if ($user)
+        if (static::$_user)
         {
-            $model = new UserModel;
-
-            return $model->validatePassword($user, $password);
+            return UserModel::validateUserPassword(static::$_user, $password);
         }
 
         return true;

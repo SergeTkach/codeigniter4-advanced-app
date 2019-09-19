@@ -35,7 +35,7 @@ helper('form');
 
 <div class="form-group">
 
-    <?= form_submit('send', 'Send', ['class' => 'btn btn-primary']) ?>
+    <?= form_submit('send', 'Send', ['class' => 'btn btn-primary']);?>
 
 </div>
 

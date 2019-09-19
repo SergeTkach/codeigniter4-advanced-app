@@ -15,24 +15,21 @@ class ContactForm extends \App\Components\BaseModel
         'name', 
         'email', 
         'subject', 
-        'body', 
-//        'verifyCode'
+        'body'
     ];
 
     protected $fieldLabels = [
         'name' => 'Name',
         'email' => 'E-mail',
         'subject' => 'Subject',
-        'body' => 'Body',
-//        'verifyCode' => 'Verification Code'
+        'body' => 'Body'
     ];
 
     protected $validationRules = [
         'name' => 'required|max_length[255]',
         'email' => 'required|valid_email|max_length[255]',
         'subject' => 'required|max_length[255]',
-        'body' => 'required|max_length[255]',
-//        'verifyCode' => 'strip_tags|trim|required|max_length[255]'
+        'body' => 'required|max_length[255]'
     ];
 
     /**

@@ -9,7 +9,7 @@
   - Logout
   - Email Confirmation
   - Password Reset
-  - Profile Edit
+  - Contact Form
 
 ## Installation & updates
 
