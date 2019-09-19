@@ -19,7 +19,7 @@ helper(['form']);
 
 <?= view('_errors', ['errors' => $errors]);?>
 
-<?= form_open('', ['id' => 'form-signup']);?>
+<?= form_open(site_url('user/signup'), ['id' => 'form-signup']);?>
 
 <?= FormGroup::factory([
     'content' => form_input(
