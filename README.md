@@ -1,6 +1,6 @@
 # CodeIgniter 4 Advanced Project Template
 
-This project is the [Yii 2 Advanced Project Template](https://github.com/yiisoft/yii2-app-advanced) clone on CodeIgniter 4.
+[Yii 2 Advanced Project Template](https://github.com/yiisoft/yii2-app-advanced) ported to CodeIgniter 4.
 
 ## Overview
 
