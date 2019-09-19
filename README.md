@@ -13,7 +13,6 @@
 
 ## Installation & updates
 
-
 `composer create-project denis303/codeigniter-advanced-app` then `composer update` whenever
 there is a new release of the application.
 
