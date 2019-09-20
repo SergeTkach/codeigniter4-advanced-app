@@ -10,9 +10,9 @@ if (!$user->isGuest())
 }
 else
 {
-    echo '<a href="' . site_url('user/login') . '">Login</a>';
-    echo ' | ';
     echo '<a href="' . site_url('user/signup') . '">Signup</a>';
+    echo ' | ';
+    echo '<a href="' . site_url('user/login') . '">Login</a>';
     echo ' | ';
     echo '<a href="' . site_url('user/resendVerificationEmail') . '">Resend Verification Email</a>';
     echo ' | ';

@@ -11,10 +11,9 @@
   - Password Reset
   - Contact Form
 
-## Installation & updates
+## Installation
 
-`composer create-project denis303/codeigniter4-advanced-app --stability=dev` then `composer update` whenever
-there is a new release of the application.
+`composer create-project denis303/codeigniter4-advanced-app --stability=dev`
 
 ## Setup
 
