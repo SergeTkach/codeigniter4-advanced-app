@@ -1,4 +1,9 @@
-<p>Hello <?= esc($user->user_name);?>,</p>
+<?php
+
+use App\Models\UserModel;
+
+?>
+<p>Hello <?= esc(UserModel::getUserName($user));?>,</p>
 
 <p>Follow the link below to reset your password:</p>
 
