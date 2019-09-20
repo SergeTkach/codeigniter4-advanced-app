@@ -2,7 +2,7 @@
 
 namespace denis303\user\Database\Migrations;
 
-class CreateUserTable extends \denis303\user\BaseCreateUserTableMigration
+class CreateUserTable extends \denis303\user\CreateUserTableMigration
 {
 
     public function getFields()
