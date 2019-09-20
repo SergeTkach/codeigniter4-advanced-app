@@ -75,7 +75,7 @@ class UserModel extends \denis303\user\UserModel
         return $timestamp + $expire >= time();
     }
 
-    public static function setUserVerification($user, &$error = null)
+    public static function setUserVerification($user, $token, &$error = null)
     {
         if (static::getUserField($user, 'verified_at'))
         {
