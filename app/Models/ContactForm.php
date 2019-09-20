@@ -6,7 +6,7 @@ use Config\Services;
 use Config\Mailer as MailerConfig;
 use Exception;
 
-class ContactForm extends \App\Components\BaseModel
+class ContactForm extends \App\Components\Model
 {
 
     protected $returnType = 'array';
@@ -17,19 +17,24 @@ class ContactForm extends \App\Components\BaseModel
         'subject', 
         'body'
     ];
-
-    protected $fieldLabels = [
-        'name' => 'Name',
-        'email' => 'E-mail',
-        'subject' => 'Subject',
-        'body' => 'Body'
-    ];
-
+    
     protected $validationRules = [
-        'name' => 'required|max_length[255]',
-        'email' => 'required|valid_email|max_length[255]',
-        'subject' => 'required|max_length[255]',
-        'body' => 'required|max_length[255]'
+        'name' => [
+            'rules' => 'required|max_length[255]',
+            'label' => 'Name'
+        ],
+        'email' => [
+            'rules' => 'required|valid_email|max_length[255]',
+            'label' => 'Email'
+        ],
+        'subject' => [
+            'rules' => 'required|max_length[255]',
+            'label' => 'Subject' 
+        ],
+        'body' => [
+            'rules' => 'required|max_length[255]',
+            'label' => 'Body'
+        ]
     ];
 
     /**

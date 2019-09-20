@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d0712d07956666ecedb550c7e53b2c63",
+    "content-hash": "5bc940319cc183d56e5632eb49d0db02",
     "packages": [
         {
             "name": "codeigniter4/framework",
@@ -47,114 +47,6 @@
             "description": "The CodeIgniter framework v4",
             "homepage": "https://codeigniter.com",
             "time": "2019-09-03T04:36:24+00:00"
-        },
-        {
-            "name": "denis303/codeigniter4-bootstrap4",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/denis303/codeigniter4-bootstrap4.git",
-                "reference": "039933a9c75058b32136a0d7374a2036f5d0069a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/denis303/codeigniter4-bootstrap4/zipball/039933a9c75058b32136a0d7374a2036f5d0069a",
-                "reference": "039933a9c75058b32136a0d7374a2036f5d0069a",
-                "shasum": ""
-            },
-            "require": {
-                "denis303/codeigniter4-form": "dev-master",
-                "denis303/codeigniter4-widget": "dev-master"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "denis303\\bootstrap4\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "time": "2019-09-17T11:04:33+00:00"
-        },
-        {
-            "name": "denis303/codeigniter4-controller",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/denis303/codeigniter4-controller.git",
-                "reference": "31f8d06445bc45e16e39c85500c61433f4b8a228"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/denis303/codeigniter4-controller/zipball/31f8d06445bc45e16e39c85500c61433f4b8a228",
-                "reference": "31f8d06445bc45e16e39c85500c61433f4b8a228",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "denis303\\codeigniter4\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "time": "2019-09-19T09:57:47+00:00"
-        },
-        {
-            "name": "denis303/codeigniter4-entity",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/denis303/codeigniter4-entity.git",
-                "reference": "06f932b47df2bf6466e1f11cd2f56995fcc7f6e1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/denis303/codeigniter4-entity/zipball/06f932b47df2bf6466e1f11cd2f56995fcc7f6e1",
-                "reference": "06f932b47df2bf6466e1f11cd2f56995fcc7f6e1",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "denis303\\codeigniter4\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "time": "2019-09-17T07:27:53+00:00"
-        },
-        {
-            "name": "denis303/codeigniter4-form",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/denis303/codeigniter4-form.git",
-                "reference": "08513833018562f31e576517637a494e13589c01"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/denis303/codeigniter4-form/zipball/08513833018562f31e576517637a494e13589c01",
-                "reference": "08513833018562f31e576517637a494e13589c01",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "denis303\\codeigniter4\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "time": "2019-09-16T19:36:01+00:00"
         },
         {
             "name": "denis303/codeigniter4-mailer-service",
@@ -209,44 +101,21 @@
             "time": "2019-09-17T08:15:56+00:00"
         },
         {
-            "name": "denis303/codeigniter4-model",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/denis303/codeigniter4-model.git",
-                "reference": "3fda0e4f382a8cc43afa040474f25746d6fe5457"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/denis303/codeigniter4-model/zipball/3fda0e4f382a8cc43afa040474f25746d6fe5457",
-                "reference": "3fda0e4f382a8cc43afa040474f25746d6fe5457",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "denis303\\codeigniter4\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "time": "2019-09-19T13:31:48+00:00"
-        },
-        {
             "name": "denis303/codeigniter4-user",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/denis303/codeigniter4-user.git",
-                "reference": "6f5c19e45025abc91b92d29ecd4dfabcb3595ed5"
+                "reference": "c39c6beb218aedc9da1c6b798737236f4241514d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/denis303/codeigniter4-user/zipball/6f5c19e45025abc91b92d29ecd4dfabcb3595ed5",
-                "reference": "6f5c19e45025abc91b92d29ecd4dfabcb3595ed5",
+                "url": "https://api.github.com/repos/denis303/codeigniter4-user/zipball/c39c6beb218aedc9da1c6b798737236f4241514d",
+                "reference": "c39c6beb218aedc9da1c6b798737236f4241514d",
                 "shasum": ""
+            },
+            "require": {
+                "denis303/codeigniter4-migration": "*"
             },
             "type": "library",
             "autoload": {
@@ -258,7 +127,7 @@
             "license": [
                 "MIT"
             ],
-            "time": "2019-09-19T12:06:28+00:00"
+            "time": "2019-09-20T05:40:20+00:00"
         },
         {
             "name": "denis303/codeigniter4-user-service",
@@ -285,32 +154,6 @@
                 "MIT"
             ],
             "time": "2019-09-19T10:57:41+00:00"
-        },
-        {
-            "name": "denis303/codeigniter4-widget",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/denis303/codeigniter4-widget.git",
-                "reference": "a7a5484630f2457da30302c77118acb7b24375ba"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/denis303/codeigniter4-widget/zipball/a7a5484630f2457da30302c77118acb7b24375ba",
-                "reference": "a7a5484630f2457da30302c77118acb7b24375ba",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "denis303\\codeigniter4\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "time": "2019-09-17T10:41:27+00:00"
         },
         {
             "name": "kint-php/kint",
@@ -1985,11 +1828,6 @@
     "stability-flags": {
         "codeigniter4/framework": 5,
         "denis303/codeigniter4-user-service": 20,
-        "denis303/codeigniter4-bootstrap4": 20,
-        "denis303/codeigniter4-migration": 20,
-        "denis303/codeigniter4-controller": 20,
-        "denis303/codeigniter4-model": 20,
-        "denis303/codeigniter4-entity": 20,
         "denis303/codeigniter4-mailer-service": 20,
         "denis303/codeigniter4-user": 20
     },

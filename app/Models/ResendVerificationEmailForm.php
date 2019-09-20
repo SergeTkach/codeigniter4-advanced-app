@@ -4,8 +4,10 @@ namespace App\Models;
 
 use Exception;
 
-class ResendVerificationEmailForm extends \App\Components\BaseModel
+class ResendVerificationEmailForm extends \App\Components\Model
 {
+
+    protected $returnType = 'array';
 
     protected static $_user;
 

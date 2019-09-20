@@ -5,8 +5,10 @@ namespace App\Models;
 /**
  * Password reset form
  */
-class ResetPasswordForm extends \App\Components\BaseModel
+class ResetPasswordForm extends \App\Components\Model
 {
+
+    protected $returnType = 'array';
 
     protected $validationRules = [
         'password' => [

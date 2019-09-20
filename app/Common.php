@@ -13,3 +13,8 @@
  *
  * @link: https://codeigniter4.github.io/CodeIgniter4/
  */
+
+ 
+//require_once __DIR__ . '/Components/Model.php';
+ 
+//require_once __DIR__ . '/ThirdParty/Bootstrap.php';

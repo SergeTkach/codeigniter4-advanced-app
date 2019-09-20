@@ -7,8 +7,10 @@ use Exception;
 /**
  * Password reset request form
  */
-class PasswordResetRequestForm extends \App\Components\BaseModel
+class PasswordResetRequestForm extends \App\Components\Model
 {
+
+    protected $returnType = 'array';
 
     protected static $_user;
 

@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class UserModel extends \denis303\user\BaseUserModel
+class UserModel extends \denis303\user\UserModel
 {
 
     const EMAIL_RULES = 'max_length[255]|valid_email|min_length[2]';

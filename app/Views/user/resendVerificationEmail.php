@@ -1,6 +1,6 @@
 <?php
 
-use denis303\bootstrap4\FormGroup;
+use App\Widgets\FormGroup;
 
 /* @var $this \CodeIgniter\View\View */
 /* @var $model \App\Models\ResendVerificationEmailForm */

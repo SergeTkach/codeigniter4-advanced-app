@@ -19,12 +19,14 @@ use Psr\Log\LoggerInterface;
  * @package CodeIgniter
  */
 
-abstract class BaseController extends \denis303\codeigniter4\Controller
+abstract class Controller extends \CodeIgniter\Controller
 {
 
     protected $session;
 
     protected $user;
+
+    protected $layout = "layout";
 
 	/**
 	 * Constructor.
@@ -42,5 +44,36 @@ abstract class BaseController extends \denis303\codeigniter4\Controller
 
         $this->user = \Config\Services::user();
 	}
+
+    protected function render(string $view, array $params = [])
+    {
+        $content = view($view, $params, ['saveData' => true]);
+
+        $layout = $this->layout;
+
+        $data = service('renderer')->getData();
+
+        if (array_key_exists('layout', $data))
+        {
+            $layout = $data['layout'];
+        }
+
+        if ($layout)
+        {
+            return view($this->layout, ['content' => $content], ['saveData' => false]);
+        }
+
+        return $content;
+    }
+
+    public function goHome()
+    {
+        return $this->redirect(base_url());
+    }
+
+    public function redirect($url)
+    {
+        return redirect()->to($url);
+    }
 
 }

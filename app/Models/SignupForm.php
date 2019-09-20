@@ -7,25 +7,30 @@ use Config\Services;
 /**
  * Signup form
  */
-class SignupForm extends \App\Components\BaseModel
+class SignupForm extends \App\Components\Model
 {
 
+    protected $returnType = 'array';
+
     protected $validationRules = [
-        'username' => 'required|max_length[255]|min_length[2]',
-        'email' => 'required|' . UserModel::EMAIL_RULES . '|is_unique[user.user_email,user_id,{user_id}]',
-        'password' => 'required|' . UserModel::PASSWORD_RULES
+        'username' => [
+            'rules' => 'required|max_length[255]|min_length[2]',
+            'label' => 'Name',
+        ],
+        'email' => [
+            'rules' => 'required|' . UserModel::EMAIL_RULES . '|is_unique[user.user_email,user_id,{user_id}]',
+            'label' => 'Email',
+        ],
+        'password' => [
+            'rules' => 'required|' . UserModel::PASSWORD_RULES,
+            'label' => 'Password'
+        ]
     ];
 
     protected $validationMessages = [
         'email' => [
             'is_unique' => 'This email address has already been taken.'
         ]
-    ];
-
-    protected $fieldLabels = [
-        'username' => 'Name',
-        'email' => 'Email',
-        'password' => 'Password'
     ];
 
     /**

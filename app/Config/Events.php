@@ -1,4 +1,6 @@
-<?php namespace Config;
+<?php
+
+namespace Config;
 
 use CodeIgniter\Events\Events;
 
@@ -19,13 +21,16 @@ use CodeIgniter\Events\Events;
  *      Events::on('create', [$myInstance, 'myMethod']);
  */
 
-Events::on('pre_system', function () {
-	while (\ob_get_level() > 0)
+Events::on('pre_system', function() {
+
+    require_once dirname(__DIR__) . '/ThirdParty/bootstrap.php';
+    
+	while (ob_get_level() > 0)
 	{
-		\ob_end_flush();
+		ob_end_flush();
 	}
 
-	\ob_start(function ($buffer) {
+	ob_start(function ($buffer) {
 		return $buffer;
 	});
 
@@ -35,9 +40,10 @@ Events::on('pre_system', function () {
 	 * --------------------------------------------------------------------
 	 * If you delete, they will no longer be collected.
 	 */
-	if (ENVIRONMENT !== 'production')
+	if (!is_cli() && (ENVIRONMENT !== 'production'))
 	{
 		Events::on('DBQuery', 'CodeIgniter\Debug\Toolbar\Collectors\Database::collect');
-		Services::toolbar()->respond();
+	
+    	Services::toolbar()->respond();
 	}
 });

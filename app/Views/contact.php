@@ -3,8 +3,8 @@
 /* @var $this \CodeIgniter\View\View */
 /* @var $data \App\Models\ContactForm */
 
-use denis303\bootstrap4\Alert;
-use denis303\bootstrap4\FormGroup;
+use App\Widgets\Alert;
+use App\Widgets\FormGroup;
 
 $this->data['title'] = 'Contact';
 

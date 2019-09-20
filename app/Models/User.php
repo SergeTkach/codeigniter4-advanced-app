@@ -2,6 +2,6 @@
 
 namespace App\Models;
 
-class User extends \denis303\user\BaseUser
+class User extends \denis303\user\User
 {
 }

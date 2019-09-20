@@ -6,7 +6,7 @@ use App\Models\ContactForm;
 use Config\Services;
 use Exception;
 
-class Contact extends \App\Components\BaseController
+class Contact extends \App\Components\Controller
 {
 
     /**

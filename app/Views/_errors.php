@@ -1,6 +1,6 @@
 <?php
 
-use denis303\bootstrap4\Alert;
+use App\Widgets\Alert;
 
 foreach($errors as $error)
 {

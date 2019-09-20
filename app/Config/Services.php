@@ -37,7 +37,7 @@ class Services extends \CodeIgniter\Config\Services
             return static::getSharedInstance('user');
         }
 
-        return new \App\Components\UserService(static::session(), \App\Models\UserModel::class);
+        return new \denis303\codeigniter4\UserService(static::session(), \App\Models\UserModel::class);
     }
 
     public static function mailer($getShared = true)
@@ -49,7 +49,7 @@ class Services extends \CodeIgniter\Config\Services
 
         $mailerConfig = config(Mailer::class);
 
-        return new \App\Components\MailerService($mailerConfig->fromEmail, $mailerConfig->fromName);
+        return new \denis303\codeigniter4\MailerService($mailerConfig->fromEmail, $mailerConfig->fromName);
     }
 
 }

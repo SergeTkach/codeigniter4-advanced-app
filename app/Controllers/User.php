@@ -11,7 +11,7 @@ use App\Models\ResendVerificationEmailForm;
 use App\Models\ResetPasswordForm;
 use App\Models\UserModel;
 
-class User extends \App\Components\BaseController
+class User extends \App\Components\Controller
 {
 
     /**

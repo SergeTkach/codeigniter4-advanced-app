@@ -5,15 +5,26 @@ namespace App\Models;
 /**
  * Login form
  */
-class LoginForm extends \App\Components\BaseModel
+class LoginForm extends \App\Components\Model
 {
+
+    protected $returnType = 'array';
 
     protected static $_user;
 
     protected $validationRules = [
-        'email' => 'required|' . UserModel::EMAIL_RULES. '|' . __CLASS__ .'::validateEmail|' . __CLASS__ .'::validateVerification',
-        'password' => 'required|' . UserModel::PASSWORD_RULES . '|' . __CLASS__ .'::validatePassword',
-        'rememberMe' => 'required|in_list[0,1]'
+        'email' => [
+            'rules' => 'required|' . UserModel::EMAIL_RULES. '|' . __CLASS__ .'::validateEmail|' . __CLASS__ .'::validateVerification',
+            'label' => 'Email'
+        ],
+        'password' => [
+            'rules' => 'required|' . UserModel::PASSWORD_RULES . '|' . __CLASS__ .'::validatePassword',
+            'label' => 'Password'
+        ],
+        'rememberMe' => [
+            'rules' => 'required|in_list[0,1]',
+            'label' => 'Remember Me'
+        ]
     ];
 
     protected $validationMessages = [
@@ -24,12 +35,6 @@ class LoginForm extends \App\Components\BaseModel
         'password' => [
             __CLASS__ . '::validatePassword' => 'Password Invalid.'
         ]
-    ];
-
-    protected $fieldLabels = [
-        'email' => 'Email',
-        'password' => 'Password',
-        'rememberMe' => 'Remember Me'
     ];
 
     /**
