@@ -75,4 +75,46 @@ class UserModel extends \denis303\user\UserModel
         return $timestamp + $expire >= time();
     }
 
+    public static function setUserVerification($user, &$error = null)
+    {
+        if (static::getUserField($user, 'verified_at'))
+        {
+            $error = 'User already verified.';
+
+            return false;
+        }
+
+        if (static::getUserField($user, 'verification_token') != $token)
+        {
+            $error = 'Unable to verify your account with provided token.';
+        
+            return false;
+        }
+
+        $model = new UserModel;
+
+        $model->set(static::FIELD_PREFIX . 'verified_at', 'NOW()', false);
+
+        $model->set(static::FIELD_PREFIX . 'verification_token', 'NULL', false);
+
+        $model->protect(false);
+
+        $id = $model::getUserField($user, 'id');
+
+        $updated = $model->update($id);
+
+        $model->protect(true);
+
+        if (!$updated)
+        {
+            $error = $model->getFirstError();
+
+            return false;
+        }
+
+        $user = UserModel::findByPrimaryKey($id);
+
+        return true;
+    }
+
 }

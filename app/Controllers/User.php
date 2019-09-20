@@ -119,29 +119,8 @@ class User extends \App\Components\Controller
             throw new PageNotFoundException;
         }
 
-        if (UserModel::getUserField($user, 'verification_token') != $token)
+        if (!UserModel::setUserVerification($user, $token, $error))
         {
-            throw new Exception('Unable to verify your account with provided token.');
-        }
-
-        $model = new UserModel;
-
-        $model->set(UserModel::FIELD_PREFIX . 'verified_at', 'NOW()', false);
-
-        $model->set(UserModel::FIELD_PREFIX . 'verification_token', 'NULL', false);
-
-        $model->protect(false);
-
-        $id = $model->getUserField($user, 'id');
-
-        $updated = $model->update($id);
-
-        $model->protect(true);
-
-        if (!$updated)
-        {
-            $error = $model->getFirstError();
-
             throw new Exception($error);
         }
 
