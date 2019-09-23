@@ -43,17 +43,13 @@ helper(['form']);
     'error' => array_key_exists('password', $errors) ? $errors['password'] : null
 ]);?>
 
-<?php
-
-/*
-
 <?= form_hidden('rememberMe', 0);?>
 
 <?= FormGroup::factory([
     'content' => '<br>'. form_checkbox(
         'rememberMe',
         '1',
-        (array_key_exists('username', $data) && $data['username']) ? true : false,
+        (array_key_exists('rememberMe', $data) && $data['rememberMe']) ? true : false,
         [
             'id' => 'remember-me-checkbox'
         ]
@@ -65,10 +61,6 @@ helper(['form']);
     ],
     'error' => array_key_exists('rememberMe', $errors) ? $errors['rememberMe'] : null
 ]);?>
-
-*/
-
-?>
 
 <div class="form-group">
     

@@ -85,6 +85,11 @@ class User extends \App\Components\Controller
             }
         }
 
+        if (!$data)
+        {
+            $data['rememberMe'] = 1;
+        }
+
         return $this->render('user/login', [
             'model' => $model,
             'errors' => array_merge((array) $model->errors(), $errors),
