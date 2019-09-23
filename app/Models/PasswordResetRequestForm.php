@@ -81,6 +81,7 @@ class PasswordResetRequestForm extends \App\Components\Model
                 'user' => $user,
                 'resetLink' => UserModel::getUserResetPasswordUrl($user)
             ]),
+            [],
             $error
         );
     }

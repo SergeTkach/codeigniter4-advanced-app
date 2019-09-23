@@ -54,12 +54,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/denis303/codeigniter4-mailer-service.git",
-                "reference": "84b78719a3a0265dab0da4ee58e91fdcab49e865"
+                "reference": "9745de7bdf918c874e08f3e1d5c35343592ed1d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/denis303/codeigniter4-mailer-service/zipball/84b78719a3a0265dab0da4ee58e91fdcab49e865",
-                "reference": "84b78719a3a0265dab0da4ee58e91fdcab49e865",
+                "url": "https://api.github.com/repos/denis303/codeigniter4-mailer-service/zipball/9745de7bdf918c874e08f3e1d5c35343592ed1d8",
+                "reference": "9745de7bdf918c874e08f3e1d5c35343592ed1d8",
                 "shasum": ""
             },
             "type": "library",
@@ -72,7 +72,7 @@
             "license": [
                 "MIT"
             ],
-            "time": "2019-09-18T08:05:56+00:00"
+            "time": "2019-09-23T10:36:23+00:00"
         },
         {
             "name": "denis303/codeigniter4-migration",

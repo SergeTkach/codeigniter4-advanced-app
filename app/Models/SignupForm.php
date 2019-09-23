@@ -66,7 +66,8 @@ class SignupForm extends \App\Components\Model
         return $mailer->sendToUser(
             $user, 
             'Account registration at ' . base_url(), 
-            $message, 
+            $message,
+            [], 
             $error
         );
     }

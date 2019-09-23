@@ -71,6 +71,7 @@ class ResendVerificationEmailForm extends \App\Components\Model
                 'user' => $user,
                 'verifyLink' => UserModel::getUserVerificationUrl($user)
             ]), 
+            [],
             $error
         );
     }
