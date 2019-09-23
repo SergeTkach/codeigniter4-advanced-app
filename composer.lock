@@ -135,12 +135,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/denis303/codeigniter4-user-service.git",
-                "reference": "5df93338cde19309bc1987e4434618c23987a86e"
+                "reference": "3405f716210fce5a344437ecbf522847ad521147"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/denis303/codeigniter4-user-service/zipball/5df93338cde19309bc1987e4434618c23987a86e",
-                "reference": "5df93338cde19309bc1987e4434618c23987a86e",
+                "url": "https://api.github.com/repos/denis303/codeigniter4-user-service/zipball/3405f716210fce5a344437ecbf522847ad521147",
+                "reference": "3405f716210fce5a344437ecbf522847ad521147",
                 "shasum": ""
             },
             "type": "library",
@@ -153,7 +153,7 @@
             "license": [
                 "MIT"
             ],
-            "time": "2019-09-23T09:28:52+00:00"
+            "time": "2019-09-23T09:57:39+00:00"
         },
         {
             "name": "kint-php/kint",
