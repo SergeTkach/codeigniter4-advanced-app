@@ -58,16 +58,10 @@ class ResendVerificationEmailForm extends \App\Components\Model
         {
             UserModel::setUserField($user, 'verification_token', UserModel::generateToken());
 
-            $model = new UserModel;
-
-            $model->protect(false);
-
-            if(!$model->save($user))
+            if (!UserModel::saveUser($user, $error))
             {
-                throw new Exception('User not saved.');
+                throw new Exception($error);
             }
-
-            $model->protect(true);
         }
 
         return service('mailer')->sendToUser(

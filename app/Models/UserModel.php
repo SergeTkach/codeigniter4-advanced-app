@@ -117,4 +117,13 @@ class UserModel extends \denis303\user\UserModel
         return true;
     }
 
+    public static function saveUser($user, &$error)
+    {
+        $class = get_called_class();
+
+        $model = new $class;
+
+        return $model->saveUnprotected($user, $error);
+    }    
+
 }
