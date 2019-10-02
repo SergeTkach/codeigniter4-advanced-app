@@ -2,11 +2,13 @@
 
 use App\Models\UserModel;
 
-$user = service('user');
+$userService = service('user');
 
-if (!$user->isGuest())
+if (!$userService->isGuest())
 {
-    echo '<a href="' . site_url('user/logout') . '">Logout</a> (' . esc(UserModel::getUserName($user->getEntity())) . ')';
+    $user = $userService->getUser();
+
+    echo '<a href="' . site_url('user/logout') . '">Logout</a> (' . esc(UserModel::getUserName($user)) . ')';
 }
 else
 {
