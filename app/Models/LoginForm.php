@@ -5,7 +5,7 @@ namespace App\Models;
 /**
  * Login form
  */
-class LoginForm extends \App\Components\Model
+class LoginForm extends \CodeIgniter\Model
 {
 
     protected $returnType = 'array';
@@ -14,7 +14,7 @@ class LoginForm extends \App\Components\Model
 
     protected $validationRules = [
         'email' => [
-            'rules' => 'required|' . UserModel::EMAIL_RULES. '|' . __CLASS__ .'::validateEmail|' . __CLASS__ .'::validateVerification',
+            'rules' => 'required|' . UserModel::EMAIL_RULES. '|' . __CLASS__ .'::validateEmail|' . __CLASS__ .'::validateEmailVerification',
             'label' => 'Email'
         ],
         'password' => [
@@ -30,7 +30,7 @@ class LoginForm extends \App\Components\Model
     protected $validationMessages = [
         'email' => [
             __CLASS__ . '::validateEmail' => 'There is no user with this email address.',
-            __CLASS__ . '::validateVerification' => 'Email is not verified.',
+            __CLASS__ . '::validateEmailVerification' => 'Email is not verified.',
         ],
         'password' => [
             __CLASS__ . '::validatePassword' => 'Password Invalid.'
@@ -49,16 +49,18 @@ class LoginForm extends \App\Components\Model
 
     public static function validateEmail($email)
     {
-        static::$_user = UserModel::findByEmail($email);
+        $model = new UserModel;
+
+        static::$_user = $model->findByEmail($email);
 
         return static::$_user ? true : false;
     }
 
-    public static function validateVerification($email)
+    public static function validateEmailVerification($email)
     {
         if (static::$_user)
         {
-            if (!UserModel::getUserField(static::$_user, 'verified_at'))
+            if (!static::$_user->email_verified_at)
             {
                 static::$_user = null;
 
@@ -79,7 +81,9 @@ class LoginForm extends \App\Components\Model
     {
         if (static::$_user)
         {
-            return UserModel::validateUserPassword(static::$_user, $password);
+            $model = new UserModel;
+
+            return $model->validatePassword(static::$_user, $password);
         }
 
         return true;

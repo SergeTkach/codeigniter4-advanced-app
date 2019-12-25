@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Widgets;
+namespace App\Cells;
 
-class FormGroup extends \App\Components\Widget
+class FormGroup extends BaseCell
 {
 
     public $label;
@@ -13,14 +13,16 @@ class FormGroup extends \App\Components\Widget
 
     public $error;
 
-    public function run()
+    public function cell(array $params = []) : string
     {
-        return view('widgets/form-group', [
+        $this->setParams($params);
+
+        return $this->render('cells/form-group', [
             'label' => $this->label,
             'labelOptions' => $this->labelOptions,
             'content' => $this->content,
             'error' => $this->error,
-        ], ['saveData' => false]);
+        ]);
     }
 
 }

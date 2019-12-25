@@ -1,6 +1,6 @@
 <?php
 
-use App\Widgets\FormGroup;
+use App\Cells\FormGroup;
 
 /* @var $this \CodeIgniter\View\View */
 /* @var $model \App\Models\ResetPasswordForm */
@@ -28,7 +28,7 @@ helper('form');
             'autofocus' => true
         ]
     ),
-    'label' => $model->getFieldLabel('password'),
+    'label' => $model->validationRules['password']['label'],
     'error' => array_key_exists('password', $errors) ? $errors['password'] : null
 ]);?>
 

@@ -2,9 +2,11 @@
 
 use App\Models\UserModel;
 
+$this->data['subject'] = 'Password reset for ' . base_url();
+
+$this->data['mailType'] = 'text';
+
 ?>
-<p>Hello <?= esc(UserModel::getUserName($user));?>,</p>
+Hello <?= esc($user->name);?>,
 
-<p>Follow the link below to reset your password:</p>
-
-<p><a href="<?= $resetLink;?>"><?= esc($resetLink);?></a></p>
+Follow the link below to reset your password: <?= $resetLink;?>

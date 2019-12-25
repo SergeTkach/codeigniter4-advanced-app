@@ -1,6 +1,6 @@
 <?php
 
-use App\Widgets\FormGroup;
+use App\Cells\FormGroup;
 
 /* @var $this \CodeIgniter\View\View */
 /* @var $model \App\Models\ResendVerificationEmailForm */
@@ -28,7 +28,7 @@ helper('form');
             'autofocus' => true
         ]
     ),
-    'label' => $model->getFieldLabel('email'),
+    'label' => $model->validationRules['email']['label'],
     'error' => array_key_exists('email', $errors) ? $errors['email'] : null
 ]);?>
 

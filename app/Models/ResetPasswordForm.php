@@ -5,7 +5,7 @@ namespace App\Models;
 /**
  * Password reset form
  */
-class ResetPasswordForm extends \App\Components\Model
+class ResetPasswordForm extends \CodeIgniter\Model
 {
 
     protected $returnType = 'array';
@@ -24,11 +24,22 @@ class ResetPasswordForm extends \App\Components\Model
      */
     public function resetPassword($user, $data, &$error)
     {
-        UserModel::setUserPassword($user, $data['password']);
+        $model = new UserModel;
 
-        UserModel::setUserField($user, 'password_reset_token', null);
+        $model->setPassword($user, $data['password']);
 
-        return UserModel::saveUser($user, $error);
+        $user->password_reset_token = null;
+
+        $return = $model->save($user);
+
+        if (!$return)
+        {
+            $errors = $model->errors();
+
+            $error = array_shift($errors);
+        }
+
+        return $return;
     }
 
 }

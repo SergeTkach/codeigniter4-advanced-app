@@ -1,35 +1,64 @@
 <?php
 
-namespace denis303\user\Database\Migrations;
+namespace App\Database\Migrations;
 
-class CreateUserTable extends \denis303\user\CreateUserTableMigration
+class CreateUserTable extends \CodeIgniter\Database\Migration
 {
 
-    public function getFields()
+    public function up()
     {
-        $return = parent::getFields();
+        $this->forge->addField([
+            'id' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'auto_increment' => true,
+                'unsigned' => true
+            ],
+            'name' => [
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'null' => true
+            ],
+            'email' => [
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'unique' => true,
+                'null' => true            
+            ],
+            'password_hash' => [
+                'type' => 'VARCHAR',
+                'constraint' => '60',
+                'null' => true
+            ],
+            'created_at' => [ 
+                'type' => 'TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP'
+            ],
+            'password_reset_token' => [
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'unique' => true,
+                'null' => true
+            ],
+            'email_verification_token' => [
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'unique' => true,
+                'null' => true
+            ],
+            'email_verified_at' => [
+                'type' => 'DATETIME',
+                'null' => true
+            ]
+        ]);
 
-        $return[static::FIELD_PREFIX . 'password_reset_token'] = [
-            'type' => 'VARCHAR',
-            'constraint' => '255',
-            'unique' => true,
-            'null' => true
-        ];
+        $this->forge->addKey('id', true);
 
-        $return[static::FIELD_PREFIX . 'verification_token'] = [
-            'type' => 'VARCHAR',
-            'constraint' => '255',
-            'unique' => true,
-            'null' => true
-        ];
-
-        $return[static::FIELD_PREFIX . 'verified_at'] = [
-            'type' => 'DATETIME',
-            'null' => true
-        ];
-
-        return $return;
+        $this->forge->createTable('users');
     }
 
+    public function down()
+    {
+        $this->forge->dropTable('users');
+    }
 
 }

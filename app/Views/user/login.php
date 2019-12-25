@@ -1,6 +1,6 @@
 <?php
 
-use App\Widgets\FormGroup;
+use App\Cells\FormGroup;
 
 /* @var $this \CodeIgniter\View\View */
 /* @var $model \App\Models\LoginForm */
@@ -27,7 +27,7 @@ helper(['form']);
             'class' => 'form-control'
         ]
     ),
-    'label' => $model->getFieldLabel('email'),
+    'label' => $model->validationRules['email']['label'],
     'error' => array_key_exists('email', $errors) ? $errors['email'] : null
 ]);?>
 
@@ -39,7 +39,7 @@ helper(['form']);
             'class' => 'form-control'
         ]
     ),
-    'label' => $model->getFieldLabel('password'),
+    'label' => $model->validationRules['password']['label'],
     'error' => array_key_exists('password', $errors) ? $errors['password'] : null
 ]);?>
 
@@ -54,7 +54,7 @@ helper(['form']);
             'id' => 'remember-me-checkbox'
         ]
     ),
-    'label' => $model->getFieldLabel('rememberMe'),
+    'label' => $model->validationRules['rememberMe']['label'],
     'labelOptions' => [
         'class' => 'mb-0',
         'for' => 'remember-me-checkbox'

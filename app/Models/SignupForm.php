@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use Exception;
 use Config\Services;
 
 /**
  * Signup form
  */
-class SignupForm extends \App\Components\Model
+class SignupForm extends \CodeIgniter\Model
 {
 
     protected $returnType = 'array';
@@ -18,7 +19,7 @@ class SignupForm extends \App\Components\Model
             'label' => 'Name',
         ],
         'email' => [
-            'rules' => 'required|' . UserModel::EMAIL_RULES . '|is_unique[user.user_email,user_id,{user_id}]',
+            'rules' => 'required|' . UserModel::EMAIL_RULES . '|is_unique[users.email,id,{id}]',
             'label' => 'Email',
         ],
         'password' => [
@@ -42,11 +43,46 @@ class SignupForm extends \App\Components\Model
     {
         $model = new UserModel;
 
-        return $model->createUser([
-            'user_name' => $data['username'],
-            'user_email' => $data['email'],
-            'user_password' => $data['password']
-        ], $error);
+        $user = new User([
+            'name' => $data['username'],
+            'email' => $data['email']
+        ]);
+
+        $model->setPassword($user, $data['password']);
+
+        $user->email_verification_token = $model->generateToken();
+
+        $return = $model->save($user);
+
+        if (!$return)
+        {
+            $errors = $model->errors();
+
+            $error = array_shift($errors);
+
+            return false;
+        }
+
+        $id = $user->id;
+        
+        if (!$id)
+        {
+            $id = (int) $model->db->insertID();
+        }
+
+        if (!$id)
+        {
+            throw new Exception('User ID not defined.');
+        }
+
+        $user = $model->find($id);
+
+        if (!$user)
+        {
+            throw new Exception('User not found.');
+        }
+
+        return $user;
     }
 
     /**
@@ -56,20 +92,13 @@ class SignupForm extends \App\Components\Model
      */
     public function sendEmail(User $user, &$error = null)
     {
-        $message = view('messages/signup', [
-            'user' => $user,
-            'verifyLink' => UserModel::getUserVerificationUrl($user)
-        ]);
+        $model = new UserModel;
 
-        $mailer = service('mailer');
+        $params = [
+            'verifyLink' => $model->createEmailVerificationUrl($user)
+        ];
 
-        return $mailer->sendToUser(
-            $user, 
-            'Account registration at ' . base_url(), 
-            $message,
-            [], 
-            $error
-        );
+        return $user->sendMessage('messages/signup', $params, $error);
     }
 
 }

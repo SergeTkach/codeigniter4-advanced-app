@@ -3,10 +3,10 @@
 namespace App\Models;
 
 use Config\Services;
-use Config\Mailer as MailerConfig;
+use Config\Email as EmailConfig;
 use Exception;
 
-class ContactForm extends \App\Components\Model
+class ContactForm extends \CodeIgniter\Model
 {
 
     protected $returnType = 'array';
@@ -45,42 +45,15 @@ class ContactForm extends \App\Components\Model
      */
     public function sendEmail($data, &$error)
     {
-        foreach($data as $key => $value)
-        {
-            $data[$key] = trim(strip_tags($value));
-        }
+        $email = compose_email('messages/contact', $data);
 
-        $mailerConfig = config(MailerConfig::class);
+        $config = config(EmailConfig::class);
 
-        $email = Services::email();
-
-        $email->initialize(['mailType' => 'text']);
-
-        $email->setFrom($mailerConfig->fromEmail, $mailerConfig->fromName);
-        
-        $email->setTo($mailerConfig->fromEmail, $mailerConfig->fromName);
+        $email->setTo($config->fromEmail, $config->fromName);
 
         $email->setReplyTo($data['email'], $data['name']);
 
-        $email->setSubject($data['subject']);
-
-        $email->setMessage($data['body']);
-
-        $return = $email->send();
-
-        if (!$return)
-        {
-            if (CI_DEBUG)
-            {
-                $error = $email->printDebugger([]); 
-            }
-            else
-            {
-                $error = 'There was an error sending your message.';
-            }
-        }
-
-        return $return;
+        return send_email($email, $error);
     }
 
 }

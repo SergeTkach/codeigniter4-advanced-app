@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Components;
+namespace App\Controllers;
 
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
+use Config\Services;
 
 /**
  * Class BaseController
@@ -19,7 +20,7 @@ use Psr\Log\LoggerInterface;
  * @package CodeIgniter
  */
 
-abstract class Controller extends \CodeIgniter\Controller
+abstract class BaseController extends \CodeIgniter\Controller
 {
 
     protected $session;
@@ -28,22 +29,22 @@ abstract class Controller extends \CodeIgniter\Controller
 
     protected $layout = "layout";
 
-	/**
-	 * Constructor.
-	 */
-	public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
-	{
-		// Do Not Edit This Line
-		parent::initController($request, $response, $logger);
+    /**
+     * Constructor.
+     */
+    public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
+    {
+        // Do Not Edit This Line
+        parent::initController($request, $response, $logger);
 
-		//--------------------------------------------------------------------
-		// Preload any models, libraries, etc, here.
-		//--------------------------------------------------------------------
+        //--------------------------------------------------------------------
+        // Preload any models, libraries, etc, here.
+        //--------------------------------------------------------------------
 
-		$this->session = \Config\Services::session();
+        $this->session = Services::session();
 
-        $this->user = \Config\Services::user();
-	}
+        $this->user = Services::user();
+    }
 
     protected function render(string $view, array $params = [])
     {

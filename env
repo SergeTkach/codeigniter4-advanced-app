@@ -16,19 +16,21 @@
 
 # CI_ENVIRONMENT = production
 
+CI_ENVIRONMENT = development
+
 #--------------------------------------------------------------------
-# MAILER
+# EMAIL
 #--------------------------------------------------------------------
 
-mailer.fromEmail = 'no-reply@example.com'
-mailer.fromName = 'No-reply';
+email.fromEmail = 'no-reply@example.com'
+email.fromName = 'No-reply';
 
 #--------------------------------------------------------------------
 # APP
 #--------------------------------------------------------------------
 
-# app.baseURL = ''
-# app.indexPage = ''
+app.baseURL = ''
+app.indexPage = ''
 # app.forceGlobalSecureRequests = false
 
 # app.sessionDriver = 'CodeIgniter\Session\Handlers\FileHandler'
@@ -57,13 +59,13 @@ mailer.fromName = 'No-reply';
 # DATABASE
 #--------------------------------------------------------------------
 
-# database.default.hostname = localhost
-# database.default.database = ci4
-# database.default.username = root
-# database.default.password = root
-# database.default.DBDriver = MySQLi
-# database.default.charset  = utf8
-# database.default.DBCollat = utf8_general_ci
+database.default.hostname = localhost
+database.default.database = ci4
+database.default.username = root
+database.default.password = root
+database.default.DBDriver = MySQLi
+database.default.charset  = utf8
+database.default.DBCollat = utf8_general_ci
 
 # database.tests.hostname = localhost
 # database.tests.database = ci4

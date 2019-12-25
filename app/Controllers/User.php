@@ -11,7 +11,7 @@ use App\Models\ResendVerificationEmailForm;
 use App\Models\ResetPasswordForm;
 use App\Models\UserModel;
 
-class User extends \App\Components\Controller
+class User extends BaseController
 {
 
     /**
@@ -75,7 +75,7 @@ class User extends \App\Components\Controller
 
             $user = $model->getUser();
 
-            if ($this->user->login($user, $rememberMe, $error))
+            if ($this->user->login($user, (bool) $rememberMe, $error))
             {
                 return $this->goHome();
             }
@@ -117,15 +117,37 @@ class User extends \App\Components\Controller
      */
     public function verifyEmail($id, $token)
     {
-        $user = UserModel::findByPrimaryKey($id);
+        $model = new UserModel;
+
+        $user = $model->find((int) $id);
 
         if (!$user)
         {
             throw new PageNotFoundException;
         }
 
-        if (!UserModel::setUserVerification($user, $token, $error))
+        if ($user->email_verified_at)
         {
+            throw new Exception('User already verified.');
+        }
+
+        if ($user->email_verification_token != $token)
+        {
+            throw new Exception('Unable to verify your account with provided token.');
+        }
+
+        $model->set('email_verified_at', 'NOW()', false);
+
+        $model->set('email_verification_token', 'NULL', false);
+
+        $model->protect(false);
+
+        if (!$model->update($id))
+        {
+            $errors = $model->errors();
+
+            $error = array_shift($errors);
+
             throw new Exception($error);
         }
 
@@ -149,7 +171,25 @@ class User extends \App\Components\Controller
 
         if ($data && $model->validate($data))
         {
-            if ($model->sendEmail($error))
+            $user = $model->getUser();
+
+            $userModel = new UserModel;
+
+            if (!$userModel->isTokenValid($user->email_verification_token))
+            {
+                $user->email_verification_token = $userModel->generateToken();
+
+                if (!$userModel->save($user))
+                {
+                    $errors = $userModel->errors();
+
+                    $error = array_shift($error);
+
+                    throw new Exception($error);
+                }
+            }
+
+            if ($model->sendEmail($user, $error))
             {
                 $this->session->setFlashdata('success', 'Check your email for further instructions.');
             
@@ -183,7 +223,30 @@ class User extends \App\Components\Controller
         
         if ($data && $model->validate($data))
         {
-            if ($model->sendEmail($error))
+            $userModel = new UserModel;
+
+            $user = $model->getUser();
+
+            if (!$user)
+            {
+                throw new Exception('User not found.');
+            }
+
+            if (!$user->password_reset_token || !$userModel->isTokenValid($user->password_reset_token))
+            {
+                $user->password_reset_token = $userModel->generateToken();
+
+                if (!$userModel->save($user))
+                {
+                    $errors = $userModel->errors();
+
+                    $error = array_shift($errors);
+
+                    throw new Exception($error);
+                }
+            }
+
+            if ($model->sendEmail($user, $error))
             {
                 $this->session->setFlashdata('success', 'Check your email for further instructions.');
 
@@ -212,14 +275,16 @@ class User extends \App\Components\Controller
      */
     public function resetPassword($id, $token)
     {
-        $user = UserModel::findByPrimaryKey($id);
+        $userModel = new UserModel;
+
+        $user = $userModel->find((int) $id);
 
         if (!$user)
         {
             throw new PageNotFoundException;
         }
 
-        if (UserModel::getUserField($user, 'password_reset_token') != $token)
+        if ($token != $user->password_reset_token)
         {
             throw new Exception('Wrong password reset token.');
         }

@@ -7,7 +7,7 @@ use Exception;
 /**
  * Password reset request form
  */
-class PasswordResetRequestForm extends \App\Components\Model
+class PasswordResetRequestForm extends \CodeIgniter\Model
 {
 
     protected $returnType = 'array';
@@ -16,7 +16,7 @@ class PasswordResetRequestForm extends \App\Components\Model
 
     protected $validationRules = [
         'email' => [
-            'rules' => 'required|' . UserModel::EMAIL_RULES . '|' . __CLASS__ . '::validateEmail|' .  __CLASS__ .'::validateVerification',
+            'rules' => 'required|' . UserModel::EMAIL_RULES . '|' . __CLASS__ . '::validateEmail|' .  __CLASS__ .'::validateEmailVerification',
             'label' => 'Email'
         ]
     ];
@@ -24,31 +24,30 @@ class PasswordResetRequestForm extends \App\Components\Model
     protected $validationMessages = [
         'email' => [
             __CLASS__ . '::validateEmail' => 'There is no user with this email address.',
-            __CLASS__ . '::validateVerification' => 'Unable to reset password for not verified email address.'
+            __CLASS__ . '::validateEmailVerification' => 'Unable to reset password for not verified email address.'
         ]
     ];
 
     public static function validateEmail($email)
     {
-        static::$_user = UserModel::findByEmail($email);
+        $model = new UserModel;
+
+        static::$_user = $model->findByEmail($email);
 
         return static::$_user ? true : false;
     }
 
-    public static function validateVerification($email)
+    public static function validateEmailVerification($email)
     {
-        if (static::$_user)
+        if (static::$_user && !static::$_user->email_verified_at)
         {
-            if (!UserModel::getUserField(static::$_user, 'verified_at'))
-            {
-                static::$_user = null;
+            static::$_user = null;
 
-                return false;
-            }
+            return false;
         }
 
         return true;
-    }    
+    } 
 
     public function getUser()
     {
@@ -60,30 +59,15 @@ class PasswordResetRequestForm extends \App\Components\Model
      *
      * @return bool whether the email was send
      */
-    public function sendEmail(&$error = null)
-    {    
-        $user = $this->getUser();
+    public function sendEmail(User $user, &$error = null)
+    {
+        $model = new UserModel;
 
-        if (!UserModel::isTokenValid(UserModel::getUserField($user, 'password_reset_token')))
-        {
-            UserModel::setUserField($user, 'password_reset_token', UserModel::generateToken());
+        $params = [
+            'resetLink' => $model->createResetPasswordUrl($user)
+        ];
 
-            if (!UserModel::saveUser($user, $error))
-            {
-                throw new Exception($error);
-            }
-        }
-
-        return service('mailer')->sendToUser(
-            $user,
-            'Password reset for ' . base_url(),
-            view('messages/resetPassword', [
-                'user' => $user,
-                'resetLink' => UserModel::getUserResetPasswordUrl($user)
-            ]),
-            [],
-            $error
-        );
+        return $user->sendMessage('messages/resetPassword', $params, $error);
     }
 
 }

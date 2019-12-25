@@ -2,66 +2,42 @@
 
 namespace App\Models;
 
-class UserModel extends \denis303\user\UserModel
+class UserModel extends \CodeIgniter\Model
 {
 
     const EMAIL_RULES = 'max_length[255]|valid_email|min_length[2]';
 
     const PASSWORD_RULES = 'max_length[72]|min_length[5]';   
 
+    protected $table = 'users';
+
     protected $returnType = User::class;
 
+    protected $primaryKey = 'id';
+
+    protected $createdField = 'created_at';
+
+    protected $updatedField = 'updated_at';
+
+    protected $dateFormat = 'datetime';
+
     protected $allowedFields = [
-        self::FIELD_PREFIX . 'name',
-        self::FIELD_PREFIX . 'password_hash',
-        self::FIELD_PREFIX . 'email',
-        self::FIELD_PREFIX . 'created_at',
-        self::FIELD_PREFIX . 'updated_at',
-        self::FIELD_PREFIX . 'verification_token',
-        self::FIELD_PREFIX . 'password_reset_token',
-        self::FIELD_PREFIX . 'verified_at'
+        'name',
+        'password_hash',
+        'email',
+        'created_at',
+        'updated_at',
+        'email_verification_token',
+        'password_reset_token',
+        'email_verified_at'
     ];
 
-    public function beforeCreateUser($user, array $data)
-    {
-        $token = static::getUserField($user, 'verification_token');
-
-        if (!$token)
-        {
-            static::setUserField($user, 'verification_token', static::generateToken());
-        }
-    }
-
-    public static function generateToken()
+    public function generateToken() : string
     {
         return md5(time() . rand(0, PHP_INT_MAX)) . '_' . time();
     }
 
-    public static function getUserVerificationUrl($user)
-    {
-        $id = static::getUserField($user, 'id');
-
-        $token = static::getUserField($user, 'verification_token');
-
-        return site_url('user/verifyEmail/' . $id  . '/'. $token);
-    }
-
-    public static function getUserResetPasswordUrl($user)
-    {
-        $id = static::getUserField($user, 'id');
-        
-        $token = static::getUserField($user, 'password_reset_token');
-
-        return site_url('user/resetPassword/' . $id . '/' .  $token);
-    }
-
-    /**
-     * Finds out if token is valid
-     *
-     * @param string $token token
-     * @return bool
-     */
-    public static function isTokenValid($token)
+    public function isTokenValid(string $token)
     {
         if (!$token)
         {
@@ -75,55 +51,29 @@ class UserModel extends \denis303\user\UserModel
         return $timestamp + $expire >= time();
     }
 
-    public static function setUserVerification($user, $token, &$error = null)
+    public function createEmailVerificationUrl(User $user)
     {
-        if (static::getUserField($user, 'verified_at'))
-        {
-            $error = 'User already verified.';
-
-            return false;
-        }
-
-        if (static::getUserField($user, 'verification_token') != $token)
-        {
-            $error = 'Unable to verify your account with provided token.';
-        
-            return false;
-        }
-
-        $model = new UserModel;
-
-        $model->set(static::FIELD_PREFIX . 'verified_at', 'NOW()', false);
-
-        $model->set(static::FIELD_PREFIX . 'verification_token', 'NULL', false);
-
-        $model->protect(false);
-
-        $id = $model::getUserField($user, 'id');
-
-        $updated = $model->update($id);
-
-        $model->protect(true);
-
-        if (!$updated)
-        {
-            $error = $model->getFirstError();
-
-            return false;
-        }
-
-        $user = UserModel::findByPrimaryKey($id);
-
-        return true;
+        return site_url('user/verifyEmail/' . $user->id  . '/'. $user->email_verification_token);
     }
 
-    public static function saveUser($user, &$error)
+    public function createResetPasswordUrl(User $user)
     {
-        $class = get_called_class();
+        return site_url('user/resetPassword/' . $user->id . '/' .  $user->password_reset_token);
+    }
 
-        $model = new $class;
+    public function setPassword(User $user, string $password)
+    {
+        $user->password_hash = password_hash($password, PASSWORD_BCRYPT);
+    }
 
-        return $model->saveUnprotected($user, $error);
-    }    
+    public function validatePassword(User $user, string $password) : bool
+    {
+        return password_verify($password, $user->password_hash);
+    }
+
+    public function findByEmail(string $email)
+    {
+        return $this->where(['email' => $email])->first();
+    }
 
 }

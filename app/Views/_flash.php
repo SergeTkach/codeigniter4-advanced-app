@@ -1,6 +1,6 @@
 <?php
 
-use App\Widgets\Alert;
+use App\Cells\Alert;
 
 $session = service('session');
 

@@ -1,6 +1,6 @@
 <?php
 
-use App\Widgets\FormGroup;
+use App\Cells\FormGroup;
 
 /* @var $this \CodeIgniter\View\View */
 /* @var $model \App\Models\SignupForm */
@@ -28,7 +28,7 @@ helper(['form']);
             'class' => 'form-control'
         ]
     ),
-    'label' => $model->getFieldLabel('username'),
+    'label' => $model->validationRules['username']['label'],
     'error' => array_key_exists('username', $errors) ? $errors['username'] : null
 ]);?>
 
@@ -40,7 +40,7 @@ helper(['form']);
             'class' => 'form-control'
         ]
     ),
-    'label' => $model->getFieldLabel('email'),
+    'label' => $model->validationRules['email']['label'],
     'error' => array_key_exists('email', $errors) ? $errors['email'] : null
 ]);?>
 
@@ -52,7 +52,7 @@ helper(['form']);
             'class' => 'form-control'
         ]
     ),
-    'label' => $model->getFieldLabel('password'),
+    'label' => $model->validationRules['password']['label'],
     'error' => array_key_exists('password', $errors) ? $errors['password'] : null
 ]);?>
 

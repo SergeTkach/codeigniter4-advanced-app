@@ -8,7 +8,7 @@ if (!$userService->isGuest())
 {
     $user = $userService->getUser();
 
-    echo '<a href="' . site_url('user/logout') . '">Logout</a> (' . esc(UserModel::getUserName($user)) . ')';
+    echo '<a href="' . site_url('user/logout') . '">Logout</a> (' . esc($user->name) . ')';
 }
 else
 {

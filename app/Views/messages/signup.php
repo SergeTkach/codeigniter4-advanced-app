@@ -2,9 +2,11 @@
 
 use App\Models\UserModel;
 
+$this->data['subject'] = 'Account registration at ' . base_url();
+
+$this->data['mailType'] = 'text';
+
 ?>
-<p>Hello <?= esc(UserModel::getUserName($user));?>,</p>
+Hello <?= esc($user->name);?>,
 
-<p>Follow the link below to verify your email:</p>
-
-<p><a href="<?= $verifyLink;?>"><?= esc($verifyLink);?></a></p>
+Follow the link below to verify your email: <?= $verifyLink;?>

@@ -4,7 +4,6 @@ namespace Config;
 
 use App\Models\UserModel;
 use denis303\codeigniter4\UserService;
-use denis303\codeigniter4\MailerService;
 
 require_once SYSTEMPATH . 'Config/Services.php';
 
@@ -41,21 +40,7 @@ class Services extends \CodeIgniter\Config\Services
             return static::getSharedInstance('user');
         }
 
-        $appConfig = config(App::class);
-
-        return new UserService(UserModel::class, static::session(), $appConfig);
-    }
-
-    public static function mailer($getShared = true)
-    {
-        if ($getShared)
-        {
-            return static::getSharedInstance('mailer');
-        }
-
-        $mailerConfig = config(Mailer::class);
-
-        return new MailerService($mailerConfig->fromEmail, $mailerConfig->fromName);
+        return new UserService(UserModel::class);
     }
 
 }

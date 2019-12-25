@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Exception;
 
-class ResendVerificationEmailForm extends \App\Components\Model
+class ResendVerificationEmailForm extends \CodeIgniter\Model
 {
 
     protected $returnType = 'array';
@@ -21,25 +21,24 @@ class ResendVerificationEmailForm extends \App\Components\Model
     protected $validationMessages = [
         'email' => [
             __CLASS__ . '::validateEmail' => 'There is no user with this email address.',
-            __CLASS__ . '::validateVerification' => 'Email is already verified.'
+            __CLASS__ . '::validateVerification' => 'User already verified.'
         ]
     ];
 
     public static function validateEmail($email)
     {
-        static::$_user = UserModel::findByEmail($email);
+        $model = new UserModel;
+
+        static::$_user = $model->findByEmail($email);
 
         return static::$_user ? true : false;
     }
 
     public static function validateVerification($email)
     {
-        if (static::$_user)
+        if (static::$_user && static::$_user->email_verified_at)
         {
-            if (UserModel::getUserField(static::$_user, 'verified_at'))
-            {
-                return false;
-            }
+            return false;
         }
 
         return true;
@@ -50,30 +49,15 @@ class ResendVerificationEmailForm extends \App\Components\Model
         return static::$_user;
     }
 
-    public function sendEmail(&$error)
+    public function sendEmail(User $user, &$error)
     {
-        $user = $this->getUser();
+        $model = new UserModel;
 
-        if (!UserModel::isTokenValid(UserModel::getUserField($user, 'verification_token')))
-        {
-            UserModel::setUserField($user, 'verification_token', UserModel::generateToken());
+        $params = [
+            'verifyLink' => $model->createEmailVerificationUrl($user)
+        ];
 
-            if (!UserModel::saveUser($user, $error))
-            {
-                throw new Exception($error);
-            }
-        }
-
-        return service('mailer')->sendToUser(
-            $user, 
-           'Account verification at ' . base_url(), 
-            view('messages/verification', [
-                'user' => $user,
-                'verifyLink' => UserModel::getUserVerificationUrl($user)
-            ]), 
-            [],
-            $error
-        );
+        return $user->sendMessage('messages/emailVerification', $params, $error);
     }
 
 }

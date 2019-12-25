@@ -3,8 +3,8 @@
 /* @var $this \CodeIgniter\View\View */
 /* @var $data \App\Models\ContactForm */
 
-use App\Widgets\Alert;
-use App\Widgets\FormGroup;
+use App\Cells\Alert;
+use App\Cells\FormGroup;
 
 $this->data['title'] = 'Contact';
 
@@ -34,7 +34,7 @@ helper(['form']);
             'autofocus' => true
         ]
     ),
-    'label' => $model->getFieldLabel('name'),
+    'label' => $model->validationRules['name']['label'],
     'error' => array_key_exists('name', $errors) ? $errors['name'] : null
 ]);?>
 
@@ -46,7 +46,7 @@ helper(['form']);
             'class' => 'form-control'
         ]
     ),
-    'label' => $model->getFieldLabel('email'),
+    'label' =>  $model->validationRules['email']['label'],
     'error' => array_key_exists('email', $errors) ? $errors['email'] : null
 ]);?>
 
@@ -58,7 +58,7 @@ helper(['form']);
             'class' => 'form-control'
         ]
     ),
-    'label' => $model->getFieldLabel('subject'),
+    'label' => $model->validationRules['subject']['label'],
     'error' => array_key_exists('subject', $errors) ? $errors['subject'] : null
 ]);?>
 
@@ -71,7 +71,7 @@ helper(['form']);
             'rows' => 6
         ]
     ),
-    'label' => $model->getFieldLabel('body'),
+    'label' =>  $model->validationRules['body']['label'],
     'error' => array_key_exists('body', $errors) ? $errors['body'] : null
 ]);?>
 

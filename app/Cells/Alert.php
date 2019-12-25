@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Widgets;
+namespace App\Cells;
 
-class Alert extends \App\Components\Widget
+class Alert extends BaseCell
 {
 
     const TYPE_ERROR = 'error';
@@ -21,17 +21,19 @@ class Alert extends \App\Components\Widget
         self::TYPE_SUCCESS => ['class' => 'alert alert-success']
     ];
 
-    public function run()
+    public function cell(array $params = []) : string
     {
+        $this->setParams($params);
+
         if (!$this->message)
         {
             return '';
         }
 
-        return view('widgets/alert', [
+        return $this->render('cells/alert', [
             'message' => $this->message,
             'options' => $this->typeOptions[$this->type]
-        ], ['saveData' => false]);
+        ]);
     }
 
 }

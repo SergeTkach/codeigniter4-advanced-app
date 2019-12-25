@@ -23,7 +23,7 @@ use CodeIgniter\Events\Events;
 
 Events::on('pre_system', function() {
 
-    require_once dirname(__DIR__) . '/ThirdParty/bootstrap.php';
+    helper(['compose_email', 'send_email']);
     
 	while (ob_get_level() > 0)
 	{
