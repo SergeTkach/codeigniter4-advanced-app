@@ -2,16 +2,10 @@
 
 [Yii 2 Advanced Project Template](https://github.com/yiisoft/yii2-app-advanced) ported to CodeIgniter 4.
 
-
-
-|||
-| --- | --- |
+|Screenshots||
+| --- | --- | --- |
 | ![Welcome Page](https://github.com/denis303/codeigniter4-advanced-app/raw/master/_images/screen_welcome.png) | ![Signup](https://github.com/denis303/codeigniter4-advanced-app/raw/master/_images/screen_signup.png) | ![Login](https://github.com/denis303/codeigniter4-advanced-app/raw/master/_images/screen_login.png) |
-| `git diff` | Show file differences that **haven't been** staged |  |
-
-
 | ![Reset Password](https://github.com/denis303/codeigniter4-advanced-app/raw/master/_images/screen_reset_password.png) | ![Resend Verification](https://github.com/denis303/codeigniter4-advanced-app/raw/master/_images/screen_resend_verification.png) | ![Contact Form](https://github.com/denis303/codeigniter4-advanced-app/raw/master/_images/screen_contact.png) |
-
 
 ## Overview
 
