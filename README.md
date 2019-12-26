@@ -5,6 +5,8 @@
 | ![Welcome Page](https://github.com/denis303/codeigniter4-advanced-app/raw/master/_images/screen_welcome.png)          | ![Signup](https://github.com/denis303/codeigniter4-advanced-app/raw/master/_images/screen_signup.png)                           | ![Login](https://github.com/denis303/codeigniter4-advanced-app/raw/master/_images/screen_login.png)          |
 | ![Reset Password](https://github.com/denis303/codeigniter4-advanced-app/raw/master/_images/screen_reset_password.png) | ![Resend Verification](https://github.com/denis303/codeigniter4-advanced-app/raw/master/_images/screen_resend_verification.png) | ![Contact Form](https://github.com/denis303/codeigniter4-advanced-app/raw/master/_images/screen_contact.png) |
 
+
+| | |
 | --- | --- |
 | `git status` | List all *new or modified* files |
 | `git diff` | Show file differences that **haven't been** staged |
