@@ -3,11 +3,6 @@
 [Yii 2 Advanced Project Template](https://github.com/yiisoft/yii2-app-advanced) ported to CodeIgniter 4.
 
 ![Welcome Page](https://github.com/denis303/codeigniter4-advanced-app/blob/master/_images/screen_welcome.png?raw=true)
-![Signup](https://github.com/denis303/codeigniter4-advanced-app/blob/master/_images/screen_signup.png?raw=true)
-![Login](https://github.com/denis303/codeigniter4-advanced-app/blob/master/_images/screen_login.png?raw=true)
-![Reset Password](https://github.com/denis303/codeigniter4-advanced-app/blob/master/_images/screen_reset_password.png?raw=true)
-![Resend Verification](https://github.com/denis303/codeigniter4-advanced-app/blob/master/_images/screen_resend_verification.png?raw=true)
-![Contact Form](https://github.com/denis303/codeigniter4-advanced-app/blob/master/_images/screen_contact.png?raw=true)
 
 ## Overview
 
@@ -44,3 +39,9 @@ Additionally, make sure that the following extensions are enabled in your PHP:
 - [mbstring](http://php.net/manual/en/mbstring.installation.php)
 - [mysqlnd](http://php.net/manual/en/mysqlnd.install.php)
 - xml (enabled by default - don't turn it off)
+
+![Signup](https://github.com/denis303/codeigniter4-advanced-app/blob/master/_images/screen_signup.png?raw=true)
+![Login](https://github.com/denis303/codeigniter4-advanced-app/blob/master/_images/screen_login.png?raw=true)
+![Reset Password](https://github.com/denis303/codeigniter4-advanced-app/blob/master/_images/screen_reset_password.png?raw=true)
+![Resend Verification](https://github.com/denis303/codeigniter4-advanced-app/blob/master/_images/screen_resend_verification.png?raw=true)
+![Contact Form](https://github.com/denis303/codeigniter4-advanced-app/blob/master/_images/screen_contact.png?raw=true)
