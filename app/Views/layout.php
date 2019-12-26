@@ -15,7 +15,7 @@
 <link rel="shortcut icon" type="image/png" href="<?= base_url();?>/favicon.ico"/>
 </head>
 <body>
-<main role="main" class="container">
+<main role="main" class="container mt-4">
 <?php if(!empty($this->data['title'])):?>
 
 <h1><?= esc($this->data['title']);?></h1>
