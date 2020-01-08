@@ -8,8 +8,8 @@
     "prefer-stable": true,
     "require": {
         "php": ">=7.2",
-        "codeigniter4/framework": "*",
-        "denis303/codeigniter4-auth": "*"
+        "denis303/codeigniter4-auth": "*",
+        "codeigniter4/framework": "^4.0@RC"
     },
     "require-dev": {
         "mikey179/vfsstream": "1.6.*",
