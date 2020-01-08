@@ -50,8 +50,6 @@ class TestCookie extends \CodeIgniter\Controller
     {
         helper('cookie');
 
-        //set_cookie('test_cookie', '', 0);
-
         delete_cookie('test_cookie');
     }
 

@@ -8,7 +8,7 @@
     "prefer-stable": true,
     "require": {
         "php": ">=7.2",
-        "codeigniter4/framework": "^4@rc",
+        "codeigniter4/framework": "*",
         "denis303/codeigniter4-auth": "*"
     },
     "require-dev": {
