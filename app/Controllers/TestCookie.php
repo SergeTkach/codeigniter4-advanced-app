@@ -2,8 +2,6 @@
 
 namespace App\Controllers;
 
-use Denis303\Auth\NotRememberMeCookie;
-
 class TestCookie extends \CodeIgniter\Controller
 {
 
@@ -19,7 +17,6 @@ class TestCookie extends \CodeIgniter\Controller
 
             return redirect()->to(site_url('testCookie/setCookie/0'));
         }
-
     }
 
     public function getCookie()
@@ -29,14 +26,13 @@ class TestCookie extends \CodeIgniter\Controller
         $value = get_cookie('test_cookie');
 
         var_dump($value);
-
     }
 
     public function deleteCookie()
     {
         helper('cookie');
 
-        set_cookie('test_cookie', '', 0);
+        //set_cookie('test_cookie', '', 0);
 
         delete_cookie('test_cookie');
     }
