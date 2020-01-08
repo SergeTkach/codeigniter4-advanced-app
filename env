@@ -29,7 +29,7 @@ email.fromName = 'No-reply';
 # APP
 #--------------------------------------------------------------------
 
-app.baseURL = ''
+app.baseURL = 'http://codeigniter4-advanced-app.localhost'
 app.indexPage = ''
 # app.forceGlobalSecureRequests = false
 

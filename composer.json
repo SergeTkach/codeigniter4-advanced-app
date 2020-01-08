@@ -9,7 +9,7 @@
     "require": {
         "php": ">=7.2",
         "codeigniter4/framework": "^4@rc",
-        "denis303/codeigniter4-user-service": "*"
+        "denis303/codeigniter4-auth": "*"
     },
     "require-dev": {
         "mikey179/vfsstream": "1.6.*",

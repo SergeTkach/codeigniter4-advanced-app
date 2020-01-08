@@ -3,7 +3,7 @@
 namespace Config;
 
 use App\Models\UserModel;
-use denis303\codeigniter4\UserService;
+use App\Libraries\UserService;
 
 require_once SYSTEMPATH . 'Config/Services.php';
 
@@ -37,10 +37,10 @@ class Services extends \CodeIgniter\Config\Services
     {
         if ($getShared)
         {
-            return static::getSharedInstance('user');
+            return static::getSharedInstance(__FUNCTION__);
         }
 
-        return new UserService(UserModel::class);
+        return new UserService('user_id');
     }
 
 }

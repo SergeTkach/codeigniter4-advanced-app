@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b743e4b2228a66f8a439a50af5ec5be7",
+    "content-hash": "833e47427ce23a02f2358087c32b726e",
     "packages": [
         {
             "name": "codeigniter4/framework",
@@ -49,59 +49,30 @@
             "time": "2019-10-19T13:58:00+00:00"
         },
         {
-            "name": "denis303/codeigniter4-not-remember-me",
+            "name": "denis303/codeigniter4-auth",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/denis303/codeigniter4-not-remember-me.git",
-                "reference": "a1f1691e2b5bbacf1b99718c3e6fbee8c9fce8cc"
+                "url": "https://github.com/denis303/codeigniter4-auth.git",
+                "reference": "9bea8de05bd3ccf108072e90e8b7dde14672cb5f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/denis303/codeigniter4-not-remember-me/zipball/a1f1691e2b5bbacf1b99718c3e6fbee8c9fce8cc",
-                "reference": "a1f1691e2b5bbacf1b99718c3e6fbee8c9fce8cc",
+                "url": "https://api.github.com/repos/denis303/codeigniter4-auth/zipball/9bea8de05bd3ccf108072e90e8b7dde14672cb5f",
+                "reference": "9bea8de05bd3ccf108072e90e8b7dde14672cb5f",
                 "shasum": ""
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Denis303\\CodeIgniter\\": "*"
+                    "Denis303\\Auth\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
-            "time": "2019-12-25T10:37:15+00:00"
-        },
-        {
-            "name": "denis303/codeigniter4-user-service",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/denis303/codeigniter4-user-service.git",
-                "reference": "42047122034f9f3730edd093894c51c2fcca981e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/denis303/codeigniter4-user-service/zipball/42047122034f9f3730edd093894c51c2fcca981e",
-                "reference": "42047122034f9f3730edd093894c51c2fcca981e",
-                "shasum": ""
-            },
-            "require": {
-                "denis303/codeigniter4-not-remember-me": "*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "denis303\\codeigniter4\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "time": "2019-12-25T14:44:20+00:00"
+            "time": "2020-01-08T08:45:20+00:00"
         },
         {
             "name": "kint-php/kint",
@@ -251,6 +222,7 @@
                 "escaper",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-escaper",
             "time": "2019-09-05T20:03:20+00:00"
         }
     ],
@@ -561,16 +533,16 @@
         },
         {
             "name": "phpdocumentor/reflection-docblock",
-            "version": "4.3.3",
+            "version": "4.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "2ecaa9fef01634c83bfa8dc1fe35fb5cef223a62"
+                "reference": "da3fd972d6bafd628114f7e7e036f45944b62e9c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/2ecaa9fef01634c83bfa8dc1fe35fb5cef223a62",
-                "reference": "2ecaa9fef01634c83bfa8dc1fe35fb5cef223a62",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/da3fd972d6bafd628114f7e7e036f45944b62e9c",
+                "reference": "da3fd972d6bafd628114f7e7e036f45944b62e9c",
                 "shasum": ""
             },
             "require": {
@@ -582,6 +554,7 @@
             "require-dev": {
                 "doctrine/instantiator": "^1.0.5",
                 "mockery/mockery": "^1.0",
+                "phpdocumentor/type-resolver": "0.4.*",
                 "phpunit/phpunit": "^6.4"
             },
             "type": "library",
@@ -608,7 +581,7 @@
                 }
             ],
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
-            "time": "2019-12-20T13:40:23+00:00"
+            "time": "2019-12-28T18:55:12+00:00"
         },
         {
             "name": "phpdocumentor/type-resolver",
@@ -974,16 +947,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "7.5.18",
+            "version": "7.5.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "fcf6c4bfafaadc07785528b06385cce88935474d"
+                "reference": "9467db479d1b0487c99733bb1e7944d32deded2c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/fcf6c4bfafaadc07785528b06385cce88935474d",
-                "reference": "fcf6c4bfafaadc07785528b06385cce88935474d",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/9467db479d1b0487c99733bb1e7944d32deded2c",
+                "reference": "9467db479d1b0487c99733bb1e7944d32deded2c",
                 "shasum": ""
             },
             "require": {
@@ -1054,7 +1027,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2019-12-06T05:14:37+00:00"
+            "time": "2020-01-08T08:45:45+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
