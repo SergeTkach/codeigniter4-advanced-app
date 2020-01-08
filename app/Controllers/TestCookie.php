@@ -23,18 +23,13 @@ class TestCookie extends \CodeIgniter\Controller
         var_dump($value);
     }
 
-    public function setCookie($set = 1)
+    public function setCookie()
     {
-        if ($set)
-        {
-            helper('cookie');
+        helper('cookie');
 
-            $token = rand();
+        $token = rand();
 
-            set_cookie('test_cookie', $token, 0);
-
-            return redirect()->to(site_url('testCookie/setCookie/0'));
-        }
+        set_cookie('test_cookie', $token, 0);
     }
 
     public function getCookie()
