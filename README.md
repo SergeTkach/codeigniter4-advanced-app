@@ -29,6 +29,12 @@ and any database settings.
 
 3. Run `php spark migrate -all`.
 
+## Usage
+
+If you don't receive verification email, you can create verification link manually: 
+
+/user/verifyEmail/<id>/<email_verification_token>
+
 ## Server Requirements
 
 PHP version 7.2 or higher is required, with the following extensions installed: 

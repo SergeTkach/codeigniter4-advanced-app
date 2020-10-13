@@ -9,7 +9,7 @@ use App\Forms\SignupForm;
 use App\Forms\PasswordResetRequestForm;
 use App\Forms\ResendVerificationEmailForm;
 use App\Forms\ResetPasswordForm;
-use App\Forms\UserModel;
+use App\Models\UserModel;
 
 class User extends BaseController
 {
