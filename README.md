@@ -33,7 +33,7 @@ and any database settings.
 
 If you don't receive verification email, you can create verification link manually: 
 
-/user/verifyEmail/<id>/<email_verification_token>
+/user/verifyEmail/<users.id>/<users.email_verification_token>
 
 ## Server Requirements
 
