@@ -2,7 +2,9 @@
 
 namespace Config;
 
-class Email extends \CodeIgniter\Config\BaseConfig
+use CodeIgniter\Config\BaseConfig;
+
+class Email extends BaseConfig
 {
 
 	/**
@@ -14,6 +16,11 @@ class Email extends \CodeIgniter\Config\BaseConfig
 	 * @var string
 	 */
 	public $fromName;
+
+	/**
+	 * @var string
+	 */
+	public $recipients;
 
 	/**
 	 * The "user agent"

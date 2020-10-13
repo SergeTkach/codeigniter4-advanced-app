@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace App\Forms;
+
+use App\Models\UserModel;
 
 /**
  * Password reset form

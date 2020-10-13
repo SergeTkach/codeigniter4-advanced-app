@@ -3,6 +3,7 @@
 namespace Config;
 
 use CodeIgniter\Events\Events;
+use CodeIgniter\Exceptions\FrameworkException;
 
 /*
  * --------------------------------------------------------------------
@@ -21,18 +22,25 @@ use CodeIgniter\Events\Events;
  *      Events::on('create', [$myInstance, 'myMethod']);
  */
 
-Events::on('pre_system', function() {
-
-    helper(['compose_email', 'send_email']);
-    
-	while (ob_get_level() > 0)
+Events::on('pre_system', function (){
+	if (ENVIRONMENT !== 'testing')
 	{
-		ob_end_flush();
-	}
+		helper(['compose_email', 'send_email']);
 
-	ob_start(function ($buffer) {
-		return $buffer;
-	});
+		if (ini_get('zlib.output_compression'))
+		{
+			throw FrameworkException::forEnabledZlibOutputCompression();
+		}
+
+		while (ob_get_level() > 0)
+		{
+			ob_end_flush();
+		}
+
+		ob_start(function ($buffer) {
+			return $buffer;
+		});
+	}
 
 	/*
 	 * --------------------------------------------------------------------

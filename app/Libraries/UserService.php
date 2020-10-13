@@ -4,9 +4,8 @@ namespace App\Libraries;
 
 use App\Models\UserModel;
 use App\Models\User;
-use Denis303\Auth\BaseUserService;
 
-class UserService extends BaseUserService
+class UserService extends \Denis303\Auth\UserService
 {
 
     protected $_user;

@@ -60,9 +60,9 @@ app.indexPage = ''
 #--------------------------------------------------------------------
 
 database.default.hostname = localhost
-database.default.database = ci4
+database.default.database = codeigniter4-advanced-app
 database.default.username = root
-database.default.password = root
+database.default.password = 
 database.default.DBDriver = MySQLi
 database.default.charset  = utf8
 database.default.DBCollat = utf8_general_ci
@@ -98,10 +98,18 @@ database.default.DBCollat = utf8_general_ci
 # contentsecuritypolicy.upgradeInsecureRequests = false
 
 #--------------------------------------------------------------------
+# ENCRYPTION
+#--------------------------------------------------------------------
+
+# encryption.key = 
+# encryption.driver = OpenSSL
+
+#--------------------------------------------------------------------
 # HONEYPOT
 #--------------------------------------------------------------------
 
-#  honeypot.hidden = 'true'
-#  honeypot.label = 'Fill This Field'
-#  honeypot.name = 'honeypot'
-#  honeypot.template = '<label>{label}</label><input type="text" name="{name}" value=""/>'
+# honeypot.hidden = 'true'
+# honeypot.label = 'Fill This Field'
+# honeypot.name = 'honeypot'
+# honeypot.template = '<label>{label}</label><input type="text" name="{name}" value=""/>'
+# honeypot.container = '<div style="display:none">{template}</div>'

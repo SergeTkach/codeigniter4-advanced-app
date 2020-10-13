@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Models;
+namespace App\Forms;
 
 use Exception;
 use Config\Services;
+use App\Models\UserModel;
+use App\Models\User;
 
 /**
  * Signup form

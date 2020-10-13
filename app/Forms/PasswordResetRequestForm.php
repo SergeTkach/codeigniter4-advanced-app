@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Models;
+namespace App\Forms;
 
 use Exception;
+use App\Models\UserModel;
 
 /**
  * Password reset request form

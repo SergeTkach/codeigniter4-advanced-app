@@ -4,12 +4,12 @@ namespace App\Controllers;
 
 use Exception;
 use CodeIgniter\Exceptions\PageNotFoundException;
-use App\Models\LoginForm;
-use App\Models\SignupForm;
-use App\Models\PasswordResetRequestForm;
-use App\Models\ResendVerificationEmailForm;
-use App\Models\ResetPasswordForm;
-use App\Models\UserModel;
+use App\Forms\LoginForm;
+use App\Forms\SignupForm;
+use App\Forms\PasswordResetRequestForm;
+use App\Forms\ResendVerificationEmailForm;
+use App\Forms\ResetPasswordForm;
+use App\Forms\UserModel;
 
 class User extends BaseController
 {
@@ -27,27 +27,34 @@ class User extends BaseController
 
         $errors = [];
 
-        if ($data && $model->validate($data))
+        if ($data)
         {
-            if (($user = $model->signup($data, $error)) && $model->sendEmail($user, $error))
+            if ($model->validate($data))
             {
-                $this->session->setFlashdata(
-                    'success', 
-                    'Thank you for registration. Please check your inbox for verification email.'
-                );
-            
-                return $this->goHome();
+                if (($user = $model->signup($data, $error)) && $model->sendEmail($user, $error))
+                {
+                    $this->session->setFlashdata(
+                        'success', 
+                        'Thank you for registration. Please check your inbox for verification email.'
+                    );
+                
+                    return $this->goHome();
+                }
+                else
+                {
+                    $errors[] = $error;
+                }
             }
             else
             {
-                $errors[] = $error;
+                $errors = (array) $model->errors();
             }
         }
 
         return $this->render('user/signup', [
             'model' => $model,
             'data' => $data,
-            'errors' => array_merge((array) $model->errors(), $errors)
+            'errors' => $errors
         ]);
     }
 
@@ -69,30 +76,36 @@ class User extends BaseController
 
         $errors = [];
         
-        if ($data && $model->validate($data))
+        if ($data)
         {
-            $rememberMe = array_key_exists('rememberMe', $data) ? $data['rememberMe'] : 0;
-
-            $user = $model->getUser();
-
-            if ($this->user->login($user, (bool) $rememberMe, $error))
+            if ($model->validate($data))
             {
-                return $this->goHome();
+                $rememberMe = array_key_exists('rememberMe', $data) ? $data['rememberMe'] : 0;
+
+                $user = $model->getUser();
+
+                if ($this->user->login($user, (bool) $rememberMe, $error))
+                {
+                    return $this->goHome();
+                }
+                else
+                {
+                    $errors[] = $error;
+                }
             }
             else
             {
-                $errors[] = $error;
-            }
+                $errors = (array) $model->errors();
+            } 
         }
-
-        if (!$data)
+        else
         {
             $data['rememberMe'] = 1;
         }
 
         return $this->render('user/login', [
             'model' => $model,
-            'errors' => array_merge((array) $model->errors(), $errors),
+            'errors' => $errors,
             'data' => $data
         ]);        
     }
@@ -169,42 +182,49 @@ class User extends BaseController
 
         $data = $this->request->getPost();
 
-        if ($data && $model->validate($data))
+        if ($data)
         {
-            $user = $model->getUser();
-
-            $userModel = new UserModel;
-
-            if (!$userModel->isTokenValid($user->email_verification_token))
+            if ($model->validate($data))
             {
-                $user->email_verification_token = $userModel->generateToken();
+                $user = $model->getUser();
 
-                if (!$userModel->save($user))
+                $userModel = new UserModel;
+
+                if (!$userModel->isTokenValid($user->email_verification_token))
                 {
-                    $errors = $userModel->errors();
+                    $user->email_verification_token = $userModel->generateToken();
 
-                    $error = array_shift($error);
+                    if (!$userModel->save($user))
+                    {
+                        $errors = $userModel->errors();
 
-                    throw new Exception($error);
+                        $error = array_shift($error);
+
+                        throw new Exception($error);
+                    }
                 }
-            }
 
-            if ($model->sendEmail($user, $error))
-            {
-                $this->session->setFlashdata('success', 'Check your email for further instructions.');
-            
-                return $this->goHome();
+                if ($model->sendEmail($user, $error))
+                {
+                    $this->session->setFlashdata('success', 'Check your email for further instructions.');
+                
+                    return $this->goHome();
+                }
+                else
+                {
+                    $errors[] = $error;
+                }
             }
             else
             {
-                $errors[] = $error;
+                $errors = (array) $model->errors();
             }
         }
 
         return $this->render('user/resendVerificationEmail', [
             'model' => $model,
             'data' => $data,
-            'errors' => array_merge((array) $model->errors(), $errors)
+            'errors' => $errors
         ]);
     }
 
@@ -220,50 +240,57 @@ class User extends BaseController
         $data = $this->request->getPost();
 
         $errors = [];
-        
-        if ($data && $model->validate($data))
+
+        if ($data)
         {
-            $userModel = new UserModel;
-
-            $user = $model->getUser();
-
-            if (!$user)
+            if ($model->validate($data))
             {
-                throw new Exception('User not found.');
-            }
+                $userModel = new UserModel;
 
-            if (!$user->password_reset_token || !$userModel->isTokenValid($user->password_reset_token))
-            {
-                $user->password_reset_token = $userModel->generateToken();
+                $user = $model->getUser();
 
-                if (!$userModel->save($user))
+                if (!$user)
                 {
-                    $errors = $userModel->errors();
-
-                    $error = array_shift($errors);
-
-                    throw new Exception($error);
+                    throw new Exception('User not found.');
                 }
-            }
 
-            if ($model->sendEmail($user, $error))
-            {
-                $this->session->setFlashdata('success', 'Check your email for further instructions.');
+                if (!$user->password_reset_token || !$userModel->isTokenValid($user->password_reset_token))
+                {
+                    $user->password_reset_token = $userModel->generateToken();
 
-                return $this->goHome();
+                    if (!$userModel->save($user))
+                    {
+                        $errors = $userModel->errors();
+
+                        $error = array_shift($errors);
+
+                        throw new Exception($error);
+                    }
+                }
+
+                if ($model->sendEmail($user, $error))
+                {
+                    $this->session->setFlashdata('success', 'Check your email for further instructions.');
+
+                    return $this->goHome();
+                }
+                else
+                {
+                    //'Sorry, we are unable to reset password for the provided email address.'
+
+                    $errors[] = $error; 
+                }
             }
             else
             {
-                //'Sorry, we are unable to reset password for the provided email address.'
-
-                $errors[] = $error; 
+                $errors = (array) $model->errors();
             }
         }
-
+        
         return $this->render('user/requestPasswordReset', [
             'model' => $model,
             'data' => $data,
-            'errors' => array_merge((array) $model->errors(), $errors)
+            'errors' => $errors
         ]);
     }
 
@@ -295,24 +322,31 @@ class User extends BaseController
 
         $data = $this->request->getPost();
 
-        if ($data && $model->validate($data))
+        if ($data)
         {
-            if ($model->resetPassword($user, $data, $error))
+            if ($model->validate($data))
             {
-                $this->session->setFlashdata('success', 'New password saved.');
+                if ($model->resetPassword($user, $data, $error))
+                {
+                    $this->session->setFlashdata('success', 'New password saved.');
 
-                return $this->redirect(site_url('user/login'));
+                    return $this->redirect(site_url('user/login'));
+                }
+                else
+                {
+                    $errors[] = $error;
+                }
             }
             else
             {
-                $errors[] = $error;
+                $errors = (array) $model->errors();
             }
         }
 
         return $this->render('user/resetPassword', [
             'model' => $model,
             'data' => $data,
-            'errors' => array_merge((array) $model->errors(), $errors),
+            'errors' => $errors,
             'id' => $id,
             'token' => $token
         ]);
