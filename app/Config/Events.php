@@ -22,10 +22,10 @@ use CodeIgniter\Exceptions\FrameworkException;
  *      Events::on('create', [$myInstance, 'myMethod']);
  */
 
-Events::on('pre_system', function (){
+Events::on('pre_system', function() {
 	if (ENVIRONMENT !== 'testing')
 	{
-		helper(['compose_email', 'send_email']);
+		helper(['email']);
 
 		if (ini_get('zlib.output_compression'))
 		{

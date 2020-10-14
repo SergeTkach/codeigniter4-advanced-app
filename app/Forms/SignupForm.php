@@ -50,7 +50,7 @@ class SignupForm extends \CodeIgniter\Model
             'email' => $data['email']
         ]);
 
-        $model->setPassword($user, $data['password']);
+        $user->setPassword($data['password']);
 
         $user->email_verification_token = $model->generateToken();
 
@@ -94,13 +94,12 @@ class SignupForm extends \CodeIgniter\Model
      */
     public function sendEmail(User $user, &$error = null)
     {
-        $model = new UserModel;
-
-        $params = [
-            'verifyLink' => $model->createEmailVerificationUrl($user)
-        ];
-
-        return $user->sendMessage('messages/signup', $params, $error);
+        return send_email(
+            $user->composeEmail('mail/signup', [
+                'verifyLink' => $user->getEmailVerificationUrl()
+            ]), 
+            $error
+        );
     }
 
 }

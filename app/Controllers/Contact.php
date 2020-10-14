@@ -2,9 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\ContactForm;
-use Config\Services;
-use Exception;
+use App\Forms\ContactForm;
 
 class Contact extends BaseController
 {
@@ -24,23 +22,30 @@ class Contact extends BaseController
 
         $model = new ContactForm;
 
-        if ($data && $model->validate($data))
+        if ($data)
         {
-            if ($model->sendEmail($data, $error))
-            {   
-                $message = 'Thank you for contacting us. We will respond to you as soon as possible.';
+            if ($model->validate($data))
+            {
+                if ($model->sendEmail($data, $error))
+                {   
+                    $message = 'Thank you for contacting us. We will respond to you as soon as possible.';
 
-                $data = [];
+                    $data = [];
+                }
+                else
+                {
+                    $errors[] = $error;
+                }
             }
             else
             {
-                $errors[] = $error;
+                $errors = (array) $model->errors();
             }
         }
 
         return $this->render('contact', [
             'data' => $data,
-            'errors' => array_merge((array) $model->errors(), $errors),
+            'errors' => $errors,
             'message' => $message,
             'model' => $model
         ]);

@@ -25,8 +25,6 @@
 1. Copy `env` to `.env` and tailor for your app, specifically the baseURL
 and any database settings.
 
-2. Run `bower install` or extract `public_libs.zip` archive. 
-
 3. Run `php spark migrate -all`.
 
 ## Usage

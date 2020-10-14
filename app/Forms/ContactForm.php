@@ -45,7 +45,7 @@ class ContactForm extends \CodeIgniter\Model
      */
     public function sendEmail($data, &$error)
     {
-        $email = compose_email('messages/contact', $data);
+        $email = compose_email('mail/contact', $data);
 
         $config = config(EmailConfig::class);
 

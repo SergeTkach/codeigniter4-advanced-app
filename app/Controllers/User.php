@@ -10,6 +10,7 @@ use App\Forms\PasswordResetRequestForm;
 use App\Forms\ResendVerificationEmailForm;
 use App\Forms\ResetPasswordForm;
 use App\Models\UserModel;
+use App\Models\User as UserEntity;
 
 class User extends BaseController
 {
@@ -65,7 +66,7 @@ class User extends BaseController
      */
     public function login()
     {
-        if (!$this->user->isGuest())
+        if ($this->user)
         {
             return $this->goHome();
         }
@@ -84,7 +85,7 @@ class User extends BaseController
 
                 $user = $model->getUser();
 
-                if ($this->user->login($user, (bool) $rememberMe, $error))
+                if (service('auth')->login($user, (bool) $rememberMe, $error))
                 {
                     return $this->goHome();
                 }
@@ -117,7 +118,7 @@ class User extends BaseController
      */
     public function logout()
     {
-        $this->user->logout();
+        service('auth')->logout();
 
         return $this->goHome();
     }

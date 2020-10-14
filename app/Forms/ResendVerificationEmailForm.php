@@ -4,6 +4,7 @@ namespace App\Forms;
 
 use Exception;
 use App\Models\UserModel;
+use App\Models\User;
 
 class ResendVerificationEmailForm extends \CodeIgniter\Model
 {
@@ -52,13 +53,12 @@ class ResendVerificationEmailForm extends \CodeIgniter\Model
 
     public function sendEmail(User $user, &$error)
     {
-        $model = new UserModel;
-
-        $params = [
-            'verifyLink' => $model->createEmailVerificationUrl($user)
-        ];
-
-        return $user->sendMessage('messages/emailVerification', $params, $error);
+        return send_email(
+            $user->composeEmail('mail/emailVerification', [
+                'verifyLink' => $user->getEmailVerificationUrl()
+            ]), 
+            $error
+        );
     }
 
 }

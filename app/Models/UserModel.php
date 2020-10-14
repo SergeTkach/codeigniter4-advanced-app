@@ -51,26 +51,6 @@ class UserModel extends \CodeIgniter\Model
         return $timestamp + $expire >= time();
     }
 
-    public function createEmailVerificationUrl(User $user)
-    {
-        return site_url('user/verifyEmail/' . $user->id  . '/'. $user->email_verification_token);
-    }
-
-    public function createResetPasswordUrl(User $user)
-    {
-        return site_url('user/resetPassword/' . $user->id . '/' .  $user->password_reset_token);
-    }
-
-    public function setPassword(User $user, string $password)
-    {
-        $user->password_hash = password_hash($password, PASSWORD_BCRYPT);
-    }
-
-    public function validatePassword(User $user, string $password) : bool
-    {
-        return password_verify($password, $user->password_hash);
-    }
-
     public function findByEmail(string $email)
     {
         return $this->where(['email' => $email])->first();

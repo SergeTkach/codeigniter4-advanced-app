@@ -9,7 +9,8 @@
     "require": {
         "php": ">=7.2",
         "denis303/codeigniter4-auth": "*",
-        "codeigniter4/framework": "^4"
+        "codeigniter4/framework": "^4",
+        "basic-app/email-helper": "*"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.9@dev",

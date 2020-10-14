@@ -3,64 +3,86 @@
 use App\Cells\FormGroup;
 
 /* @var $this \CodeIgniter\View\View */
-/* @var $model \App\Models\LoginForm */
+/* @var $model \App\Forms\LoginForm */
 
 $this->data['title'] = 'Login';
 
 $this->data['breadcrumbs'][] = $this->data['title'];
 
 helper(['form']);
+
+$this->extend('layouts/main');
+
 ?>
+
+<?php $this->section('content');?>
 
 <p>Please fill out the following fields to login:</p>
 
+<ul>
+    <li><a href="<?= site_url('user/requestPasswordReset');?>">Request password reset</a></li>
+    <li><a href="<?= site_url('user/resendVerificationEmail');?>">Resend verification email</a></li>
+</ul>
+
 <?= form_open('user/login', ['id' => 'login-form']);?>
 
-<?= view('_errors', ['errors' => $errors]);?>
+<div class="form-group">
 
-<?= FormGroup::factory([
-    'content' => form_input(
+    <label><?= $model->validationRules['email']['label'];?></label>
+
+    <?= form_input(
         'email', 
-        array_key_exists('email', $data) ? $data['email'] : '', 
+        $data['email'] ?? '', 
         [
             'autofocus' => true,
             'class' => 'form-control'
         ]
-    ),
-    'label' => $model->validationRules['email']['label'],
-    'error' => array_key_exists('email', $errors) ? $errors['email'] : null
-]);?>
+    );?>
 
-<?= FormGroup::factory([
-    'content' => form_password(
+    <div class="invalid-feedback"><?= $errors['email'] ?? '';?></div>
+
+</div>
+
+<div class="form-group">
+
+    <label><?= $model->validationRules['password']['label'];?></label>
+
+    <?= form_password(
         'password', 
         '', 
         [
             'class' => 'form-control'
         ]
-    ),
-    'label' => $model->validationRules['password']['label'],
-    'error' => array_key_exists('password', $errors) ? $errors['password'] : null
-]);?>
+    );?>
 
-<?= form_hidden('rememberMe', 0);?>
+    <div class="invalid-feedback"><?= $errors['password'] ?? '';?></div>
 
-<?= FormGroup::factory([
-    'content' => '<br>'. form_checkbox(
+</div>
+
+<div class="form-group">
+    
+    <label for="remember-me-checkbox"><?= $model->validationRules['rememberMe']['label'];?></label>
+
+    <?= form_hidden('rememberMe', 0);?>
+
+    <?= form_checkbox(
         'rememberMe',
         '1',
         (array_key_exists('rememberMe', $data) && $data['rememberMe']) ? true : false,
         [
             'id' => 'remember-me-checkbox'
         ]
-    ),
-    'label' => $model->validationRules['rememberMe']['label'],
-    'labelOptions' => [
-        'class' => 'mb-0',
-        'for' => 'remember-me-checkbox'
-    ],
-    'error' => array_key_exists('rememberMe', $errors) ? $errors['rememberMe'] : null
-]);?>
+    );?>
+
+    <div class="invalid-feedback"><?= $errors['rememberMe'] ?? '';?></div>
+
+</div>
+
+<?php foreach($errors as $error):?>
+
+    <div class="alert alert-error"><?= $error;?></div>
+
+<?php endforeach;?>
 
 <div class="form-group">
     
@@ -69,3 +91,5 @@ helper(['form']);
 </div>
 
 <?= form_close();?>
+
+<?php $this->endSection();?>

@@ -4,8 +4,34 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5d96be051d53a725e3f0caa5d87fc685",
+    "content-hash": "bec05bd1ff091447489f991f2d91c502",
     "packages": [
+        {
+            "name": "basic-app/email-helper",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/basic-app/email-helper.git",
+                "reference": "02a6608940e473a83111a4d7e7c291789932ef8c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/basic-app/email-helper/zipball/02a6608940e473a83111a4d7e7c291789932ef8c",
+                "reference": "02a6608940e473a83111a4d7e7c291789932ef8c",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "BasicApp\\EmailHelper\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "time": "2020-10-14T18:32:34+00:00"
+        },
         {
             "name": "codeigniter4/framework",
             "version": "v4.0.4",
@@ -1081,6 +1107,7 @@
             "keywords": [
                 "tokenizer"
             ],
+            "abandoned": true,
             "time": "2019-09-17T06:23:10+00:00"
         },
         {

@@ -1,1 +1,0 @@
-<div<?= stringify_attributes($options);?>><?= $message;?></div>

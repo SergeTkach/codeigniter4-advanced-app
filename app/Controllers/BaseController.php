@@ -27,7 +27,7 @@ abstract class BaseController extends \CodeIgniter\Controller
 
     protected $user;
 
-    protected $layout = "layout";
+    protected $viewsNamespace;
 
     /**
      * Constructor.
@@ -43,28 +43,25 @@ abstract class BaseController extends \CodeIgniter\Controller
 
         $this->session = Services::session();
 
-        $this->user = Services::user();
+        $this->user = Services::auth()->getUser();
     }
 
-    protected function render(string $view, array $params = [])
+    protected function render(string $view, array $params = [], array $options = [])
     {
-        $content = view($view, $params, ['saveData' => true]);
-
-        $layout = $this->layout;
-
-        $data = service('renderer')->getData();
-
-        if (array_key_exists('layout', $data))
+        if (mb_strpos("\\", $view) === false)
         {
-            $layout = $data['layout'];
+            if ($this->viewsNamespace)
+            {
+                $view = $this->viewsNamespace . "\\" . $view;
+            }
         }
 
-        if ($layout)
+        if (array_key_exists('saveData', $options) == false)
         {
-            return view($this->layout, ['content' => $content], ['saveData' => false]);
+            $options['saveData'] = true;
         }
 
-        return $content;
+        return view($view, $params, $options);
     }
 
     public function goHome()

@@ -3,77 +3,98 @@
 /* @var $this \CodeIgniter\View\View */
 /* @var $data \App\Models\ContactForm */
 
-use App\Cells\Alert;
-use App\Cells\FormGroup;
-
 $this->data['title'] = 'Contact';
 
 $this->data['breadcrumbs'][] = $this->data['title'];
 
 helper(['form']);
 
+$this->extend('layouts/main');
+
 ?>
+<?php $this->section('content');?>
+
 <p>If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.</p>
 
 <?php if($message):?>
 
-<?= Alert::factory(['message' => $message, 'type' => Alert::TYPE_SUCCESS]);?>
+    <div class="alert alert-success"><?= $message;?></div>
 
 <?php endif;?>
 
-<?= view('_errors', ['errors' => $errors]);?>
+<?= form_open('contact', ['id' => 'contact-form']);?>
 
-<?= form_open('', ['id' => 'contact-form']);?>
+<div class="form-group">
 
-<?= FormGroup::factory([
-    'content' => form_input(
+    <label><?= $model->validationRules['name']['label'];?></label>
+
+    <?= form_input(
         'name', 
-        array_key_exists('name', $data) ? $data['name'] : '', 
+        $data['name'] ?? '', 
         [
             'class' => 'form-control',
             'autofocus' => true
         ]
-    ),
-    'label' => $model->validationRules['name']['label'],
-    'error' => array_key_exists('name', $errors) ? $errors['name'] : null
-]);?>
+    );?>
 
-<?= FormGroup::factory([
-    'content' => form_input(
+    <div class="invalid-feedback"><?= $errors['name'] ?? '';?></div>
+
+</div>
+
+<div class="form-group">
+
+    <label><?= $model->validationRules['email']['label'];?></label>
+
+    <?= form_input(
         'email', 
-        array_key_exists('email', $data) ? $data['email'] : '', 
+        $data['email'] ?? '', 
         [
             'class' => 'form-control'
         ]
-    ),
-    'label' =>  $model->validationRules['email']['label'],
-    'error' => array_key_exists('email', $errors) ? $errors['email'] : null
-]);?>
+    );?>
 
-<?= FormGroup::factory([
-    'content' => form_input(
+    <div class="invalid-feedback"><?= $errors['email'] ?? '';?></div>
+
+</div>
+
+<div class="form-group">
+
+    <label><?= $model->validationRules['subject']['label'];?></label>
+    
+    <?= form_input(
         'subject', 
-        array_key_exists('subject', $data) ? $data['subject'] : '', 
+        $data['subject'] ?? '', 
         [
             'class' => 'form-control'
         ]
-    ),
-    'label' => $model->validationRules['subject']['label'],
-    'error' => array_key_exists('subject', $errors) ? $errors['subject'] : null
-]);?>
+    );?>
 
-<?= FormGroup::factory([
-    'content' => form_textarea(
+    <div class="invalid-feedback"><?= $errors['subject'] ?? '';?></div>
+
+</div>
+
+<div class="form-group">
+
+    <label><?= $model->validationRules['body']['label'];?></label>
+    
+    <?= form_textarea(
         'body', 
-        array_key_exists('body', $data) ? $data['body'] : '', 
+        $data['body'] ?? '', 
         [
             'class' => 'form-control',
             'rows' => 6
         ]
-    ),
-    'label' =>  $model->validationRules['body']['label'],
-    'error' => array_key_exists('body', $errors) ? $errors['body'] : null
-]);?>
+    );?>
+
+    <div class="invalid-feedback"><?= $errors['body'] ?? '';?></div>
+
+</div>
+
+<?php foreach($errors as $error):?>
+
+    <div class="alert alert-error"><?= $error;?></div>
+
+<?php endforeach;?>
 
 <div class="form-group">
 
@@ -82,3 +103,5 @@ helper(['form']);
 </div>
 
 <?= form_close();?>
+
+<?php $this->endSection();?>

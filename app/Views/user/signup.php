@@ -1,9 +1,7 @@
 <?php
 
-use App\Cells\FormGroup;
-
 /* @var $this \CodeIgniter\View\View */
-/* @var $model \App\Models\SignupForm */
+/* @var $model \App\Forms\SignupForm */
 
 $this->data['title'] = 'Signup';
 
@@ -11,50 +9,82 @@ $this->data['breadcrumbs'][] = $this->data['title'];
 
 helper(['form']);
 
+$this->extend('layouts/main');
+
 ?>
+<?php $this->section('content');?>
     
 <p>Please fill out the following fields to signup:</p>
 
-<?= view('_errors', ['errors' => $errors]);?>
+<?php if(CI_DEBUG):?>
+<p>
+    If you did not receive a verification message on the test server, you can view the secret keys in the database and verify your account manually.
+    <br>
+    <b style="color: red;"><?= site_url('user/verifyEmail/:id/:email_verification_token');?></b>
+</p>
+<?php endif;?>
+
+<ul>
+    <li><a href="<?= site_url('user/requestPasswordReset');?>">Request password reset</a></li>
+    <li><a href="<?= site_url('user/resendVerificationEmail');?>">Resend verification email</a></li>
+</ul>
 
 <?= form_open('user/signup', ['id' => 'form-signup']);?>
 
-<?= FormGroup::factory([
-    'content' => form_input(
+<div class="form-group">
+
+    <label><?= $model->validationRules['username']['label'];?></label>
+
+    <?= form_input(
         'username', 
-        array_key_exists('username', $data) ? $data['username'] : '', 
+        $data['username'] ?? '', 
         [
             'autofocus' => true, 
             'class' => 'form-control'
         ]
-    ),
-    'label' => $model->validationRules['username']['label'],
-    'error' => array_key_exists('username', $errors) ? $errors['username'] : null
-]);?>
+    );?>
 
-<?= FormGroup::factory([
-    'content' => form_input(
+    <div class="invalid-feedback"><?= $errors['username'] ?? '';?></div>
+
+</div>
+
+<div class="form-group">
+
+    <label><?= $model->validationRules['email']['label'];?></label>
+
+    <?= form_input(
         'email', 
         array_key_exists('email', $data) ? $data['email'] : '', 
         [
             'class' => 'form-control'
         ]
-    ),
-    'label' => $model->validationRules['email']['label'],
-    'error' => array_key_exists('email', $errors) ? $errors['email'] : null
-]);?>
+    );?>
 
-<?= FormGroup::factory([
-    'content' => form_password(
+    <div class="invalid-feedback"><?= $errors['email'] ?? '';?></div>
+
+</div>
+
+<div class="form-group">
+
+    <label><?= $model->validationRules['password']['label'];?></label>
+
+    <?= form_password(
         'password', 
         '', 
         [
             'class' => 'form-control'
         ]
-    ),
-    'label' => $model->validationRules['password']['label'],
-    'error' => array_key_exists('password', $errors) ? $errors['password'] : null
-]);?>
+    );?>
+
+    <div class="invalid-feedback"><?= $errors['password'] ?? '';?></div>
+    
+</div>
+
+<?php foreach($errors as $error):?>
+
+    <div class="alert alert-error"><?= $error;?></div>
+
+<?php endforeach;?>
 
 <div class="form-group">
 
@@ -63,3 +93,5 @@ helper(['form']);
 </div>
 
 <?= form_close();?>
+
+<?php $this->endSection();?>

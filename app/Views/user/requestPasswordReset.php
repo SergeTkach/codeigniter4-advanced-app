@@ -3,7 +3,7 @@
 use App\Cells\FormGroup;
 
 /* @var $this \CodeIgniter\View\View */
-/* @var $model \App\Models\PasswordResetRequestForm */
+/* @var $model \App\Forms\PasswordResetRequestForm */
 
 $this->data['title'] = 'Request password reset';
 
@@ -11,26 +11,37 @@ $this->data['breadcrumbs'][] = $this->data['title'];
 
 helper(['form']);
 
+$this->extend('layouts/main');
+
 ?>
+<?php $this->section('content');?>
     
 <p>Please fill out your email. A link to reset password will be sent there.</p>
 
 <?= form_open('user/requestPasswordReset', ['id' => 'request-password-reset-form']);?>
 
-<?= view('_errors', ['errors' => $errors]);?>
+<div class="form-group">
 
-<?= FormGroup::factory([
-    'content' => form_input(
+    <label><?= $model->validationRules['email']['label'];?></label>
+
+    <?= form_input(
         'email', 
-        array_key_exists('email', $data) ? $data['email'] : '', 
+        $data['email'] ?? '', 
         [
             'class' => 'form-control',
             'autofocus' => true
         ]
-    ),
-    'label' => $model->validationRules['email']['label'],
-    'error' => array_key_exists('email', $errors) ? $errors['email'] : null
-]);?>
+    );?>
+
+    <div class="invalid-feedback"><?= $errors['email'] ?? '';?></div>
+
+</div>
+
+<?php foreach($errors as $error):?>
+
+    <div class="alert alert-error"><?= $error;?></div>
+
+<?php endforeach;?>
 
 <div class="form-group">
 
@@ -39,3 +50,5 @@ helper(['form']);
 </div>
 
 <?php form_close();?>
+
+<?php $this->endSection();?>

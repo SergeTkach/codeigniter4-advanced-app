@@ -4,6 +4,7 @@ namespace App\Forms;
 
 use Exception;
 use App\Models\UserModel;
+use App\Models\User;
 
 /**
  * Password reset request form
@@ -62,13 +63,12 @@ class PasswordResetRequestForm extends \CodeIgniter\Model
      */
     public function sendEmail(User $user, &$error = null)
     {
-        $model = new UserModel;
-
-        $params = [
-            'resetLink' => $model->createResetPasswordUrl($user)
-        ];
-
-        return $user->sendMessage('messages/resetPassword', $params, $error);
+        return send_email(
+            $user->composeEmail('mail/resetPassword', [
+                'resetLink' => $user->getResetPasswordUrl()
+            ]), 
+            $error
+        );
     }
 
 }

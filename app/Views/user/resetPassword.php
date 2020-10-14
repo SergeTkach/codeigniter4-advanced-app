@@ -3,7 +3,7 @@
 use App\Cells\FormGroup;
 
 /* @var $this \CodeIgniter\View\View */
-/* @var $model \App\Models\ResetPasswordForm */
+/* @var $model \App\Forms\ResetPasswordForm */
 
 $this->data['title'] = 'Reset password';
 
@@ -11,7 +11,10 @@ $this->data['breadcrumbs'][] = $this->data['title'];
 
 helper('form');
 
+$this->extend('layouts/main');
+
 ?>
+<?php $this->section('content');?>
 
 <p>Please choose your new password:</p>
 
@@ -39,3 +42,5 @@ helper('form');
 </div>
 
 <?= form_close();?>
+
+<?php $this->endSection();?>
