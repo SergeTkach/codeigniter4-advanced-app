@@ -83,9 +83,7 @@ class LoginForm extends \CodeIgniter\Model
     {
         if (static::$_user)
         {
-            $model = new UserModel;
-
-            return $model->validatePassword(static::$_user, $password);
+            return static::$_user->validatePassword($password);
         }
 
         return true;
