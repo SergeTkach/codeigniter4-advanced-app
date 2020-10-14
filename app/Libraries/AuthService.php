@@ -50,7 +50,7 @@ class AuthService extends \Denis303\Auth\UserService
     {
         $this->_user = null;
 
-        $this->deleteUserId();
+        $this->unsetUserId();
     }
 
     public function isGuest() : bool
