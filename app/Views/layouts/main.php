@@ -287,7 +287,7 @@
 
         <?php if(service('auth')->isLogged()):?>
 
-            <h1>Welcome to CodeIgniter, <?= service('auth')->getUser()->name;?></h1>
+            <h1>Welcome to CodeIgniter, <?= service('auth')->getUser()->name;?>!</h1>
 
         <?php else:?>
 
