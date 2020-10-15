@@ -8,9 +8,9 @@
     "prefer-stable": true,
     "require": {
         "php": ">=7.2",
-        "denis303/codeigniter4-auth": "*",
         "codeigniter4/framework": "^4",
-        "basic-app/email-helper": "*"
+        "basic-app/email-helper": "*",
+        "basic-app/auth": "*"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.9@dev",

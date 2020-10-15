@@ -5,32 +5,31 @@ namespace App\Libraries;
 use App\Models\UserModel;
 use App\Models\User;
 
-class AuthService extends \Denis303\Auth\UserService
+class AuthService extends \BasicApp\Auth\BaseAuthService
 {
 
     protected $_user;
 
-    public function login(User $user, bool $rememberMe = true, & $error = null)
+    public function getUserId() : ?int
     {
-        if (!$user->id)
-        {
-            $error = lang('user', 'Primary key not defined.');
-
-            return false;
-        }
-
-        $this->setUserId($user->id, $rememberMe);
-    
-        $this->_user = $user;
-
-        return true;
+        return parent::getUserId();
     }
 
-    public function getUser()
+    public function login($user, $rememberMe = true)
+    {
+        if ($user instanceof User)
+        {
+            $user = $user->id;
+        }
+
+        return parent::login($user, $rememberMe);
+    }
+
+    public function getUser() : ?User
     {
         if (!$this->_user)
         {
-            $id = (int) $this->getUserId();
+            $id = $this->getUserId();
 
             if ($id)
             {
@@ -44,23 +43,6 @@ class AuthService extends \Denis303\Auth\UserService
         }
 
         return $this->_user;
-    }
-
-    public function logout()
-    {
-        $this->_user = null;
-
-        $this->unsetUserId();
-    }
-
-    public function isGuest() : bool
-    {
-        return $this->getUser() ? false : true;
-    }
-
-    public function isLogged()
-    {
-        return !$this->isGuest();
     }
 
 }

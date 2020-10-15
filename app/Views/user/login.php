@@ -78,12 +78,6 @@ $this->extend('layouts/main');
 
 </div>
 
-<?php foreach($errors as $error):?>
-
-    <div class="alert alert-error"><?= $error;?></div>
-
-<?php endforeach;?>
-
 <div class="form-group">
     
     <?= form_submit('login-button', 'Login', ['class' => 'btn btn-primary']);?>

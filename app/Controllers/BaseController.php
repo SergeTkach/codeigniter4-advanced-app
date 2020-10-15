@@ -71,7 +71,7 @@ abstract class BaseController extends \CodeIgniter\Controller
 
     public function redirect($url)
     {
-        return redirect()->to($url);
+        return redirect()->withCookies()->to($url);
     }
 
 }

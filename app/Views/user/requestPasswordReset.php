@@ -18,6 +18,12 @@ $this->extend('layouts/main');
     
 <p>Please fill out your email. A link to reset password will be sent there.</p>
 
+<?php foreach($customErrors as $error):?>
+
+    <div class="alert alert-error"><?= $error;?></div>
+
+<?php endforeach;?>
+
 <?= form_open('user/requestPasswordReset', ['id' => 'request-password-reset-form']);?>
 
 <div class="form-group">
@@ -36,12 +42,6 @@ $this->extend('layouts/main');
     <div class="invalid-feedback"><?= $errors['email'] ?? '';?></div>
 
 </div>
-
-<?php foreach($errors as $error):?>
-
-    <div class="alert alert-error"><?= $error;?></div>
-
-<?php endforeach;?>
 
 <div class="form-group">
 

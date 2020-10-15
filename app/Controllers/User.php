@@ -81,18 +81,13 @@ class User extends BaseController
         {
             if ($model->validate($data))
             {
-                $rememberMe = array_key_exists('rememberMe', $data) ? $data['rememberMe'] : 0;
+                $rememberMe = array_key_exists('rememberMe', $data) ? $data['rememberMe'] : false;
 
                 $user = $model->getUser();
 
-                if (service('auth')->login($user, (bool) $rememberMe, $error))
-                {
-                    return $this->goHome();
-                }
-                else
-                {
-                    $errors[] = $error;
-                }
+                service('auth')->login($user, $rememberMe);
+
+                return $this->goHome();
             }
             else
             {
@@ -181,6 +176,8 @@ class User extends BaseController
         
         $errors = [];
 
+        $customErrors = [];
+
         $data = $this->request->getPost();
 
         if ($data)
@@ -213,7 +210,7 @@ class User extends BaseController
                 }
                 else
                 {
-                    $errors[] = $error;
+                    $customErrors[] = $error;
                 }
             }
             else
@@ -225,7 +222,8 @@ class User extends BaseController
         return $this->render('user/resendVerificationEmail', [
             'model' => $model,
             'data' => $data,
-            'errors' => $errors
+            'errors' => $errors,
+            'customErrors' => $customErrors
         ]);
     }
 
@@ -241,6 +239,8 @@ class User extends BaseController
         $data = $this->request->getPost();
 
         $errors = [];
+
+        $customErrors = [];
 
         if ($data)
         {
@@ -279,7 +279,7 @@ class User extends BaseController
                 {
                     //'Sorry, we are unable to reset password for the provided email address.'
 
-                    $errors[] = $error; 
+                    $customErrors[] = $error; 
                 }
             }
             else
@@ -291,7 +291,8 @@ class User extends BaseController
         return $this->render('user/requestPasswordReset', [
             'model' => $model,
             'data' => $data,
-            'errors' => $errors
+            'errors' => $errors,
+            'customErrors' => $customErrors
         ]);
     }
 

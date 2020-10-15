@@ -4,8 +4,34 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bec05bd1ff091447489f991f2d91c502",
+    "content-hash": "0b2bb8e4abea18d2a8292ddff39601ea",
     "packages": [
+        {
+            "name": "basic-app/auth",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/basic-app/auth.git",
+                "reference": "9345d9d06d06c3d9ec315e3952ed5d6a010a2f06"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/basic-app/auth/zipball/9345d9d06d06c3d9ec315e3952ed5d6a010a2f06",
+                "reference": "9345d9d06d06c3d9ec315e3952ed5d6a010a2f06",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "BasicApp\\Auth\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "time": "2020-10-15T17:19:43+00:00"
+        },
         {
             "name": "basic-app/email-helper",
             "version": "dev-main",
@@ -77,32 +103,6 @@
             "description": "The CodeIgniter framework v4",
             "homepage": "https://codeigniter.com",
             "time": "2020-07-16T03:44:28+00:00"
-        },
-        {
-            "name": "denis303/codeigniter4-auth",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/denis303/codeigniter4-auth.git",
-                "reference": "000de26a2f45208ae44d06bfaad87ca3443060ce"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/denis303/codeigniter4-auth/zipball/000de26a2f45208ae44d06bfaad87ca3443060ce",
-                "reference": "000de26a2f45208ae44d06bfaad87ca3443060ce",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Denis303\\Auth\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "time": "2020-01-10T06:47:13+00:00"
         },
         {
             "name": "kint-php/kint",

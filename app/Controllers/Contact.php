@@ -16,6 +16,8 @@ class Contact extends BaseController
     {
         $errors = [];
 
+        $customErrors = [];
+
         $message = null;
 
         $data = $this->request->getPost();
@@ -34,7 +36,7 @@ class Contact extends BaseController
                 }
                 else
                 {
-                    $errors[] = $error;
+                    $customErrors[] = $error;
                 }
             }
             else
@@ -47,7 +49,8 @@ class Contact extends BaseController
             'data' => $data,
             'errors' => $errors,
             'message' => $message,
-            'model' => $model
+            'model' => $model,
+            'customErrors' => $customErrors
         ]);
     }
 

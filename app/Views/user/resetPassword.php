@@ -1,7 +1,5 @@
 <?php
 
-use App\Cells\FormGroup;
-
 /* @var $this \CodeIgniter\View\View */
 /* @var $model \App\Forms\ResetPasswordForm */
 
@@ -20,20 +18,22 @@ $this->extend('layouts/main');
 
 <?= form_open('user/resetPassword/' . $id . '/' . $token, ['id' => 'reset-password-form']);?>
 
-<?= view('_errors', ['errors' => $errors]);?>
+<div class="form-group">
 
-<?= FormGroup::factory([
-    'content' => form_password(
+    <label><?= $model->validationRules['password']['label'];?></label>
+
+    <?= form_password(
         'password', 
         '', 
         [
             'class' => 'form-control',
             'autofocus' => true
         ]
-    ),
-    'label' => $model->validationRules['password']['label'],
-    'error' => array_key_exists('password', $errors) ? $errors['password'] : null
-]);?>
+    );?>
+
+    <div class="invalid-feedback"><?= $errors['password'] ?? '';?></div>
+
+</div>
 
 <div class="form-group">
 

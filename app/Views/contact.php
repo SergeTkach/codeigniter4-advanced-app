@@ -22,6 +22,12 @@ $this->extend('layouts/main');
 
 <?php endif;?>
 
+<?php foreach($customErrors as $error):?>
+
+    <div class="alert alert-error"><?= $error;?></div>
+
+<?php endforeach;?>
+
 <?= form_open('contact', ['id' => 'contact-form']);?>
 
 <div class="form-group">
@@ -89,12 +95,6 @@ $this->extend('layouts/main');
     <div class="invalid-feedback"><?= $errors['body'] ?? '';?></div>
 
 </div>
-
-<?php foreach($errors as $error):?>
-
-    <div class="alert alert-error"><?= $error;?></div>
-
-<?php endforeach;?>
 
 <div class="form-group">
 
