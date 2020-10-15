@@ -58,7 +58,7 @@ class SignupForm extends \CodeIgniter\Model
 
         if (!$return)
         {
-            $errors = $model->errors();
+            $errors = (array) $model->errors();
 
             $error = array_shift($errors);
 

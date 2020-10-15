@@ -28,7 +28,7 @@ class ResetPasswordForm extends \CodeIgniter\Model
     {
         $model = new UserModel;
 
-        $model->setPassword($user, $data['password']);
+        $user->setPassword($data['password']);
 
         $user->password_reset_token = null;
 
@@ -36,7 +36,7 @@ class ResetPasswordForm extends \CodeIgniter\Model
 
         if (!$return)
         {
-            $errors = $model->errors();
+            $errors = (array) $model->errors();
 
             $error = array_shift($errors);
         }
