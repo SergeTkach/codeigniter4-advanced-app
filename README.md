@@ -31,8 +31,8 @@ and any database settings.
 
 If you don't receive email, you can create links manually: 
 
-Verification: /user/verifyEmail/<users.id>/<users.email_verification_token>
-Reset password: /user/resetPassword/<users.id>/<users.password_reset_token>
+- verification: /user/verifyEmail/<users.id>/<users.email_verification_token>
+- reset password: /user/resetPassword/<users.id>/<users.password_reset_token>
 
 ## Server Requirements
 
