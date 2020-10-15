@@ -15,6 +15,13 @@
   - Email Confirmation
   - Password Reset
   - Contact Form
+  
+Remember me feature not working correct in Chrome (and other browsers) when:
+ 
+1. On Startup = "Continue where you left off"
+2. Continue running background apps when Google Chrome is closed = "On"
+
+In this case browser not clean remember me cookie when remember me flag is not checked. This is not a bug in the code, but a feature of modern browsers. 
 
 ## Installation
 
