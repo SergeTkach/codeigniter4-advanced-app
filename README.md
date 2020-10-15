@@ -29,9 +29,10 @@ and any database settings.
 
 ## Usage
 
-If you don't receive verification email, you can create verification link manually: 
+If you don't receive email, you can create links manually: 
 
-/user/verifyEmail/<users.id>/<users.email_verification_token>
+Verification: /user/verifyEmail/<users.id>/<users.email_verification_token>
+Reset password: /user/resetPassword/<users.id>/<users.password_reset_token>
 
 ## Server Requirements
 
