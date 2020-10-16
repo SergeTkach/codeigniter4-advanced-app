@@ -22,6 +22,11 @@ class User extends BaseController
      */
     public function signup()
     {
+        if ($this->user)
+        {
+            return $this->goHome();
+        }
+        
         $model = new SignupForm;
 
         $data = $this->request->getPost();
