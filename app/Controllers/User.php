@@ -28,22 +28,36 @@ class User extends BaseController
 
         $errors = [];
 
+        $customErrors = [];
+
         if ($data)
         {
             if ($model->validate($data))
             {
-                if (($user = $model->signup($data, $error)) && $model->sendEmail($user, $error))
+                $user = $model->signup($data, $error);
+
+                if (!$user)
+                {
+                    throw new Exception($error);
+                }
+
+                if ($model->sendEmail($user, $error))
                 {
                     $this->session->setFlashdata(
                         'success', 
-                        'Thank you for registration. Please check your inbox for verification email.'
+                        lang('Thank you for registration. Please check your inbox for verification email.')
                     );
                 
-                    return $this->goHome();
+                    return $this->goHome();                    
                 }
                 else
                 {
-                    $errors[] = $error;
+                    if (!CI_DEBUG)
+                    {
+                        $error = lang('Sorry, we are unable to send a message to the provided email address.');
+                    }
+
+                    $customErrors[] = $error;
                 }
             }
             else
@@ -55,7 +69,8 @@ class User extends BaseController
         return $this->render('user/signup', [
             'model' => $model,
             'data' => $data,
-            'errors' => $errors
+            'errors' => $errors,
+            'customErrors' => $customErrors
         ]);
     }
 
@@ -81,9 +96,14 @@ class User extends BaseController
         {
             if ($model->validate($data))
             {
-                $rememberMe = array_key_exists('rememberMe', $data) ? $data['rememberMe'] : false;
+                $user = model('UserModel')->findByEmail($data['email']);
 
-                $user = $model->getUser();
+                if (!$user)
+                {
+                    throw new Exception(lang('User not found.'));
+                }
+
+                $rememberMe = array_key_exists('rememberMe', $data) ? $data['rememberMe'] : false;
 
                 service('auth')->login($user, $rememberMe);
 
@@ -126,23 +146,27 @@ class User extends BaseController
      */
     public function verifyEmail($id, $token)
     {
-        $model = new UserModel;
+        $model = model('UserModel');
 
         $user = $model->find((int) $id);
 
         if (!$user)
         {
-            throw new PageNotFoundException;
+            throw new Exception(lang('User not found.'));
         }
 
         if ($user->email_verified_at)
         {
-            throw new Exception('User already verified.');
+            $this->session->setFlashdata('info', lang('User already verified.'));
+        
+            return $this->redirect(site_url('user/login'));
         }
 
         if ($user->email_verification_token != $token)
         {
-            throw new Exception('Unable to verify your account with provided token.');
+            $this->session->setFlashdata('error', lang('Unable to verify your account with provided token.'));
+        
+            return $this->redirect(site_url('user/resendVerificationEmail'));
         }
 
         $model->set('email_verified_at', 'NOW()', false);
@@ -151,16 +175,20 @@ class User extends BaseController
 
         $model->protect(false);
 
-        if (!$model->update($id))
+        if (!$model->update($user->id))
         {
             $errors = $model->errors();
 
             $error = array_shift($errors);
 
+            $model->protect(true);
+
             throw new Exception($error);
         }
 
-        $this->session->setFlashdata('success', 'Your email has been confirmed!');
+        $model->protect(true);
+
+        $this->session->setFlashdata('success', lang('Your email has been confirmed!'));
 
         return $this->redirect(site_url('user/login'));
     }
@@ -204,12 +232,17 @@ class User extends BaseController
 
                 if ($model->sendEmail($user, $error))
                 {
-                    $this->session->setFlashdata('success', 'Check your email for further instructions.');
+                    $this->session->setFlashdata('success', lang('Check your email for further instructions.'));
                 
                     return $this->goHome();
                 }
                 else
                 {
+                    if (!CI_DEBUG)
+                    {
+                        $error = lang('Sorry, we are unable to send a message to the provided email address.');
+                    }
+
                     $customErrors[] = $error;
                 }
             }
@@ -252,7 +285,7 @@ class User extends BaseController
 
                 if (!$user)
                 {
-                    throw new Exception('User not found.');
+                    throw new Exception(lang('User not found.'));
                 }
 
                 if (!$user->password_reset_token || !$userModel->isTokenValid($user->password_reset_token))
@@ -271,13 +304,16 @@ class User extends BaseController
 
                 if ($model->sendEmail($user, $error))
                 {
-                    $this->session->setFlashdata('success', 'Check your email for further instructions.');
+                    $this->session->setFlashdata('success', lang('Check your email for further instructions.'));
 
                     return $this->goHome();
                 }
                 else
                 {
-                    //'Sorry, we are unable to reset password for the provided email address.'
+                    if (!CI_DEBUG)
+                    {
+                        $error = lang('Sorry, we are unable to send a message to the provided email address.');
+                    }
 
                     $customErrors[] = $error; 
                 }
@@ -315,7 +351,9 @@ class User extends BaseController
 
         if ($token != $user->password_reset_token)
         {
-            throw new Exception('Wrong password reset token.');
+            $this->session->setFlashdata('error', lang('Wrong password reset token.'));
+
+            return $this->redirect(site_url('user/requestPasswordReset'));
         }
 
         $errors = [];
@@ -330,7 +368,7 @@ class User extends BaseController
             {
                 if ($model->resetPassword($user, $data, $error))
                 {
-                    $this->session->setFlashdata('success', 'New password saved.');
+                    $this->session->setFlashdata('success', lang('New password saved.'));
 
                     return $this->redirect(site_url('user/login'));
                 }

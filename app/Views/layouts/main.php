@@ -76,12 +76,12 @@ helper(['html']);
 
 	<?php $info = service('session')->getFlashdata('info');?>
 	<?php if($info):?>
-		<div class="alert alert-success"><?= $info;?></div>
+		<div class="alert alert-info"><?= $info;?></div>
 	<?php endif;?>
 
 	<?php $error = service('session')->getFlashdata('error');?>
 	<?php if($error):?>
-		<div class="alert alert-success"><?= $error;?></div>
+		<div class="alert alert-error"><?= $error;?></div>
 	<?php endif;?>
 
     <?= $this->renderSection('content');?>

@@ -4,8 +4,7 @@ namespace Config;
 
 use CodeIgniter\Config\Services as CoreServices;
 use App\Models\UserModel;
-use App\Libraries\AuthService;
-use BasicApp\Auth\RememberMe;
+use BasicApp\Auth\AuthService;
 
 /**
  * Services Configuration file.
@@ -40,13 +39,7 @@ class Services extends CoreServices
             return static::getSharedInstance(__FUNCTION__);
         }
 
-        $sessionKey = 'rememberMe';
-
-        $cookieName = 'rememberMe';
-
-        $rememberMe = new RememberMe($sessionKey, $cookieName);
-
-        return new AuthService($rememberMe, 'userId');
+        return new AuthService(UserModel::class);
     }
 
 }

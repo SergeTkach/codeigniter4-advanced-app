@@ -16,20 +16,18 @@ $this->extend('layouts/main');
     
 <p>Please fill out the following fields to signup:</p>
 
-<?php if(CI_DEBUG):?>
-<p>
-    If you did not receive a verification message on the test server, you can view the secret keys in the database and verify your account manually.
-    <br>
-    <b style="color: red;"><?= site_url('user/verifyEmail/:id/:email_verification_token');?></b>
-</p>
-<?php endif;?>
-
 <ul>
     <li><a href="<?= site_url('user/requestPasswordReset');?>">Request password reset</a></li>
     <li><a href="<?= site_url('user/resendVerificationEmail');?>">Resend verification email</a></li>
 </ul>
 
 <?= form_open('user/signup', ['id' => 'form-signup']);?>
+
+<?php foreach($customErrors as $error):?>
+
+    <div class="alert alert-error"><?= $error;?></div>
+
+<?php endforeach;?>
 
 <div class="form-group">
 
@@ -93,5 +91,10 @@ $this->extend('layouts/main');
 </div>
 
 <?= form_close();?>
+
+<?php if(CI_DEBUG):?>
+<p>If your server is not configured to send emails, you can create a link by manually constructing a URL with the following form:<br>
+<b style="color: red;"><?= site_url('user/verifyEmail/:id/:token');?></b></p>
+<?php endif;?>
 
 <?php $this->endSection();?>

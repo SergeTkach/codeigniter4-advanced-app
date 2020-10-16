@@ -22,13 +22,13 @@ $this->extend('layouts/main');
 
 <?php endif;?>
 
+<?= form_open('contact', ['id' => 'contact-form']);?>
+
 <?php foreach($customErrors as $error):?>
 
     <div class="alert alert-error"><?= $error;?></div>
 
 <?php endforeach;?>
-
-<?= form_open('contact', ['id' => 'contact-form']);?>
 
 <div class="form-group">
 

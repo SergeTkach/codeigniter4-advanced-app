@@ -8,5 +8,8 @@ $this->data['mailType'] = 'text';
 
 ?>
 Hello <?= esc($user->name);?>,
-
-Follow the link below to verify your email: <?= $verifyLink;?>
+<br>
+<br>
+Follow the link below to verify your email:
+<br>
+<a href="<?= $verifyLink;?>"><?= $verifyLink;?></a>

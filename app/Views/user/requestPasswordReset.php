@@ -51,4 +51,9 @@ $this->extend('layouts/main');
 
 <?php form_close();?>
 
+<?php if(CI_DEBUG):?>
+<p>If your server is not configured to send emails, you can create a link by manually constructing a URL with the following form:<br>
+<b style="color: red;"><?= site_url('user/resetPassword/:id/:token');?></b></p>
+<?php endif;?>
+
 <?php $this->endSection();?>

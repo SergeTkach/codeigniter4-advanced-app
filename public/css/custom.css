@@ -7,13 +7,19 @@
 
 .alert-error
 {
-    background-color: Coral;
+    background-color: Red;
     color: white;
 }
 
 .alert-success
 {
     background-color: LimeGreen;
+    color: white;
+}
+
+.alert-info
+{
+    background-color: LightBlue;
     color: white;
 }
 
@@ -54,5 +60,5 @@
 
 .invalid-feedback
 {
-    color: Coral;
+    color: Red;
 }
