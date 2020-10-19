@@ -23,10 +23,9 @@ use CodeIgniter\Exceptions\FrameworkException;
  */
 
 Events::on('pre_system', function() {
+
 	if (ENVIRONMENT !== 'testing')
 	{
-		helper(['email']);
-
 		if (ini_get('zlib.output_compression'))
 		{
 			throw FrameworkException::forEnabledZlibOutputCompression();

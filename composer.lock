@@ -38,12 +38,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/basic-app/email-helper.git",
-                "reference": "c7dd5f9d6f1223bca32b9114f57fe0e0123e889a"
+                "reference": "4f3080daf5307a81a2b98296362936c22edaef43"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/basic-app/email-helper/zipball/c7dd5f9d6f1223bca32b9114f57fe0e0123e889a",
-                "reference": "c7dd5f9d6f1223bca32b9114f57fe0e0123e889a",
+                "url": "https://api.github.com/repos/basic-app/email-helper/zipball/4f3080daf5307a81a2b98296362936c22edaef43",
+                "reference": "4f3080daf5307a81a2b98296362936c22edaef43",
                 "shasum": ""
             },
             "type": "library",
@@ -56,7 +56,7 @@
             "license": [
                 "MIT"
             ],
-            "time": "2020-10-19T07:41:58+00:00"
+            "time": "2020-10-19T09:44:29+00:00"
         },
         {
             "name": "codeigniter4/framework",
