@@ -30,7 +30,7 @@ helper(['html']);
 
             <li class="menu-item hidden"><a href="<?= base_url();?>">Home</a></li>
 
-            <?php if(!service('auth')->isGuest()):?>
+            <?php if(!auth()->isGuest()):?>
 
                 <li class="menu-item hidden"><a href="<?= site_url('user/logout');?>">Logout</a>
 
@@ -49,9 +49,9 @@ helper(['html']);
 
 	<div class="heroe">
 
-        <?php if(service('auth')->isLogged()):?>
+        <?php if(auth()->isLogged()):?>
 
-            <h1>Welcome to CodeIgniter, <?= service('auth')->getUser()->name;?>!</h1>
+            <h1>Welcome to CodeIgniter, <?= auth()->getUser()->name;?>!</h1>
 
         <?php else:?>
 

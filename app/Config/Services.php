@@ -3,8 +3,6 @@
 namespace Config;
 
 use CodeIgniter\Config\Services as CoreServices;
-use App\Models\UserModel;
-use BasicApp\Auth\AuthService;
 
 /**
  * Services Configuration file.
@@ -31,15 +29,5 @@ class Services extends CoreServices
 	//
 	//        return new \CodeIgniter\Example();
 	//    }
-
-    public static function auth($getShared = true)
-    {
-        if ($getShared)
-        {
-            return static::getSharedInstance(__FUNCTION__);
-        }
-
-        return new AuthService(UserModel::class);
-    }
 
 }

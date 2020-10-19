@@ -110,7 +110,7 @@ class User extends BaseController
 
                 $rememberMe = array_key_exists('rememberMe', $data) ? $data['rememberMe'] : false;
 
-                service('auth')->login($user, $rememberMe);
+                auth()->login($user, $rememberMe);
 
                 return $this->goHome();
             }
@@ -138,7 +138,7 @@ class User extends BaseController
      */
     public function logout()
     {
-        service('auth')->logout();
+        auth()->logout();
 
         return $this->goHome();
     }

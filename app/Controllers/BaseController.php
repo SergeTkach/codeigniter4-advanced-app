@@ -43,7 +43,7 @@ abstract class BaseController extends \CodeIgniter\Controller
 
         $this->session = Services::session();
 
-        $this->user = Services::auth()->getUser();
+        $this->user = auth()->getUser();
     }
 
     protected function render(string $view, array $params = [], array $options = [])
