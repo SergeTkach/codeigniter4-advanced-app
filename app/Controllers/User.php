@@ -101,7 +101,7 @@ class User extends BaseController
         {
             if ($model->validate($data))
             {
-                $user = model('UserModel')->findByEmail($data['email']);
+                $user = model(UserModel::class)->findByEmail($data['email']);
 
                 if (!$user)
                 {
@@ -151,7 +151,7 @@ class User extends BaseController
      */
     public function verifyEmail($id, $token)
     {
-        $model = model('UserModel');
+        $model = model(UserModel::class);
 
         $user = $model->find((int) $id);
 
@@ -219,7 +219,7 @@ class User extends BaseController
             {
                 $user = $model->getUser();
 
-                $userModel = new UserModel;
+                $userModel = model(UserModel::class);
 
                 if (!$userModel->isTokenValid($user->email_verification_token))
                 {
@@ -284,7 +284,7 @@ class User extends BaseController
         {
             if ($model->validate($data))
             {
-                $userModel = new UserModel;
+                $userModel = model(UserModel::class);
 
                 $user = $model->getUser();
 
@@ -345,7 +345,7 @@ class User extends BaseController
      */
     public function resetPassword($id, $token)
     {
-        $userModel = new UserModel;
+        $userModel = model(UserModel::class);
 
         $user = $userModel->find((int) $id);
 
