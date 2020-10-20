@@ -11,14 +11,12 @@ class Admin implements FilterInterface
 
     public function before(RequestInterface $request, $arguments = null)
     {
-        $user = adminAuth()->getUser();
-
         if (current_url() == site_url('admin/login'))
         {
             return;
         }
 
-        if (!$user)
+        if (!adminAuth()->getUser())
         {
             return redirect()->to('admin/login');
         }
