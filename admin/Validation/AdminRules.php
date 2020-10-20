@@ -2,8 +2,6 @@
 
 namespace Admin\Validation;
 
-use Admin\Models\AdminModel;
-
 class AdminRules
 {
 
