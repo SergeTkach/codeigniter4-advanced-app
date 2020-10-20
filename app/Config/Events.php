@@ -28,7 +28,6 @@ AuthEvents::onLogin(function($event) {
 	{
 		// Compability with:
 		// https://codeigniter.com/user_guide/extending/authentication.html
-
 		Events::trigger('login');
 	}
 });
@@ -38,7 +37,6 @@ AuthEvents::onLogout(function($event) {
 	{
 		// Compability with:
 		// https://codeigniter.com/user_guide/extending/authentication.html
-
 		Events::trigger('logout');
 	}
 });
