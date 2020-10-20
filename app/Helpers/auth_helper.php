@@ -1,9 +1,5 @@
 <?php
-/**
- * @author Basic App Dev Team <dev@basic-app.com>
- * @license MIT
- * @link https://basic-app.com
- */
+
 use BasicApp\Auth\Config\Auth;
 
 if (!function_exists('auth'))
@@ -13,6 +9,9 @@ if (!function_exists('auth'))
         return service('auth');
     }
 }
+
+// Compability with:
+// https://codeigniter.com/user_guide/extending/authentication.html
 
 if (!function_exists('user_id'))
 {

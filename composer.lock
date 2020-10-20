@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/basic-app/auth.git",
-                "reference": "37e9eaf50a44ca67b53589874f7fe87cb95e5655"
+                "reference": "a9569c0ad55556c4640c45b5d1881ff7e955caa9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/basic-app/auth/zipball/37e9eaf50a44ca67b53589874f7fe87cb95e5655",
-                "reference": "37e9eaf50a44ca67b53589874f7fe87cb95e5655",
+                "url": "https://api.github.com/repos/basic-app/auth/zipball/a9569c0ad55556c4640c45b5d1881ff7e955caa9",
+                "reference": "a9569c0ad55556c4640c45b5d1881ff7e955caa9",
                 "shasum": ""
             },
             "type": "library",
@@ -30,7 +30,7 @@
             "license": [
                 "MIT"
             ],
-            "time": "2020-10-20T10:10:43+00:00"
+            "time": "2020-10-20T11:08:24+00:00"
         },
         {
             "name": "basic-app/email-helper",

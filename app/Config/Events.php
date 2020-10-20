@@ -4,6 +4,7 @@ namespace Config;
 
 use CodeIgniter\Events\Events;
 use CodeIgniter\Exceptions\FrameworkException;
+use BasicApp\Auth\AuthEvents;
 
 /*
  * --------------------------------------------------------------------
@@ -21,6 +22,26 @@ use CodeIgniter\Exceptions\FrameworkException;
  * Example:
  *      Events::on('create', [$myInstance, 'myMethod']);
  */
+
+AuthEvents::onLogin(function($event) {
+	if ($event->model instanceof \App\Models\UserModel)
+	{
+		// Compability with:
+		// https://codeigniter.com/user_guide/extending/authentication.html
+
+		Events::trigger('login');
+	}
+});
+
+AuthEvents::onLogout(function($event) {
+	if ($event->model instanceof \App\Models\UserModel)
+	{
+		// Compability with:
+		// https://codeigniter.com/user_guide/extending/authentication.html
+
+		Events::trigger('logout');
+	}
+});
 
 Events::on('pre_system', function() {
 
