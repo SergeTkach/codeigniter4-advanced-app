@@ -10,16 +10,18 @@ class UserRules
 
     protected function getUser(array $data, &$error = null) : ?User
     {
-        $user = model('UserModel')->findByEmail($data['email']);
+        $model = auth()->getModel();
 
-        if ($user && $user->validatePassword($data['password']))
+        $user = $model->findByEmail($data['email']);
+
+        if ($user && $model->validatePassword($user, $data['password']))
         {
             return $user;
         }
 
         $error = lang('User not found or password incorrect.');
 
-        return false;
+        return null;
     }
 
     protected function validateVerification(User $user, &$error = null)

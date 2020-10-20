@@ -24,6 +24,8 @@ use CodeIgniter\Exceptions\FrameworkException;
 
 Events::on('pre_system', function() {
 
+    helper(['auth']);
+
 	if (ENVIRONMENT !== 'testing')
 	{
 		if (ini_get('zlib.output_compression'))

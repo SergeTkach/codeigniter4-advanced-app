@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
-class UserModel extends \CodeIgniter\Model
+use BasicApp\Auth\Interfaces\AuthModelInterface;
+
+class UserModel extends \CodeIgniter\Model implements AuthModelInterface
 {
 
     const EMAIL_RULES = 'max_length[255]|valid_email|min_length[2]';
 
-    const PASSWORD_RULES = 'max_length[72]|min_length[5]';   
+    const PASSWORD_RULES = 'max_length[72]|min_length[5]';
 
     protected $table = 'users';
 
@@ -54,6 +56,16 @@ class UserModel extends \CodeIgniter\Model
     public function findByEmail(string $email)
     {
         return $this->where(['email' => $email])->first();
+    }
+
+    public function validatePassword($user, string $password) : bool
+    {
+        return password_verify($password, $user->password_hash);
+    }
+
+    public function encodePassword($user, string $password) : string
+    {
+        return $user->encodePassword($password);
     }
 
 }

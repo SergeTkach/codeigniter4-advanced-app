@@ -9,7 +9,7 @@ $this->data['breadcrumbs'][] = $this->data['title'];
 
 helper('form');
 
-$this->extend('layouts/main');
+$this->extend('layout');
 
 ?>
 <?php $this->section('content');?>

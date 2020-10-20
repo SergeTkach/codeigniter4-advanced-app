@@ -2,10 +2,14 @@
 
 $this->data['title'] = 'Welcome to CodeIgniter 4';
 
-$this->extend('layout');
+$this->extend('Admin\layout');
 
 ?>
 <?php $this->section('content');?>
+
+<?php
+
+/*
 
 <h1>About this page</h1>
 
@@ -19,10 +23,8 @@ $this->extend('layout');
 
 <pre><code>app/Controllers/Home.php</code></pre>
 
-<?php $this->endSection();?>
+*/?>
 
-<?php $this->section('beforeFooter');?>
-
-<?= view('_further');?>
+Admin Home
 
 <?php $this->endSection();?>

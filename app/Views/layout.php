@@ -23,7 +23,7 @@ helper(['html']);
 
 	<div class="menu">
 		<ul>
-			<li class="logo"><a href="https://codeigniter.com" target="_blank"><?= view('layouts/_logo');?></a></li>
+			<li class="logo"><a href="https://codeigniter.com" target="_blank"><?= view('_logo');?></a></li>
 			<li class="menu-toggle">
 				<button onclick="toggleMenu();">&#9776;</button>
 			</li>

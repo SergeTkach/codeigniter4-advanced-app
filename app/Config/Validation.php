@@ -19,7 +19,8 @@ class Validation
 		\CodeIgniter\Validation\FormatRules::class,
 		\CodeIgniter\Validation\FileRules::class,
 		\CodeIgniter\Validation\CreditCardRules::class,
-		\App\Validation\UserRules::class
+		\App\Validation\UserRules::class,
+        \Admin\Validation\AdminRules::class
 	];
 
 	/**
@@ -36,4 +37,5 @@ class Validation
 	//--------------------------------------------------------------------
 	// Rules
 	//--------------------------------------------------------------------
+
 }

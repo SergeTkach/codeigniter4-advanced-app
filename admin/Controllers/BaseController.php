@@ -1,20 +1,21 @@
 <?php
 
-namespace App\Controllers;
+namespace Admin\Controllers;
 
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use Config\Services;
+use CodeIgniter\Security\Exceptions\SecurityException;
 
 abstract class BaseController extends \CodeIgniter\Controller
 {
 
     protected $session;
 
-    protected $user;
+    protected $admin;
 
-    protected $viewsNamespace;
+    protected $viewsNamespace = 'Admin';
 
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
@@ -22,7 +23,17 @@ abstract class BaseController extends \CodeIgniter\Controller
 
         $this->session = Services::session();
 
-        $this->user = auth()->getUser();
+        $this->admin = adminAuth()->getUser();
+
+        if (!$this->checkAuth())
+        {
+            throw SecurityException::forDisallowedAction();
+        }
+    }
+
+    protected function checkAuth() : bool
+    {
+        return $this->admin ? true : false;
     }
 
     protected function render(string $view, array $params = [], array $options = [])
@@ -45,7 +56,7 @@ abstract class BaseController extends \CodeIgniter\Controller
 
     public function goHome()
     {
-        return $this->redirect(base_url());
+        return $this->redirect(site_url('admin'));
     }
 
     public function redirect($url)

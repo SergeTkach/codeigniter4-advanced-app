@@ -29,14 +29,14 @@ class User extends \CodeIgniter\Entity
         return site_url('user/verifyEmail/' . $this->id  . '/'. $this->email_verification_token);
     }
 
-    public function setPassword(string $password)
+    public function encodePassword(string $password) : string
     {
-        $this->password_hash = password_hash($password, PASSWORD_BCRYPT);
+        return password_hash($password, PASSWORD_BCRYPT);
     }
 
-    public function validatePassword(string $password) : bool
+    public function setPassword(string $password)
     {
-        return password_verify($password, $this->password_hash);
+        $this->password_hash = $this->encodePassword($password);
     }
 
 }

@@ -1,7 +1,7 @@
 <?php
 
 /* @var $this \CodeIgniter\View\View */
-/* @var $model \App\Forms\LoginForm */
+/* @var $model \Admin\Forms\LoginForm */
 
 $this->data['title'] = 'Login';
 
@@ -9,7 +9,7 @@ $this->data['breadcrumbs'][] = $this->data['title'];
 
 helper(['form']);
 
-$this->extend('layout');
+$this->extend('Admin\layout');
 
 ?>
 
@@ -17,27 +17,22 @@ $this->extend('layout');
 
 <p>Please fill out the following fields to login:</p>
 
-<ul>
-    <li><a href="<?= site_url('user/requestPasswordReset');?>">Request password reset</a></li>
-    <li><a href="<?= site_url('user/resendVerificationEmail');?>">Resend verification email</a></li>
-</ul>
-
-<?= form_open('user/login', ['id' => 'login-form']);?>
+<?= form_open('admin/login', ['id' => 'login-form']);?>
 
 <div class="form-group">
 
-    <label><?= $model->validationRules['email']['label'];?></label>
+    <label><?= $model->validationRules['username']['label'];?></label>
 
     <?= form_input(
-        'email', 
-        $data['email'] ?? '', 
+        'username', 
+        $data['username'] ?? '', 
         [
             'autofocus' => true,
             'class' => 'form-control'
         ]
     );?>
 
-    <div class="invalid-feedback"><?= $errors['email'] ?? '';?></div>
+    <div class="invalid-feedback"><?= $errors['username'] ?? '';?></div>
 
 </div>
 
