@@ -110,12 +110,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/denis303/codeigniter4-recaptcha.git",
-                "reference": "acfc165b2ab225ffe773a219b3864b2381cdf2dc"
+                "reference": "5c3e7c2d52145b2c112278769b1fd71dadd073d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/denis303/codeigniter4-recaptcha/zipball/acfc165b2ab225ffe773a219b3864b2381cdf2dc",
-                "reference": "acfc165b2ab225ffe773a219b3864b2381cdf2dc",
+                "url": "https://api.github.com/repos/denis303/codeigniter4-recaptcha/zipball/5c3e7c2d52145b2c112278769b1fd71dadd073d4",
+                "reference": "5c3e7c2d52145b2c112278769b1fd71dadd073d4",
                 "shasum": ""
             },
             "require": {
@@ -131,7 +131,7 @@
             "license": [
                 "MIT"
             ],
-            "time": "2020-10-22T20:46:34+00:00"
+            "time": "2020-10-22T21:01:27+00:00"
         },
         {
             "name": "google/recaptcha",
