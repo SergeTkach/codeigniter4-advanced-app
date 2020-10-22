@@ -20,7 +20,8 @@ class Validation
 		\CodeIgniter\Validation\FileRules::class,
 		\CodeIgniter\Validation\CreditCardRules::class,
 		\App\Validation\UserRules::class,
-        \Admin\Validation\AdminRules::class
+        \Admin\Validation\AdminRules::class,
+        \Denis303\ReCaptcha\Validation\ReCaptchaRules::class
 	];
 
 	/**

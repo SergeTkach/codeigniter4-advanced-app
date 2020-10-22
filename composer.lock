@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0b2bb8e4abea18d2a8292ddff39601ea",
+    "content-hash": "92c33b0019c3345fd6d61bdb3d8c20c1",
     "packages": [
         {
             "name": "basic-app/auth",
@@ -103,6 +103,82 @@
             "description": "The CodeIgniter framework v4",
             "homepage": "https://codeigniter.com",
             "time": "2020-07-16T03:44:28+00:00"
+        },
+        {
+            "name": "denis303/codeigniter4-recaptcha",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/denis303/codeigniter4-recaptcha.git",
+                "reference": "acfc165b2ab225ffe773a219b3864b2381cdf2dc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/denis303/codeigniter4-recaptcha/zipball/acfc165b2ab225ffe773a219b3864b2381cdf2dc",
+                "reference": "acfc165b2ab225ffe773a219b3864b2381cdf2dc",
+                "shasum": ""
+            },
+            "require": {
+                "google/recaptcha": "^1.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Denis303\\ReCaptcha\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "time": "2020-10-22T20:46:34+00:00"
+        },
+        {
+            "name": "google/recaptcha",
+            "version": "1.2.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/google/recaptcha.git",
+                "reference": "614f25a9038be4f3f2da7cbfd778dc5b357d2419"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/google/recaptcha/zipball/614f25a9038be4f3f2da7cbfd778dc5b357d2419",
+                "reference": "614f25a9038be4f3f2da7cbfd778dc5b357d2419",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.2.20|^2.15",
+                "php-coveralls/php-coveralls": "^2.1",
+                "phpunit/phpunit": "^4.8.36|^5.7.27|^6.59|^7.5.11"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ReCaptcha\\": "src/ReCaptcha"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Client library for reCAPTCHA, a free service that protects websites from spam and abuse.",
+            "homepage": "https://www.google.com/recaptcha/",
+            "keywords": [
+                "Abuse",
+                "captcha",
+                "recaptcha",
+                "spam"
+            ],
+            "time": "2020-03-31T17:50:54+00:00"
         },
         {
             "name": "kint-php/kint",
@@ -1993,6 +2069,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "denis303/codeigniter4-recaptcha": 20,
         "fzaninotto/faker": 20
     },
     "prefer-stable": true,

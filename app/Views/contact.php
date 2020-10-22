@@ -7,14 +7,14 @@ $this->data['title'] = 'Contact';
 
 $this->data['breadcrumbs'][] = $this->data['title'];
 
-helper(['form']);
+helper(['form', 'reCaptcha']);
 
 $this->extend('layout');
 
 ?>
 <?php $this->section('content');?>
 
-<p>If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.</p>
+<p>Please fill out the following form to contact us. Thank you.</p>
 
 <?php if($message):?>
 
@@ -95,6 +95,30 @@ $this->extend('layout');
     <div class="invalid-feedback"><?= $errors['body'] ?? '';?></div>
 
 </div>
+
+<?php if($reCaptcha2):?>
+
+<div class="form-group">
+
+    <?= reCaptcha2('reCaptcha2');?>
+
+    <div class="invalid-feedback"><?= $errors['reCaptcha2'] ?? '';?></div>
+
+</div>
+
+<?php endif;?>
+
+<?php if($reCaptcha3):?>
+
+<div class="form-group">
+
+    <?= reCaptcha3('reCaptcha3', [], ['action' => 'contactForm']);?>
+
+    <div class="invalid-feedback"><?= $errors['reCaptcha3'] ?? '';?></div>
+
+</div>
+
+<?php endif;?>
 
 <div class="form-group">
 
