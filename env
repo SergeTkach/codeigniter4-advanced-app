@@ -10,8 +10,8 @@
 # at the beginning of the line.
 #--------------------------------------------------------------------
 
-admin.username = admin
-admin.password = 12345
+superadmin.username = admin
+superadmin.password = 12345
 
 recaptcha2.key=
 recaptcha2.secret=

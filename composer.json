@@ -11,6 +11,7 @@
         "codeigniter4/framework": "^4",
         "basic-app/email-helper": "*",
         "basic-app/auth": "*",
+        "basic-app/superadmin": "*",
         "denis303/codeigniter4-recaptcha": "dev-master"
     },
     "require-dev": {

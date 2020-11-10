@@ -2,7 +2,7 @@
 
 namespace Admin\Forms;
 
-use Admin\Models\AdminModel;
+use BasicApp\SuperAdmin\Models\SuperAdminModel;
 
 /**
  * Login form
@@ -14,11 +14,11 @@ class LoginForm extends \CodeIgniter\Model
 
     protected $validationRules = [
         'username' => [
-            'rules' => 'required|' . AdminModel::USERNAME_RULES,
+            'rules' => 'required|' . SuperAdminModel::USERNAME_RULES,
             'label' => 'Login'
         ],
         'password' => [
-            'rules' => 'required|' . AdminModel::PASSWORD_RULES . '|validAdmin[]',
+            'rules' => 'required|' . SuperAdminModel::PASSWORD_RULES . '|validAdmin[]',
             'label' => 'Password'
         ],
         'rememberMe' => [
