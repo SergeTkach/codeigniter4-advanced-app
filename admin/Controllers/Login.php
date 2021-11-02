@@ -2,7 +2,6 @@
 
 namespace Admin\Controllers;
 
-use Admin\Forms\LoginForm;
 use Exception;
 
 class Login extends BaseController
@@ -15,37 +14,45 @@ class Login extends BaseController
 
     public function index()
     {
-        if ($this->admin)
+        if (adminAuth()->getId())
         {
             return $this->goHome();
         }
 
-        $model = new LoginForm;
+        $validator = \Config\Services::validation();
 
         $data = $this->request->getPost();
 
         $errors = [];
-        
+
+        $validator->setRules([
+            'username' => [
+                'rules' => 'required',
+                'label' => lang('Login')
+            ],
+            'password' => [
+                'rules' => 'required|validAdmin[]',
+                'label' => lang('Password')
+            ],
+            'rememberMe' => [
+                'rules' => 'required|in_list[0,1]',
+                'label' => lang('Remember Me')
+            ]
+        ]);
+
         if ($data)
         {
-            if ($model->validate($data))
+            if ($validator->run($data))
             {
-                $user = adminAuth()->getModel()->find($data['username']);
-
-                if (!$user)
-                {
-                    throw new Exception(lang('Admin not found.'));
-                }
-
                 $rememberMe = array_key_exists('rememberMe', $data) ? $data['rememberMe'] : false;
 
-                adminAuth()->login($user, $rememberMe);
+                adminAuth()->setId($data['username'], $rememberMe);
 
                 return $this->goHome();
             }
             else
             {
-                $errors = (array) $model->errors();
+                $errors = (array) $validator->getErrors();
             } 
         }
         else
@@ -54,9 +61,9 @@ class Login extends BaseController
         }
 
         return $this->render('login', [
-            'model' => $model,
             'errors' => $errors,
-            'data' => $data
+            'data' => $data,
+            'validation' => $validator
         ]);        
     }
 
@@ -67,7 +74,7 @@ class Login extends BaseController
      */
     public function logout()
     {
-        adminAuth()->logout();
+        adminAuth()->unsetId();
 
         return $this->goHome();
     }

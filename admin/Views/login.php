@@ -21,7 +21,7 @@ $this->extend('Admin\layout');
 
 <div class="form-group">
 
-    <label><?= $model->validationRules['username']['label'];?></label>
+    <label><?= lang('Username');?></label>
 
     <?= form_input(
         'username', 
@@ -38,15 +38,11 @@ $this->extend('Admin\layout');
 
 <div class="form-group">
 
-    <label><?= $model->validationRules['password']['label'];?></label>
+    <label><?= lang('Password');?></label>
 
-    <?= form_password(
-        'password', 
-        '', 
-        [
-            'class' => 'form-control'
-        ]
-    );?>
+    <?= form_password('password', '', [
+        'class' => 'form-control'
+    ]);?>
 
     <div class="invalid-feedback"><?= $errors['password'] ?? '';?></div>
 
@@ -54,18 +50,13 @@ $this->extend('Admin\layout');
 
 <div class="form-group">
     
-    <label for="remember-me-checkbox"><?= $model->validationRules['rememberMe']['label'];?></label>
+    <label for="remember-me-checkbox"><?= lang('Remember Me');?></label>
 
     <?= form_hidden('rememberMe', 0);?>
 
-    <?= form_checkbox(
-        'rememberMe',
-        '1',
-        (array_key_exists('rememberMe', $data) && $data['rememberMe']) ? true : false,
-        [
-            'id' => 'remember-me-checkbox'
-        ]
-    );?>
+    <?= form_checkbox('rememberMe', '1', (array_key_exists('rememberMe', $data) && $data['rememberMe']) ? true : false, [
+        'id' => 'remember-me-checkbox'
+    ]);?>
 
     <div class="invalid-feedback"><?= $errors['rememberMe'] ?? '';?></div>
 

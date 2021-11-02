@@ -2,7 +2,7 @@
 
 namespace Config;
 
-class Validation
+class Validation extends \BasicApp\Config\Validation
 {
 	//--------------------------------------------------------------------
 	// Setup
@@ -19,9 +19,7 @@ class Validation
 		\CodeIgniter\Validation\FormatRules::class,
 		\CodeIgniter\Validation\FileRules::class,
 		\CodeIgniter\Validation\CreditCardRules::class,
-		\App\Validation\UserRules::class,
-        \Admin\Validation\AdminRules::class,
-        \Denis303\ReCaptcha\Validation\ReCaptchaRules::class
+		\App\Validation\UserRules::class 
 	];
 
 	/**
@@ -32,7 +30,7 @@ class Validation
 	 */
 	public $templates = [
 		'list'   => 'CodeIgniter\Validation\Views\list',
-		'single' => 'CodeIgniter\Validation\Views\single',
+		'single' => 'CodeIgniter\Validation\Views\single'
 	];
 
 	//--------------------------------------------------------------------

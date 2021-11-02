@@ -4,8 +4,8 @@ namespace App\Forms;
 
 use Exception;
 use Config\Services;
-use App\Models\UserModel;
-use App\Models\User;
+use App\Models\User as UserModel;
+use App\Entities\User;
 
 /**
  * Signup form

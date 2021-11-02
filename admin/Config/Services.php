@@ -4,8 +4,6 @@ namespace Admin\Config;
 
 use Exception;
 use CodeIgniter\Config\Services as CoreServices;
-use BasicApp\Auth\Libraries\AuthService;
-use BasicApp\SuperAdmin\Models\SuperAdminModel;
 
 class Services extends CoreServices
 {
@@ -17,7 +15,7 @@ class Services extends CoreServices
             return static::getSharedInstance(__FUNCTION__);
         }
 
-        return new AuthService(SuperAdminModel::class, 'adminId');
+        return new \BasicApp\Admin\AdminService('admin_id');
     }
 
 }

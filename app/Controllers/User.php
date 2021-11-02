@@ -9,8 +9,8 @@ use App\Forms\SignupForm;
 use App\Forms\PasswordResetRequestForm;
 use App\Forms\ResendVerificationEmailForm;
 use App\Forms\ResetPasswordForm;
-use App\Models\UserModel;
-use App\Models\User as UserEntity;
+use App\Models\User as UserModel;
+use App\Entities\User as UserEntity;
 
 class User extends BaseController
 {
@@ -153,7 +153,7 @@ class User extends BaseController
     {
         $model = model(UserModel::class);
 
-        $user = $model->find((int) $id);
+        $user = $model->find($id);
 
         if (!$user)
         {

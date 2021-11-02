@@ -2,41 +2,70 @@
 
 namespace App\Models;
 
-use Config\Services;
-use CodeIgniter\Email\Email;
+use App\Entities\User as UserEntity;
 
-class User extends \CodeIgniter\Entity
+class User extends \CodeIgniter\Model
 {
 
-    public function composeEmail(string $view, array $params = [], array $options = []) : Email
+    const EMAIL_RULES = 'max_length[255]|valid_email|min_length[2]';
+
+    const PASSWORD_RULES = 'max_length[72]|min_length[5]';
+
+    protected $table = 'users';
+
+    protected $returnType = UserEntity::class;
+
+    protected $primaryKey = 'id';
+
+    protected $createdField = 'created_at';
+
+    protected $updatedField = 'updated_at';
+
+    protected $dateFormat = 'datetime';
+
+    protected $allowedFields = [
+        'name',
+        'password_hash',
+        'email',
+        'created_at',
+        'updated_at',
+        'email_verification_token',
+        'password_reset_token',
+        'email_verified_at'
+    ];
+
+    public function generateToken() : string
     {
-        $params['user'] = $this;
-
-        $email = compose_email($view, $params, $options);
-
-        $email->setTo($this->email, $this->name);
-
-        return $email;
+        return md5(time() . rand(0, PHP_INT_MAX)) . '_' . time();
     }
 
-    public function getResetPasswordUrl()
+    public function isTokenValid(string $token)
     {
-        return site_url('user/resetPassword/' . $this->id . '/' .  $this->password_reset_token);
+        if (!$token)
+        {
+            return false;
+        }
+
+        $timestamp = (int) substr($token, strrpos($token, '_') + 1);
+     
+        $expire = 600;
+        
+        return $timestamp + $expire >= time();
     }
 
-    public function getEmailVerificationUrl()
+    public function findByEmail(string $email)
     {
-        return site_url('user/verifyEmail/' . $this->id  . '/'. $this->email_verification_token);
+        return $this->where(['email' => $email])->first();
     }
 
-    public function encodePassword(string $password) : string
+    public function validatePassword($user, string $password) : bool
     {
-        return password_hash($password, PASSWORD_BCRYPT);
+        return password_verify($password, $user->password_hash);
     }
 
-    public function setPassword(string $password)
+    public function encodePassword($user, string $password) : string
     {
-        $this->password_hash = $this->encodePassword($password);
+        return $user->encodePassword($password);
     }
 
 }

@@ -5,8 +5,6 @@ namespace App\Forms;
 use Config\Services;
 use Config\Email as EmailConfig;
 use Exception;
-use Denis303\ReCaptcha\Config\ReCaptcha2;
-use Denis303\ReCaptcha\Config\ReCaptcha3;
 
 class ContactForm extends \CodeIgniter\Model
 {
@@ -38,37 +36,6 @@ class ContactForm extends \CodeIgniter\Model
             'label' => 'Body'
         ]
     ];
-
-    public function __construct()
-    {
-        parent::__construct();
-
-        $config = config(ReCaptcha2::class);
-
-        if ($config->key && $config->secret)
-        {
-            $this->allowedFields[] = 'reCaptcha2';
-
-            $this->validationRules['reCaptcha2'] = [
-                'label' => 'reCAPTCHA v2',
-                'rules' => 'required|reCaptcha2[]'
-            ];
-        }
-        else
-        {
-            $config = config(ReCaptcha3::class);
-
-            if ($config->key && $config->secret)
-            {
-                $this->allowedFields[] = 'reCaptcha3';
-
-                $this->validationRules['reCaptcha3'] = [
-                    'label' => 'reCAPTCHA v3',
-                    'rules' => 'required|reCaptcha3[contactForm]'
-                ];
-            }
-        }
-    }
 
     public function load(array $data)
     {

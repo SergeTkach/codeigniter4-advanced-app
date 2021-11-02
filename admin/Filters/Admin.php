@@ -16,7 +16,7 @@ class Admin implements FilterInterface
             return;
         }
 
-        if (!adminAuth()->getUser())
+        if (!adminAuth()->getId())
         {
             return redirect()->to('admin/login');
         }

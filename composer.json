@@ -12,7 +12,7 @@
         "basic-app/email-helper": "*",
         "basic-app/auth": "*",
         "basic-app/superadmin": "*",
-        "denis303/codeigniter4-recaptcha": "dev-master"
+        "basic-app/config": "dev-main"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.9@dev",
@@ -28,11 +28,21 @@
         "post-update-cmd": [
             "@composer dump-autoload"
         ],
-        "test": "phpunit"
+        "test": "phpunit",
+        "post-create-project-cmd": [
+            "php -r \"copy('env', '.env');\""
+        ]
     },
     "support": {
         "forum": "http://forum.codeigniter.com/",
         "source": "https://github.com/codeigniter4/CodeIgniter4",
         "slack": "https://codeigniterchat.slack.com"
+    },
+    "config": {
+        "preferred-install" : {
+            "basic-app/*" : "source",
+            "denis303/*" : "source",
+            "*" : "dist"
+        }
     }
 }

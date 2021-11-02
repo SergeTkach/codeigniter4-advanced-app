@@ -2,14 +2,15 @@
 
 namespace App\Validation;
 
-use App\Models\User;
+use App\Models\User as UserModel;
+use App\Entities\User;
 
 class UserRules
 {
 
     protected function getUser(array $data, &$error = null) : ?User
     {
-        $model = auth()->getModel();
+        $model = model(UserModel::class);
 
         $user = $model->findByEmail($data['email']);
 

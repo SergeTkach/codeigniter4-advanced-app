@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "98e6534c829c792601398aad356481f9",
+    "content-hash": "8dc2ac38d66a2b36ca525fcdb3efedb9",
     "packages": [
         {
             "name": "basic-app/auth",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/basic-app/auth.git",
-                "reference": "851f96df75395cca1abe57a172f2dff5100d0726"
+                "reference": "03db6272600663e616c19b81f34f9c229ad3b50e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/basic-app/auth/zipball/851f96df75395cca1abe57a172f2dff5100d0726",
-                "reference": "851f96df75395cca1abe57a172f2dff5100d0726",
+                "url": "https://api.github.com/repos/basic-app/auth/zipball/03db6272600663e616c19b81f34f9c229ad3b50e",
+                "reference": "03db6272600663e616c19b81f34f9c229ad3b50e",
                 "shasum": ""
             },
             "default-branch": true,
@@ -35,7 +35,41 @@
                 "issues": "https://github.com/basic-app/auth/issues",
                 "source": "https://github.com/basic-app/auth/tree/main"
             },
-            "time": "2021-08-25T21:20:14+00:00"
+            "time": "2021-11-02T13:57:42+00:00"
+        },
+        {
+            "name": "basic-app/config",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/basic-app/config.git",
+                "reference": "656633a9db787b766194b78b3f896a8ffde8aec1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/basic-app/config/zipball/656633a9db787b766194b78b3f896a8ffde8aec1",
+                "reference": "656633a9db787b766194b78b3f896a8ffde8aec1",
+                "shasum": ""
+            },
+            "require": {
+                "basic-app/event": "*"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "BasicApp\\Config\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "support": {
+                "issues": "https://github.com/basic-app/config/issues",
+                "source": "https://github.com/basic-app/config/tree/main"
+            },
+            "time": "2021-06-23T14:52:49+00:00"
         },
         {
             "name": "basic-app/email-helper",
@@ -105,23 +139,22 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/basic-app/superadmin.git",
-                "reference": "0f3aeaf066a7b05b1ab168dfbc2effa03c61f55d"
+                "reference": "541b55936ccce9bde1129adbbe600b68d08da649"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/basic-app/superadmin/zipball/0f3aeaf066a7b05b1ab168dfbc2effa03c61f55d",
-                "reference": "0f3aeaf066a7b05b1ab168dfbc2effa03c61f55d",
+                "url": "https://api.github.com/repos/basic-app/superadmin/zipball/541b55936ccce9bde1129adbbe600b68d08da649",
+                "reference": "541b55936ccce9bde1129adbbe600b68d08da649",
                 "shasum": ""
             },
             "require": {
-                "basic-app/auth": "*",
-                "basic-app/event": "*"
+                "basic-app/auth": "*"
             },
             "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "BasicApp\\SuperAdmin\\": "src/"
+                    "BasicApp\\Admin\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -132,7 +165,7 @@
                 "issues": "https://github.com/basic-app/superadmin/issues",
                 "source": "https://github.com/basic-app/superadmin/tree/main"
             },
-            "time": "2020-11-10T18:16:49+00:00"
+            "time": "2021-11-02T14:54:27+00:00"
         },
         {
             "name": "codeigniter4/framework",
@@ -191,92 +224,6 @@
                 "source": "https://github.com/codeigniter4/CodeIgniter4"
             },
             "time": "2021-09-07T01:20:26+00:00"
-        },
-        {
-            "name": "denis303/codeigniter4-recaptcha",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/denis303/codeigniter4-recaptcha.git",
-                "reference": "db8b828cfc9d8e1879a4568ecf0a8d9e09a64c0d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/denis303/codeigniter4-recaptcha/zipball/db8b828cfc9d8e1879a4568ecf0a8d9e09a64c0d",
-                "reference": "db8b828cfc9d8e1879a4568ecf0a8d9e09a64c0d",
-                "shasum": ""
-            },
-            "require": {
-                "google/recaptcha": "^1.2"
-            },
-            "default-branch": true,
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Denis303\\ReCaptcha\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "support": {
-                "issues": "https://github.com/denis303/codeigniter4-recaptcha/issues",
-                "source": "https://github.com/denis303/codeigniter4-recaptcha/tree/master"
-            },
-            "time": "2020-10-24T07:07:49+00:00"
-        },
-        {
-            "name": "google/recaptcha",
-            "version": "1.2.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/google/recaptcha.git",
-                "reference": "614f25a9038be4f3f2da7cbfd778dc5b357d2419"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/google/recaptcha/zipball/614f25a9038be4f3f2da7cbfd778dc5b357d2419",
-                "reference": "614f25a9038be4f3f2da7cbfd778dc5b357d2419",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.2.20|^2.15",
-                "php-coveralls/php-coveralls": "^2.1",
-                "phpunit/phpunit": "^4.8.36|^5.7.27|^6.59|^7.5.11"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.2.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "ReCaptcha\\": "src/ReCaptcha"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "Client library for reCAPTCHA, a free service that protects websites from spam and abuse.",
-            "homepage": "https://www.google.com/recaptcha/",
-            "keywords": [
-                "Abuse",
-                "captcha",
-                "recaptcha",
-                "spam"
-            ],
-            "support": {
-                "forum": "https://groups.google.com/forum/#!forum/recaptcha",
-                "issues": "https://github.com/google/recaptcha/issues",
-                "source": "https://github.com/google/recaptcha"
-            },
-            "time": "2020-03-31T17:50:54+00:00"
         },
         {
             "name": "kint-php/kint",
@@ -2351,7 +2298,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "denis303/codeigniter4-recaptcha": 20,
+        "basic-app/config": 20,
         "fzaninotto/faker": 20
     },
     "prefer-stable": true,

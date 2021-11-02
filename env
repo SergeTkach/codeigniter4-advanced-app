@@ -10,14 +10,12 @@
 # at the beginning of the line.
 #--------------------------------------------------------------------
 
-superadmin.username = admin
-superadmin.password = 12345
+#--------------------------------------------------------------------
+# ADMIN
+#--------------------------------------------------------------------
 
-recaptcha2.key=
-recaptcha2.secret=
-
-recaptcha3.key=
-recaptcha3.secret=
+admin.username = admin
+admin.password = 12345
 
 #--------------------------------------------------------------------
 # ENVIRONMENT
@@ -38,7 +36,7 @@ email.fromName = 'No-reply';
 # APP
 #--------------------------------------------------------------------
 
-app.baseURL = 'http://codeigniter4-advanced-app.localhost'
+app.baseURL = 'http://localhost:8080'
 app.indexPage = ''
 # app.forceGlobalSecureRequests = false
 

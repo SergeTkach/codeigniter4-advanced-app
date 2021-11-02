@@ -1,8 +1,8 @@
-<?php namespace Config;
+<?php 
 
-use CodeIgniter\Config\BaseConfig;
+namespace Config;
 
-class Pager extends BaseConfig
+class Pager extends BasicApp\Config\Pager
 {
 	/*
 	|--------------------------------------------------------------------------
@@ -20,7 +20,7 @@ class Pager extends BaseConfig
 	public $templates = [
 		'default_full'   => 'CodeIgniter\Pager\Views\default_full',
 		'default_simple' => 'CodeIgniter\Pager\Views\default_simple',
-		'default_head'   => 'CodeIgniter\Pager\Views\default_head',
+		'default_head'   => 'CodeIgniter\Pager\Views\default_head'
 	];
 
 	/*

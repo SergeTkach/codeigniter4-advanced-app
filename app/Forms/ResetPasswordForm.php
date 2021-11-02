@@ -2,7 +2,7 @@
 
 namespace App\Forms;
 
-use App\Models\UserModel;
+use App\Models\User as UserModel;
 
 /**
  * Password reset form

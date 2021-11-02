@@ -14,10 +14,6 @@ class Contact extends BaseController
      */
     public function index()
     {
-        $reCaptcha2 = false;
-
-        $reCaptcha3 = false;
-
         $errors = [];
 
         $customErrors = [];
@@ -27,15 +23,6 @@ class Contact extends BaseController
         $data = $this->request->getPost();
 
         $model = new ContactForm;
-
-        if (array_search('reCaptcha2', $model->allowedFields) !== false)
-        {
-            $reCaptcha2 = true;
-        }
-        elseif(array_search('reCaptcha3', $model->allowedFields) !== false)
-        {
-            $reCaptcha3 = true;
-        }
 
         if ($data)
         {
@@ -70,9 +57,7 @@ class Contact extends BaseController
             'errors' => $errors,
             'message' => $message,
             'model' => $model,
-            'customErrors' => $customErrors,
-            'reCaptcha2' => $reCaptcha2,
-            'reCaptcha3' => $reCaptcha3
+            'customErrors' => $customErrors
         ]);
     }
 

@@ -13,8 +13,6 @@ abstract class BaseController extends \CodeIgniter\Controller
 
     protected $session;
 
-    protected $admin;
-
     protected $viewsNamespace = 'Admin';
 
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
@@ -22,8 +20,6 @@ abstract class BaseController extends \CodeIgniter\Controller
         parent::initController($request, $response, $logger);
 
         $this->session = Services::session();
-
-        $this->admin = adminAuth()->getUser();
 
         if (!$this->checkAuth())
         {
@@ -33,7 +29,7 @@ abstract class BaseController extends \CodeIgniter\Controller
 
     protected function checkAuth() : bool
     {
-        return $this->admin ? true : false;
+        return adminAuth()->getId() ? true : false;
     }
 
     protected function render(string $view, array $params = [], array $options = [])

@@ -28,7 +28,9 @@ helper(['html']);
 				<button onclick="toggleMenu();">&#9776;</button>
 			</li>
 
-            <li class="menu-item hidden"><a href="<?= site_url('admin');?>">Home</a></li>
+            <li class="menu-item hidden"><a href="<?= site_url('admin');?>">Admin</a></li>
+
+            <li class="menu-item hidden"><a href="<?= site_url('/');?>">Site</a></li>
 
             <?php if(!adminAuth()->isGuest()):?>
 
@@ -47,7 +49,7 @@ helper(['html']);
 
         <?php if(adminAuth()->isLogged()):?>
 
-            <h1>Welcome to CodeIgniter, <?= adminAuth()->getUserId();?>!</h1>
+            <h1>Welcome to CodeIgniter, <?= adminAuth()->getId();?>!</h1>
 
         <?php else:?>
 

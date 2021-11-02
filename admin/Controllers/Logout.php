@@ -7,7 +7,7 @@ class Logout extends BaseController
 
     public function index()
     {
-        adminAuth()->logout();
+        adminAuth()->unsetId();
 
         return $this->goHome();
     }
